@@ -10,7 +10,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <title>Mogi App</title>
+        <title>Template</title>
       </Head>
 
       <ChakraProvider theme={theme}>

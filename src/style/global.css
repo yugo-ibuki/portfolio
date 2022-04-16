@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.c-flex {
+    @apply flex;
+    @apply justify-between;
+    @apply items-center;
+}
