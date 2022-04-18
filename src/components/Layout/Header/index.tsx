@@ -1,6 +1,6 @@
 import React from 'react'
 import { ColorModeSwitch } from '@components/ColorModeSwitch'
-import { ImWink, ImWink2 } from 'react-icons/all'
+import { ImWink, ImWink2 } from 'react-icons/im'
 import Link from 'next/link'
 import { useColorMode } from '@chakra-ui/react'
 
@@ -39,9 +39,11 @@ export const Header: React.FC = () => {
               {
                 navData.map(nav => {
                   return (
-                    <li className={'hover:border-b-2 hover:border-red-600 border-b-2 border-white-600'}>
+                    <li key={nav.name} className={'hover:border-b-2 hover:border-red-600 border-b-2 border-white-600'}>
                       <Link href={nav.href}>
-                        <a>{nav.name}</a>
+                        <a target={nav.name === 'GITHUB' ? '_blanck' : '_self'}>
+                          {nav.name}
+                        </a>
                       </Link>
                     </li>
                   )
