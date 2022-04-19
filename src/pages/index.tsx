@@ -1,7 +1,6 @@
+import { Block, Title, Skill } from '@components'
 import type { NextPage } from 'next'
 import Image from 'next/image'
-import { Title } from '@components/Title'
-import { Block } from '@components/Block'
 
 type TProfiles = {
   name: string
@@ -17,8 +16,8 @@ const profiles: TProfiles[] = [
 const Home: NextPage = () => {
   return (
     <main>
-      <div className={'mt-[30px] flex items-center'}>
-        <figure className={'w-[60%] h-[300px] flex justify-center'}>
+      <div className={'mt-[30px] flex items-center gap-x-10'}>
+        <figure className={'h-[300px] flex'}>
           <Image
             src="/assets/me.jpeg"
             alt="Picture of the author"
@@ -44,7 +43,17 @@ const Home: NextPage = () => {
       </div>
 
       <Block>
-        <Title>BACKGROUND</Title>
+        <Title>Graduate</Title>
+        <div className={'mt-[25px]'}>
+
+        </div>
+      </Block>
+
+      <Block>
+        <Title>SKILLS</Title>
+        <div className={'mt-[25px]'}>
+          <Skill />
+        </div>
       </Block>
     </main>
   )
