@@ -43,7 +43,7 @@ const Home: NextPage = () => {
       </div>
 
       <Block>
-        <Title>Graduate</Title>
+        <Title>GRADUATE</Title>
         <div className={'mt-[25px]'}>
           <Graduate />
         </div>
