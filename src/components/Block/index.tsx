@@ -1,14 +1,10 @@
-import { FC } from 'react'
-
-// type TBlock = {
-//
-// }
+import type { FC } from 'react'
 
 export const Block: FC = ({
  children
 }) => {
   return (
-    <div className={'mt-5'}>
+    <div className={'mt-10'}>
       {children}
     </div>
   )

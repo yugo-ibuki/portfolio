@@ -1,9 +1,15 @@
 import type { NextPage } from 'next'
+import { Title, Block, Work } from '@components'
 
 const Works: NextPage = () => {
   return (
     <div>
-      work
+      <Block>
+        <Title>WORK EXPERIENCE</Title>
+        <div className={'mt-[25px]'}>
+          <Work />
+        </div>
+      </Block>
     </div>
   )
 }
