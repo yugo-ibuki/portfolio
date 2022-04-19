@@ -1,4 +1,4 @@
-import { Block, Title, Skill } from '@components'
+import { Block, Title, Skill, Graduate } from '@components'
 import type { NextPage } from 'next'
 import Image from 'next/image'
 
@@ -45,7 +45,7 @@ const Home: NextPage = () => {
       <Block>
         <Title>Graduate</Title>
         <div className={'mt-[25px]'}>
-
+          <Graduate />
         </div>
       </Block>
 
