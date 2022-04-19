@@ -1,4 +1,4 @@
-import { Block, Title, Skill, Graduate } from '@components'
+import { Block, Title, Skill, Graduate, Stack } from '@components'
 import type { NextPage } from 'next'
 import Image from 'next/image'
 
@@ -43,16 +43,34 @@ const Home: NextPage = () => {
       </div>
 
       <Block>
-        <Title>GRADUATE</Title>
-        <div className={'mt-[25px]'}>
-          <Graduate />
+        <Title>COMMENT</Title>
+        <div className={'mt-[25px] w-[90%] mx-auto'}>
+          <p>
+            Hello, this is Yugo.<br />
+            I'm a web developer, living in Japan, who desires to work overseas.<br />
+            My skills are below here, please take a little look at it.<br />
+          </p>
         </div>
       </Block>
 
       <Block>
         <Title>SKILLS</Title>
-        <div className={'mt-[25px]'}>
+        <div className={'mt-[25px] w-[90%] mx-auto'}>
           <Skill />
+        </div>
+      </Block>
+
+      <Block>
+        <Title>GRADUATE</Title>
+        <div className={'mt-[25px] w-[90%] mx-auto'}>
+          <Graduate />
+        </div>
+      </Block>
+
+      <Block>
+        <Title>THIS SITE STACK</Title>
+        <div className={'mt-[25px] w-[90%] mx-auto'}>
+          <Stack />
         </div>
       </Block>
     </main>

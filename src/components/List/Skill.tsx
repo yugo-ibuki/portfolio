@@ -49,7 +49,7 @@ const skills: {
 
 export const Skill: FC = () => {
   return (
-    <ul className={'w-[90%] mx-auto flex flex-col gap-y-[20px]'}>
+    <ul className={'flex flex-col gap-y-[20px]'}>
       {
         skills.map(skill => {
           return (

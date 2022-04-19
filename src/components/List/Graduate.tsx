@@ -19,7 +19,7 @@ const graduates: {
 
 export const Graduate: FC = () => {
   return (
-    <ul className={'w-[90%] mx-auto flex flex-col gap-y-[20px]'}>
+    <ul className={'flex flex-col gap-y-[20px]'}>
       {
         graduates.map(grd => {
           return (
