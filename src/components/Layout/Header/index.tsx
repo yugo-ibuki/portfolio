@@ -29,12 +29,16 @@ export const Header: React.FC = () => {
       <div className={'py-[15px]'}>
         <div className={'w-[900px] c-flex mx-auto'}>
           <div className={'c-flex gap-x-3'}>
-            {
-              colorMode === 'light'
-              ? <ImWink />
-              : <ImWink2 />
-            }
-            <h1 className={'font-bold text-lg mr-2'}>Yugo Ibuki</h1>
+            <Link href="/">
+              <a className={'c-flex gap-x-3'}>
+                {
+                  colorMode === 'light'
+                    ? <ImWink />
+                    : <ImWink2 />
+                }
+                <h1 className={'font-bold text-lg mr-2'}>Yugo Ibuki</h1>
+              </a>
+            </Link>
             <ul className={'c-flex gap-x-3'}>
               {
                 navData.map(nav => {

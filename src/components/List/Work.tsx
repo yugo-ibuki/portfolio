@@ -1,53 +1,11 @@
 import type { FC } from 'react'
 
-const workExperiences: {
-  title: string
-  terms: string
-  jobTitle: string
-}[] = [
-  {
-    title: 'Crafts inc',
-    terms: '2017.1 ~ 2017.7',
-    jobTitle: 'Interpreter / Translator',
-  },
-  {
-    title: 'ALIVE inc',
-    terms: '2017.12 ~ 2019.3',
-    jobTitle: 'Web Creator',
-  },
-  {
-    title: 'Maple Systems',
-    terms: '2019.4 ~ 2019.12',
-    jobTitle: 'System Engineer',
-  },
-  {
-    title: 'Asia Quest',
-    terms: '2020.1 ~ 2021.10',
-    jobTitle: 'Backend Engineer',
-  },
-  {
-    title: '3-shake',
-    terms: '2021.11 ~ present',
-    jobTitle: 'Frontend Engineer',
-  },
-]
-
 export const Work: FC = () => {
   return (
-    <ul className={'w-[90%] mx-auto flex flex-col gap-y-[20px]'}>
-      {
-        workExperiences.map(we => {
-          return (
-            <li>
-              <dl className={'flex flex-col gap-y-[10px]'}>
-                <dt>{we.title}</dt>
-                <dd className={'ml-[30px]'}>{we.jobTitle}</dd>
-                <dd className={'ml-[30px]'}>{we.terms}</dd>
-              </dl>
-            </li>
-          )
-        })
-      }
-    </ul>
+    <div>
+      <div>
+        <h3>Works</h3>
+      </div>
+    </div>
   )
 }

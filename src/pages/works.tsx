@@ -5,7 +5,7 @@ const Works: NextPage = () => {
   return (
     <div>
       <Block>
-        <Title>WORK EXPERIENCE</Title>
+        <Title>WHAT I HAVE BEEN DOING</Title>
         <div className={'mt-[25px]'}>
           <Work />
         </div>
