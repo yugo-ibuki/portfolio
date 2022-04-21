@@ -9,7 +9,7 @@ const navData: {
   href: string
 }[] = [
   {
-    name: 'BACKGRLUND',
+    name: 'BACKGROUND',
     href: '/background'
   },
   {
