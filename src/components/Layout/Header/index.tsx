@@ -13,8 +13,8 @@ const navData: {
     href: '/background'
   },
   {
-    name: 'WORKS',
-    href: 'works'
+    name: 'ARTICLES',
+    href: 'articles'
   },
   {
     name: 'GITHUB',
