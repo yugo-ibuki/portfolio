@@ -1,6 +1,6 @@
 import type { FC } from 'react'
 
-const workExperiences: {
+const experiences: {
   title: string
   terms: string
   jobTitle: string
@@ -36,13 +36,13 @@ export const Step: FC = () => {
   return (
     <ul className={'w-[90%] mx-auto flex flex-col gap-y-[20px]'}>
       {
-        workExperiences.map(we => {
+        experiences.map(ex => {
           return (
             <li>
               <dl className={'flex flex-col gap-y-[10px]'}>
-                <dt>{we.title}</dt>
-                <dd className={'ml-[30px]'}>{we.jobTitle}</dd>
-                <dd className={'ml-[30px]'}>{we.terms}</dd>
+                <dt>{ex.title}</dt>
+                <dd className={'ml-[30px]'}>{ex.jobTitle}</dd>
+                <dd className={'ml-[30px]'}>{ex.terms}</dd>
               </dl>
             </li>
           )
