@@ -21,7 +21,7 @@ export const Articles: FC = () => {
       {
         articles.map(article => {
           return (
-            <li>
+            <li key={article.name}>
               <dl className={'flex flex-col gap-y-[10px]'}>
                 <dt className={'text-cyan-600'}>{article.name}</dt>
                 <dd className={'ml-[30px]'}>

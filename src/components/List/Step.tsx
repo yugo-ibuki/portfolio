@@ -38,7 +38,7 @@ export const Step: FC = () => {
       {
         experiences.map(ex => {
           return (
-            <li>
+            <li key={ex.title}>
               <dl className={'flex flex-col gap-y-[10px]'}>
                 <dt>{ex.title}</dt>
                 <dd className={'ml-[30px]'}>{ex.jobTitle}</dd>

@@ -53,7 +53,7 @@ export const Skill: FC = () => {
       {
         skills.map(skill => {
           return (
-            <li>
+            <li  key={skill.name}>
               <dl className={'flex gap-x-5 items-center'}>
                 <dt className={'w-[100px]'}>{skill.name}</dt>
                 <dd className={'w-[70px]'}>{skill.terms} years</dd>
