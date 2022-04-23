@@ -10,7 +10,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <title>Template</title>
+        <title>Yugo Ibuki</title>
       </Head>
 
       <ChakraProvider theme={theme}>

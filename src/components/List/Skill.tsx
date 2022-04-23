@@ -54,7 +54,7 @@ export const Skill: FC = () => {
         skills.map(skill => {
           return (
             <li  key={skill.name}>
-              <dl className={'c-md-list gap-x-5'}>
+              <dl className={'c-sp-list gap-x-5'}>
                 <dt className={'w-[100px]'}>{skill.name}</dt>
                 <dd className={'w-[70px]'}>{skill.terms} years</dd>
                 <dd>
