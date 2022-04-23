@@ -9,11 +9,17 @@
 }
 
 .c-appearance-flex {
-    @apply hidden;
-    @apply md:flex;
+    @apply flex;
+    @apply sp:hidden;
 }
 
 .c-appearance-block {
-    @apply hidden;
-    @apply md:block;
+    @apply block;
+    @apply sp:hidden;
+}
+
+.c-md-list {
+    @apply flex;
+    @apply sp:flex-col;
+    @apply sp:items-center;
 }

@@ -24,10 +24,10 @@ export const Graduate: FC = () => {
         graduates.map(grd => {
           return (
             <li key={grd.name}>
-              <dl className={'flex gap-x-5 items-center'}>
+              <dl className={'c-md-list gap-x-5'}>
                 <dt className={'w-[140px]'}>{grd.name}</dt>
-                <dd className={'w-[180px]'}>{grd.place}</dd>
-                <dd>{grd.major}</dd>
+                <dd className={'w-[180px] ml-[10px] md:ml-[0px]'}>{grd.place}</dd>
+                <dd className={'ml-[10px] md:ml-[0px]'}>{grd.major}</dd>
               </dl>
             </li>
           )
