@@ -18,8 +18,7 @@
     @apply sp:hidden;
 }
 
-.c-md-list {
+.c-sp-list {
     @apply flex;
     @apply sp:flex-col;
-    @apply sp:items-center;
 }
