@@ -18,6 +18,11 @@
     @apply sp:hidden;
 }
 
+.c-not-appearance-block {
+    @apply hidden;
+    @apply sp:block;
+}
+
 .c-sp-list {
     @apply flex;
     @apply sp:flex-col;

@@ -59,7 +59,7 @@ export const Header: React.FC = () => {
               <ColorModeSwitch />
             </div>
           </div>
-          <div className={'block md:hidden'}>
+          <div className={'c-not-appearance-block'}>
             <Menu>
               <ul className={'flex justify-start flex-col gap-y-3 h-full'}>
                 {
@@ -67,7 +67,7 @@ export const Header: React.FC = () => {
                     return (
                       <li key={nav.name} className={'hover:border-b-2 hover:border-red-600 border-b-2 border-white-600 mt-2'}>
                         <Link href={nav.href}>
-                          <a target={nav.name === 'GITHUB' ? '_blanck' : '_self'}>
+                          <a target={nav.name === 'GITHUB' ? '_blank' : '_self'}>
                             {nav.name}
                           </a>
                         </Link>
