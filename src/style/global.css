@@ -7,3 +7,13 @@
     @apply justify-between;
     @apply items-center;
 }
+
+.c-appearance-flex {
+    @apply hidden;
+    @apply md:flex;
+}
+
+.c-appearance-block {
+    @apply hidden;
+    @apply md:block;
+}

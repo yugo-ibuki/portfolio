@@ -3,6 +3,7 @@ import { ColorModeSwitch } from '@components/ColorModeSwitch'
 import { ImWink, ImWink2 } from 'react-icons/im'
 import Link from 'next/link'
 import { useColorMode } from '@chakra-ui/react'
+import { Menu } from '@components/Layout/Drawer'
 
 const navData: {
   name: string
@@ -26,9 +27,9 @@ export const Header: React.FC = () => {
   const { colorMode } = useColorMode()
   return (
     <header>
-      <div className={'py-[15px]'}>
-        <div className={'w-[900px] c-flex mx-auto'}>
-          <div className={'c-flex gap-x-3'}>
+      <div className={'px-[10px]'}>
+        <div className={'w-full md:w-[900px] py-[15px] c-flex mx-auto'}>
+          <div className={'c-flex gap-x-3 w-full'}>
             <Link href="/">
               <a className={'c-flex gap-x-3'}>
                 {
@@ -39,7 +40,7 @@ export const Header: React.FC = () => {
                 <h1 className={'font-bold text-lg mr-2'}>Yugo Ibuki</h1>
               </a>
             </Link>
-            <ul className={'c-flex gap-x-3'}>
+            <ul className={'c-appearance-flex justify-between items-center gap-x-3'}>
               {
                 navData.map(nav => {
                   return (
@@ -54,8 +55,32 @@ export const Header: React.FC = () => {
                 })
               }
             </ul>
+            <div className={'c-appearance-block ml-auto'}>
+              <ColorModeSwitch />
+            </div>
           </div>
-          <ColorModeSwitch />
+          <div className={'block md:hidden'}>
+            <Menu>
+              <ul className={'flex justify-start flex-col gap-y-3 h-full'}>
+                {
+                  navData.map(nav => {
+                    return (
+                      <li key={nav.name} className={'hover:border-b-2 hover:border-red-600 border-b-2 border-white-600 mt-2'}>
+                        <Link href={nav.href}>
+                          <a target={nav.name === 'GITHUB' ? '_blanck' : '_self'}>
+                            {nav.name}
+                          </a>
+                        </Link>
+                      </li>
+                    )
+                  })
+                }
+                <li className={'mt-auto'}>
+                  <ColorModeSwitch />
+                </li>
+              </ul>
+            </Menu>
+          </div>
         </div>
       </div>
     </header>
