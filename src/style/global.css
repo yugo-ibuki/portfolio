@@ -7,3 +7,18 @@
     @apply justify-between;
     @apply items-center;
 }
+
+.c-appearance-flex {
+    @apply flex;
+    @apply sp:hidden;
+}
+
+.c-appearance-block {
+    @apply block;
+    @apply sp:hidden;
+}
+
+.c-sp-list {
+    @apply flex;
+    @apply sp:flex-col;
+}

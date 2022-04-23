@@ -16,7 +16,7 @@ const profiles: TProfiles[] = [
 const Home: NextPage = () => {
   return (
     <main>
-      <div className={'mt-[30px] flex items-center gap-x-10'}>
+      <div className={'mt-[30px] flex items-center gap-x-10 sp:flex-col'}>
         <figure className={'h-[300px] flex'}>
           <Image
             src="/assets/me.jpeg"
@@ -26,7 +26,7 @@ const Home: NextPage = () => {
             height={300}
           />
         </figure>
-        <div className={'gap-x-5 w-[40%]'}>
+        <div className={'gap-x-5 w-[40%] sp:mt-[20px]'}>
           <dl>
             {
               profiles.map(profile => {
