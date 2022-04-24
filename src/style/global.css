@@ -18,7 +18,6 @@
     @apply sp:hidden;
 }
 
-<<<<<<< HEAD
 .c-not-appearance-block {
     @apply hidden;
     @apply sp:block;
@@ -27,10 +26,10 @@
 .c-sp-list {
     @apply flex;
     @apply sp:flex-col;
-=======
-.c-md-list {
+    @apply sp:items-center;
+}
+
+.c-sp-list {
     @apply flex;
     @apply sp:flex-col;
-    @apply sp:items-center;
->>>>>>> a4f1297 (feat: tailwindにspのdisplay区分を追加)
 }

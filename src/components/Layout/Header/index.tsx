@@ -28,11 +28,7 @@ export const Header: React.FC = () => {
   return (
     <header>
       <div className={'px-[10px]'}>
-<<<<<<< HEAD
         <div className={'w-[700px] sp:w-full py-[15px] c-flex mx-auto'}>
-=======
-        <div className={'w-[900px] sp:w-full py-[15px] c-flex mx-auto'}>
->>>>>>> a4f1297 (feat: tailwindにspのdisplay区分を追加)
           <div className={'c-flex gap-x-3 w-full'}>
             <Link href="/">
               <a className={'c-flex gap-x-3'}>
