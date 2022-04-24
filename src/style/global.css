@@ -26,10 +26,4 @@
 .c-sp-list {
     @apply flex;
     @apply sp:flex-col;
-    @apply sp:items-center;
-}
-
-.c-sp-list {
-    @apply flex;
-    @apply sp:flex-col;
 }
