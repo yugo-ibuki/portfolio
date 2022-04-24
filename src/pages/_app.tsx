@@ -1,10 +1,11 @@
 import '../style/global.css'
-import type { AppProps } from 'next/app'
+import type { AppContext, AppProps } from 'next/app'
 import Head from 'next/head'
 import { ChakraProvider } from '@chakra-ui/react'
 import { theme } from '../config/chakra'
 import { Header } from '@components/Layout/Header'
 import { LayoutWrapper } from '@components/Layout/LayoutWrapper'
+import App from 'next/app'
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -14,7 +15,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Head>
 
       <ChakraProvider theme={theme}>
-        <Header />
+        <Header ua={pageProps.ua} />
 
         <LayoutWrapper>
           <Component {...pageProps} />
@@ -23,4 +24,10 @@ function MyApp({ Component, pageProps }: AppProps) {
     </>
   )
 }
+
+MyApp.getInitialProps = async (appContext : AppContext) => {
+  const appProps = await App.getInitialProps(appContext)
+  return { ...appProps }
+}
+
 export default MyApp

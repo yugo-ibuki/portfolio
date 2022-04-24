@@ -1,7 +1,9 @@
-import type { FC } from 'react'
 import { Block, Articles as ArticleList, Title } from '@components'
+import type { NextPageContext } from 'next'
+import { checkUa } from '@libs/checkUa'
+import type { NextPage } from 'next'
 
-const Articles: FC = () => {
+const Articles: NextPage = () => {
   return (
     <main>
       <Block>
@@ -12,6 +14,11 @@ const Articles: FC = () => {
       </Block>
     </main>
   )
+}
+
+Articles.getInitialProps = async ({ req }: NextPageContext) => {
+  const ua = checkUa(req)
+  return { ua }
 }
 
 export default Articles

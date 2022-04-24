@@ -2,13 +2,12 @@ import React from 'react'
 import { ColorModeSwitch } from '@components/ColorModeSwitch'
 import { ImWink, ImWink2 } from 'react-icons/im'
 import Link from 'next/link'
-import { useColorMode } from '@chakra-ui/react'
+import { useColorMode, useDisclosure } from '@chakra-ui/react'
 import { Menu } from '@components/Layout/Drawer'
+import { HeaderList } from './HeaderList'
+import type { NavData } from './HeaderList'
 
-const navData: {
-  name: string
-  href: string
-}[] = [
+const navData: NavData[] = [
   {
     name: 'BACKGROUND',
     href: '/background'
@@ -23,8 +22,13 @@ const navData: {
   }
 ]
 
-export const Header: React.FC = () => {
+type Props = {
+  ua: string
+}
+
+export const Header: React.FC<Props> = ({ ua }) => {
   const { colorMode } = useColorMode()
+  const { isOpen, onOpen, onClose } = useDisclosure()
   return (
     <header>
       <div className={'px-[10px]'}>
@@ -41,40 +45,16 @@ export const Header: React.FC = () => {
               </a>
             </Link>
             <ul className={'c-appearance-flex justify-between items-center gap-x-3'}>
-              {
-                navData.map(nav => {
-                  return (
-                    <li key={nav.name} className={'hover:border-b-2 hover:border-red-600 border-b-2 border-white-600'}>
-                      <Link href={nav.href}>
-                        <a target={nav.name === 'GITHUB' ? '_blanck' : '_self'}>
-                          {nav.name}
-                        </a>
-                      </Link>
-                    </li>
-                  )
-                })
-              }
+              <HeaderList navData={navData} ua={ua} onClose={onClose} />
             </ul>
             <div className={'c-appearance-block ml-auto'}>
               <ColorModeSwitch />
             </div>
           </div>
           <div className={'c-not-appearance-block'}>
-            <Menu>
+            <Menu disclosure={{isOpen, onOpen, onClose}}>
               <ul className={'flex justify-start flex-col gap-y-3 h-full'}>
-                {
-                  navData.map(nav => {
-                    return (
-                      <li key={nav.name} className={'hover:border-b-2 hover:border-red-600 border-b-2 border-white-600 mt-2'}>
-                        <Link href={nav.href}>
-                          <a target={nav.name === 'GITHUB' ? '_blank' : '_self'}>
-                            {nav.name}
-                          </a>
-                        </Link>
-                      </li>
-                    )
-                  })
-                }
+                <HeaderList navData={navData} ua={ua} onClose={onClose} />
                 <li className={'mt-auto'}>
                   <ColorModeSwitch />
                 </li>

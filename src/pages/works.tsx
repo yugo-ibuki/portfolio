@@ -1,5 +1,7 @@
 import type { NextPage } from 'next'
 import { Title, Block, Work } from '@components'
+import type { NextPageContext } from 'next'
+import { checkUa } from '@libs/checkUa'
 
 const Works: NextPage = () => {
   return (
@@ -12,6 +14,11 @@ const Works: NextPage = () => {
       </Block>
     </div>
   )
+}
+
+Works.getInitialProps = async ({ req }: NextPageContext) => {
+  const ua = checkUa(req)
+  return { ua }
 }
 
 export default Works
