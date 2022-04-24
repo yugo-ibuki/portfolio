@@ -7,7 +7,7 @@ export const checkUa = (req: NextPageContext['req']): string => {
     ua = /Android/.test(req.headers['user-agent'])
       // Android判定
       ? 'Android'
-      : /iOS/.test(req.headers['user-agent'])
+      : /(iPhone|iPad)/.test(req.headers['user-agent'])
         // iOS判定
         ? 'iOS'
         : 'other'
