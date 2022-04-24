@@ -22,11 +22,7 @@ const navData: NavData[] = [
   }
 ]
 
-type Props = {
-  ua: string
-}
-
-export const Header: React.FC<Props> = ({ ua }) => {
+export const Header: React.FC = () => {
   const { colorMode } = useColorMode()
   const { isOpen, onOpen, onClose } = useDisclosure()
   return (
@@ -45,7 +41,7 @@ export const Header: React.FC<Props> = ({ ua }) => {
               </a>
             </Link>
             <ul className={'c-appearance-flex justify-between items-center gap-x-3'}>
-              <HeaderList navData={navData} ua={ua} onClose={onClose} />
+              <HeaderList navData={navData} onClose={onClose} />
             </ul>
             <div className={'c-appearance-block ml-auto'}>
               <ColorModeSwitch />
@@ -54,7 +50,7 @@ export const Header: React.FC<Props> = ({ ua }) => {
           <div className={'c-not-appearance-block'}>
             <Menu disclosure={{isOpen, onOpen, onClose}}>
               <ul className={'flex justify-start flex-col gap-y-3 h-full'}>
-                <HeaderList navData={navData} ua={ua} onClose={onClose} />
+                <HeaderList navData={navData} onClose={onClose} />
                 <li className={'mt-auto'}>
                   <ColorModeSwitch />
                 </li>
