@@ -4,14 +4,20 @@ import {
   DrawerContent,
   DrawerHeader,
   DrawerOverlay,
-  useDisclosure,
 } from '@chakra-ui/react'
 import { GiHamburgerMenu } from 'react-icons/gi'
 import type { FC } from 'react'
 
-export const Menu: FC = ({ children }) => {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+type Props = {
+  disclosure: {
+    isOpen: boolean
+    onOpen: () => void
+    onClose: () => void
+  }
+}
 
+export const Menu: FC<Props> = ({ children, disclosure }) => {
+  const { isOpen, onOpen, onClose } = disclosure
   return (
     <div>
       <GiHamburgerMenu onClick={onOpen} width={80} />

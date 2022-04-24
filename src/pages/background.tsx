@@ -1,5 +1,7 @@
 import type { NextPage } from 'next'
 import { Block, Title, Step } from '@components'
+import type { NextPageContext } from 'next'
+import { checkUa } from '@libs/checkUa'
 
 const Background: NextPage = () => {
  return (
@@ -12,6 +14,11 @@ const Background: NextPage = () => {
      </Block>
    </main>
   )
+}
+
+Background.getInitialProps = async ({ req }: NextPageContext) => {
+  const ua = checkUa(req)
+  return { ua }
 }
 
 export default Background

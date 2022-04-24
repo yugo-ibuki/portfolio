@@ -1,6 +1,7 @@
 import { Block, Title, Skill, Graduate, Stack } from '@components'
-import type { NextPage } from 'next'
+import type { NextPage, NextPageContext } from 'next'
 import Image from 'next/image'
+import { checkUa } from '@libs/checkUa'
 
 type TProfiles = {
   name: string
@@ -13,7 +14,11 @@ const profiles: TProfiles[] = [
   { name: 'Language', description: 'JP / EN' },
 ]
 
-const Home: NextPage = () => {
+interface Props {
+  ua: string
+}
+
+const Home: NextPage<Props> = ({ ua }) => {
   return (
     <main>
       <div className={'mt-[30px] flex items-center gap-x-10 sp:flex-col'}>
@@ -75,6 +80,11 @@ const Home: NextPage = () => {
       </Block>
     </main>
   )
+}
+
+Home.getInitialProps = async ({ req }: NextPageContext) => {
+  const ua = checkUa(req)
+  return { ua }
 }
 
 export default Home
