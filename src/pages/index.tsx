@@ -14,11 +14,7 @@ const profiles: TProfiles[] = [
   { name: 'Language', description: 'JP / EN' },
 ]
 
-interface Props {
-  ua: string
-}
-
-const Home: NextPage<Props> = ({ ua }) => {
+const Home: NextPage = () => {
   return (
     <main>
       <div className={'mt-[30px] flex items-center gap-x-10 sp:flex-col'}>
