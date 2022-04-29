@@ -23,7 +23,7 @@ export const Volunteer: FC = () => {
                 <dd className={'ml-[30px]'}>{v.content}</dd>
                 <dd className={'ml-[30px]'}>
                   <Link href="https://www.kisfvf.com/">
-                    <a target={'_blank'} className={'text-cyan-600'}>
+                    <a target={'_blank'} className={'text-cyan-600 hover:cursor-pointer'}>
                       Kyoto International Student Film & Video Festival<br />
                       (京都国際学生映画祭)
                     </a>
