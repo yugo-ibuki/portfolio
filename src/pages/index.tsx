@@ -9,8 +9,9 @@ type TProfiles = {
 
 const profiles: TProfiles[] = [
   { name: 'Name', description: 'YUGO IBUKI' },
-  { name: 'Age', description: '30' },
+  // { name: 'Age', description: '30' },
   { name: 'Language', description: 'JP / EN' },
+  { name: 'Job Title', description: 'Frontend Engineer' },
 ]
 
 const Home: NextPage = () => {
@@ -26,13 +27,13 @@ const Home: NextPage = () => {
             height={300}
           />
         </figure>
-        <div className={'gap-x-5 w-[40%] sp:mt-[20px]'}>
+        <div className={'gap-x-5 w-[40%] sp:w-[60%] sp:mt-[20px]'}>
           <dl>
             {
               profiles.map(profile => {
                 return (
                   <>
-                    <dt className={'float-left mr-2'}>{profile.name}:</dt>
+                    <dt className={'float-left sp:float-none mr-2 sp:mr-0 sp:mt-3 font-bold'}>{profile.name}:</dt>
                     <dd>{profile.description}</dd>
                   </>
                 )
