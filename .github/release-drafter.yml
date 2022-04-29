@@ -13,6 +13,37 @@ categories:
   - title: '🧰 Maintenance'
     labels:
       - 'chore'
+autolabeler:
+  - label: feature
+    branch:
+      - "/^feat(ure)?[/-].+/"
+    title:
+      - "/^feat(ure)?[/-].+/"
+  - label: fix
+    branch:
+      - "/^fix[/-].+/"
+    title:
+      - "/^fix[/-].+/"
+  - label: chore
+    branch:
+      - "/^chore[/-].+/"
+    title:
+      - "/^chore[/-].+/"
+  - label: refactor
+    branch:
+      - "/(refactor|refactoring)[/-].+/"
+    title:
+      - "/(refactor|refactoring)[/-].+/"
+  - label: docs
+    branch:
+      - "/doc(umentation)[/-].+/"
+    title:
+      - "/doc(umentation)[/-].+/"
+  - label: enhancement
+    branch:
+      - "/(enhancement|improve)[/-].+/"
+    title:
+      - "/(enhancement|improve)[/-].+/"
 change-title-escapes: '\<*_&'
 exclude-labels:
   - 'exclude from changelog'
