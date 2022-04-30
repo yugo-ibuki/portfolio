@@ -8,11 +8,11 @@ const handler = (req: NextApiRequest, res: NextApiResponse) => {
     const body = JSON.parse(req.body)
 
     const content = `
-    お問合せを受け付けました。
-    名前: ${body.name}
-    メールアドレス: ${body.email}
-    所属: ${body.belonging}
-    内容: ${body.message}
+    お問合せを受け付けました。\r\n
+    名前: ${body.name}\r\n
+    メールアドレス: ${body.email}\r\n
+    所属: ${body.belonging}\r\n
+    内容: ${body.message}\r\n
     `
     const msgToSender = {
       to: body.email,
