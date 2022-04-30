@@ -13,9 +13,11 @@ const handler = (req: NextApiRequest, res: NextApiResponse) => {
       text: 'お問合せを受け付けました。回答をお待ちください。' + req.body.message,
       html: 'お問合せを受け付けました。回答をお待ちください。' + req.body.message,
     }
+    console.log(msg)
     ;(async () => {
       try {
-        await sgMail.send(msg)
+        const res = await sgMail.send(msg)
+        console.log(res)
       } catch (error) {
         const err = error as ResponseError
         if (err.response) {
