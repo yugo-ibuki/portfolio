@@ -19,6 +19,10 @@ const navData: NavData[] = [
   {
     name: 'GITHUB',
     href: 'https://github.com/yugo-ibuki'
+  },
+  {
+    name: 'CONTACT',
+    href: '/contact'
   }
 ]
 
