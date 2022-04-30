@@ -14,14 +14,12 @@ const handler = (req: NextApiRequest, res: NextApiResponse) => {
       from: 'support@y-ibuki91.app',
       subject: 'お問合せありがとうございました。',
       text: contentToSender({ name: body.name, email: body.email, belonging: body.belonging, message: body.message }),
-      html: contentToSender({ name: body.name, email: body.email, belonging: body.belonging, message: body.message }),
     }
     const msgToMe = {
       to: process.env.NEXT_PUBLIC_MY_EMAIL,
       from: body.email,
       subject: 'お問合せがありました。',
       text: contentToMe({ name: body.name, email: body.email, belonging: body.belonging, message: body.message }),
-      html: contentToMe({ name: body.name, email: body.email, belonging: body.belonging, message: body.message }),
     }
     ;(async () => {
       try {
