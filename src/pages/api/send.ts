@@ -19,40 +19,15 @@ const handler = (req: NextApiRequest, res: NextApiResponse) => {
       to: body.email,
       from: 'support@y-ibuki91.app',
       subject: 'お問合せありがとうございました。',
-<<<<<<< HEAD
       text: content,
       html: content,
-=======
-      text: '' +
-        'お問合せを受け付けました。\r\n' +
-        '名前: ' + body.name + '\r\n' +
-        'メールアドレス: ' + body.email + '\r\n' +
-        '所属: ' + body.email + '\r\n' +
-        '内容: ' + body.message + '\r\n',
-      html: 'お問合せを受け付けました。返答をお待ちください。\r\n' + body.message,
->>>>>>> main
     }
     const msgToMe = {
       to: process.env.NEXT_PUBLIC_MY_EMAIL,
       from: body.email,
       subject: 'お問合せがありました。',
-<<<<<<< HEAD
       text: content,
       html: content,
-=======
-      text: '' +
-        'お問合せを受け付けました。\r\n' +
-        '名前: ' + body.name + '\r\n' +
-        'メールアドレス: ' + body.email + '\r\n' +
-        '所属: ' + body.email + '\r\n' +
-        '内容: ' + body.message + '\r\n',
-      html: '' +
-        'お問合せを受け付けました。\r\n' +
-        '名前: ' + body.name + '\r\n' +
-        'メールアドレス: ' + body.email + '\r\n' +
-        '所属: ' + body.email + '\r\n' +
-        '内容: ' + body.message + '\r\n',
->>>>>>> main
     }
     ;(async () => {
       try {
