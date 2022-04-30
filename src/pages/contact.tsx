@@ -82,7 +82,6 @@ const Contact: FC = () => {
                 h={300}
                 {...register('content', {
                   required: '内容は必須項目です。',
-                  maxLength: 50
                 })}
               />
               <FormErrorMessage>
