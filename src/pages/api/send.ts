@@ -5,9 +5,10 @@ const handler = (req: NextApiRequest, res: NextApiResponse) => {
   if(req.method === 'POST') {
     const sgMail = require('@sendgrid/mail')
     sgMail.setApiKey(process.env.NEXT_PUBLIC_SENDGRID_KEY)
+    const body = JSON.parse(req.body)
 
     const msg = {
-      to: req.body.email,
+      to: body.email,
       from: 'support@example.com',
       subject: 'お問合せありがとうございました。',
       text: 'お問合せを受け付けました。回答をお待ちください。' + req.body.message,
