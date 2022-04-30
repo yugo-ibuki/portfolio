@@ -1,5 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import type { ResponseError } from '@sendgrid/helpers/classes'
+import { contentToSender } from '@lib/mailTemplate/toSender'
+import { contentToMe } from '@lib/mailTemplate/toMe'
 
 const handler = (req: NextApiRequest, res: NextApiResponse) => {
   if(req.method === 'POST') {
@@ -11,30 +13,13 @@ const handler = (req: NextApiRequest, res: NextApiResponse) => {
       to: body.email,
       from: 'support@y-ibuki91.app',
       subject: 'お問合せありがとうございました。',
-      text: '' +
-        'お問合せを受け付けました。\r\n' +
-        '名前: ' + body.name + '\r\n' +
-        'メールアドレス: ' + body.email + '\r\n' +
-        '所属: ' + body.email + '\r\n' +
-        '内容: ' + body.message + '\r\n',
-      html: 'お問合せを受け付けました。返答をお待ちください。\r\n' + body.message,
+      text: contentToSender({ name: body.name, email: body.email, belonging: body.belonging, message: body.message }),
     }
     const msgToMe = {
       to: process.env.NEXT_PUBLIC_MY_EMAIL,
       from: body.email,
       subject: 'お問合せがありました。',
-      text: '' +
-        'お問合せを受け付けました。\r\n' +
-        '名前: ' + body.name + '\r\n' +
-        'メールアドレス: ' + body.email + '\r\n' +
-        '所属: ' + body.email + '\r\n' +
-        '内容: ' + body.message + '\r\n',
-      html: '' +
-        'お問合せを受け付けました。\r\n' +
-        '名前: ' + body.name + '\r\n' +
-        'メールアドレス: ' + body.email + '\r\n' +
-        '所属: ' + body.email + '\r\n' +
-        '内容: ' + body.message + '\r\n',
+      text: contentToMe({ name: body.name, email: body.email, belonging: body.belonging, message: body.message }),
     }
     ;(async () => {
       try {
