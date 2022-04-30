@@ -7,8 +7,8 @@ import {
   FormLabel, Textarea,
 } from '@chakra-ui/react'
 import { Input } from '@chakra-ui/react'
-import type { IFormInputs } from '@libs/sendMail'
-import { sendMail } from '@libs/sendMail'
+import type { IFormInputs } from '@lib/sendMail'
+import { sendMail } from '@lib/sendMail'
 
 const Contact: FC = () => {
   const {
@@ -82,7 +82,6 @@ const Contact: FC = () => {
                 h={300}
                 {...register('content', {
                   required: '内容は必須項目です。',
-                  maxLength: 50
                 })}
               />
               <FormErrorMessage>

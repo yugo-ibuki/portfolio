@@ -23,7 +23,7 @@
       "@components": ["./src/components"],
       "@components/*": ["./src/components/*"],
       "@models/*": ["./src/models/*"],
-      "@libs/*": ["./src/libs/*"]
+      "@lib/*": ["./src/lib/*"]
     }
   },
   "include": [
