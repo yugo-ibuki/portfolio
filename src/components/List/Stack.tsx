@@ -16,6 +16,14 @@ const stacks: {
   {
     name: 'Chakra',
     url: 'https://chakra-ui.com/'
+  },
+  {
+    name: 'React Hook Form',
+    url: 'https://react-hook-form.com/'
+  },
+  {
+    name: 'send grid',
+    url: 'https://sendgrid.com/'
   }
 ]
 
