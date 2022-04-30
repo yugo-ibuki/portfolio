@@ -7,13 +7,8 @@ import {
   FormLabel, Textarea,
 } from '@chakra-ui/react'
 import { Input } from '@chakra-ui/react'
-
-interface IFormInputs {
-  name: string
-  belonging: string
-  email: string
-  content: string
-}
+import type { IFormInputs } from '@libs/sendMail'
+import { sendMail } from '@libs/sendMail'
 
 const Contact: FC = () => {
   const {
@@ -21,8 +16,10 @@ const Contact: FC = () => {
     handleSubmit,
     formState: { errors, isSubmitting }
   } = useForm<IFormInputs>()
-  const onSubmit = (data: IFormInputs): void => {
-    if (!errors) console.log(data)
+
+  const onSubmit = async (data: IFormInputs): Promise<void> => {
+    if (errors) return
+    await sendMail(data)
   }
   return (
     <main>
