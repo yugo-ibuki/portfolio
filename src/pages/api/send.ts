@@ -7,18 +7,29 @@ const handler = (req: NextApiRequest, res: NextApiResponse) => {
     sgMail.setApiKey(process.env.NEXT_PUBLIC_SENDGRID_KEY)
     const body = JSON.parse(req.body)
 
-    const msg = {
+    const msgToSender = {
       to: body.email,
-      from: 'support@example.com',
+      from: 'support@y-ibuki91.app',
       subject: 'お問合せありがとうございました。',
-      text: 'お問合せを受け付けました。回答をお待ちください。' + req.body.message,
-      html: 'お問合せを受け付けました。回答をお待ちください。' + req.body.message,
+      text: 'お問合せを受け付けました。返答をお待ちください。\r\n' + body.message,
+      html: 'お問合せを受け付けました。返答をお待ちください。\r\n' + body.message,
     }
-    console.log(msg)
+    const msgToMe = {
+      to: process.env.NEXT_PUBLIC_MY_EMAIL,
+      from: body.email,
+      subject: 'お問合せありがとうございました。',
+      text: '' +
+        'お問合せを受け付けました。\r\n' +
+        '名前: ' + body.name + '\r\n' +
+        'メールアドレス: ' + body.email + '\r\n' +
+        '所属: ' + body.email + '\r\n' +
+        '内容: ' + body.message + '\r\n',
+      html: 'お問合せを受け付けました。回答をお待ちください。\r\n' + body.message,
+    }
     ;(async () => {
       try {
-        const res = await sgMail.send(msg)
-        console.log(res)
+        await sgMail.send(msgToSender)
+        await sgMail.send(msgToMe)
       } catch (error) {
         const err = error as ResponseError
         if (err.response) {
