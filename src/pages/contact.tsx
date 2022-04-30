@@ -18,7 +18,10 @@ const Contact: FC = () => {
   } = useForm<IFormInputs>()
 
   const onSubmit = async (data: IFormInputs): Promise<void> => {
-    if (errors) return
+    if (errors) {
+      console.log('フォームエラー')
+      return
+    }
     await sendMail(data)
   }
   return (
