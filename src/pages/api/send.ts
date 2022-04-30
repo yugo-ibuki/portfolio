@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import type { ResponseError } from '@sendgrid/helpers/classes'
+import { EOL } from 'os'
 
 const handler = (req: NextApiRequest, res: NextApiResponse) => {
   if(req.method === 'POST') {
@@ -7,34 +8,26 @@ const handler = (req: NextApiRequest, res: NextApiResponse) => {
     sgMail.setApiKey(process.env.NEXT_PUBLIC_SENDGRID_KEY)
     const body = JSON.parse(req.body)
 
+    const content = `
+    お問合せを受け付けました。
+    名前: ${body.name}
+    メールアドレス: ${body.email}
+    所属: ${body.belonging}
+    内容: ${body.message}
+    `
     const msgToSender = {
       to: body.email,
       from: 'support@y-ibuki91.app',
       subject: 'お問合せありがとうございました。',
-      text: '' +
-        'お問合せを受け付けました。\r\n' +
-        '名前: ' + body.name + '\r\n' +
-        'メールアドレス: ' + body.email + '\r\n' +
-        '所属: ' + body.email + '\r\n' +
-        '内容: ' + body.message + '\r\n',
-      html: 'お問合せを受け付けました。返答をお待ちください。\r\n' + body.message,
+      text: content,
+      html: content,
     }
     const msgToMe = {
       to: process.env.NEXT_PUBLIC_MY_EMAIL,
       from: body.email,
       subject: 'お問合せがありました。',
-      text: '' +
-        'お問合せを受け付けました。\r\n' +
-        '名前: ' + body.name + '\r\n' +
-        'メールアドレス: ' + body.email + '\r\n' +
-        '所属: ' + body.email + '\r\n' +
-        '内容: ' + body.message + '\r\n',
-      html: '' +
-        'お問合せを受け付けました。\r\n' +
-        '名前: ' + body.name + '\r\n' +
-        'メールアドレス: ' + body.email + '\r\n' +
-        '所属: ' + body.email + '\r\n' +
-        '内容: ' + body.message + '\r\n',
+      text: content,
+      html: content,
     }
     ;(async () => {
       try {
