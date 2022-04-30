@@ -10,8 +10,12 @@ export const contentToSender = ({
   message: string
 }) => `
 お問合せを受け付けました。
+
 名前: ${name}
+
 メールアドレス: ${email}
+
 所属: ${belonging}
+
 内容: ${message}
 `

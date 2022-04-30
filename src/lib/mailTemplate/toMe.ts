@@ -10,8 +10,12 @@ export const contentToMe = ({
   message: string
 }) => `
 お問合せがありました。
+
 名前: ${name}
+
 メールアドレス: ${email}
+
 所属: ${belonging}
+
 内容: ${message}
 `
