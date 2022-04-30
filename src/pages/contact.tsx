@@ -35,6 +35,7 @@ const Contact: FC = () => {
               <Input
                 id='name'
                 {...register('name', {
+                  required: '名前は必須項目です。',
                   maxLength: { value: 50, message: '名前は50文字以内にしてください。' },
                   minLength: { value: 2, message: '名前は2文字以上にしてください。' },
                 })}
@@ -50,6 +51,7 @@ const Contact: FC = () => {
                 id='email'
                 type='email'
                 {...register('email', {
+                  required: 'メールアドレスは必須項目です。',
                   pattern: {
                     value: /\S+@\S+\.\S+/,
                     message: 'メールアドレスの形式で入力してください。'
@@ -79,7 +81,10 @@ const Contact: FC = () => {
               <Textarea
                 id='content'
                 h={300}
-                {...register('content', { required: false, maxLength: 50 })}
+                {...register('content', {
+                  required: '内容は必須項目です。',
+                  maxLength: 50
+                })}
               />
               <FormErrorMessage>
                 {errors.content && errors.content.message}
