@@ -26,14 +26,14 @@ const Contact: FC = () => {
             <FormControl isInvalid={Boolean(errors.name)}>
               <FormLabel htmlFor='name'>
                 <span className={'text-red-500'}>*</span>
-                Name(名前):
+                Name:
               </FormLabel>
               <Input
                 id='name'
                 {...register('name', {
-                  required: '名前は必須項目です。',
-                  maxLength: { value: 50, message: '名前は50文字以内にしてください。' },
-                  minLength: { value: 2, message: '名前は2文字以上にしてください。' },
+                  required: '"name" is required',
+                  maxLength: { value: 50, message: 'name must be less than 50 characters.' },
+                  minLength: { value: 2, message: 'name must be greater than 2 chracters.' },
                 })}
               />
               <FormErrorMessage>
@@ -44,18 +44,18 @@ const Contact: FC = () => {
             <FormControl isInvalid={Boolean(errors.email)}>
               <FormLabel htmlFor='email'>
                 <span className={'text-red-500'}>*</span>
-                E-mail(メールアドレス):
+                E-mail:
               </FormLabel>
               <Input
                 id='email'
                 type='email'
                 {...register('email', {
-                  required: 'メールアドレスは必須項目です。',
+                  required: '"email" is required',
                   pattern: {
                     value: /\S+@\S+\.\S+/,
-                    message: 'メールアドレスの形式で入力してください。'
+                    message: 'email must be formatted as Email.'
                   },
-                  maxLength: 50,
+                  maxLength: { value: 50, message: 'email must be less than 50 characters.' },
                 })}
               />
               <FormErrorMessage>
@@ -65,12 +65,14 @@ const Contact: FC = () => {
 
             <FormControl isInvalid={Boolean(errors.belonging)}>
               <FormLabel htmlFor='belonging'>
-                Belongings(所属):
+                Belonging(Company, Organization, Freelance...etc):
               </FormLabel>
               <Input
                 id='belonging'
                 type='text'
-                {...register('belonging', { maxLength: 50 })}
+                {...register('belonging', {
+                  maxLength: { value: 50, message: 'belonging must be less than 50 characters.'}
+                })}
               />
               <FormErrorMessage>
                 {errors.belonging && errors.belonging.message}
@@ -80,13 +82,13 @@ const Contact: FC = () => {
             <FormControl isInvalid={Boolean(errors.content)}>
               <FormLabel htmlFor='content'>
                 <span className={'text-red-500'}>*</span>
-                Content(内容):
+                Content:
               </FormLabel>
               <Textarea
                 id='content'
                 h={300}
                 {...register('content', {
-                  required: '内容は必須項目です。',
+                  required: '"content" is required',
                 })}
               />
               <FormErrorMessage>
@@ -101,7 +103,7 @@ const Contact: FC = () => {
                 isLoading={isSubmitting}
                 type='submit'
               >
-                送信
+                Submit
               </Button>
             </div>
           </form>

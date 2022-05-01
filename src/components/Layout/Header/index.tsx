@@ -14,7 +14,7 @@ const navData: NavData[] = [
   },
   {
     name: 'ARTICLES',
-    href: 'articles'
+    href: '/articles'
   },
   {
     name: 'GITHUB',
