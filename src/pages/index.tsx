@@ -1,6 +1,8 @@
 import { Block, Title, Skill, Graduate, Stack } from '@components'
 import type { NextPage } from 'next'
 import Image from 'next/image'
+import { AiFillGithub } from 'react-icons/ai'
+import Link from 'next/link'
 
 type TProfiles = {
   name: string
@@ -39,6 +41,13 @@ const Home: NextPage = () => {
                 )
               })
             }
+            <dd>
+              <Link href="https://github.com/yugo-ibuki">
+                <a className={'inline-block mt-2 sp:mt-3'} target={'_blank'}>
+                  <AiFillGithub size={20} />
+                </a>
+              </Link>
+            </dd>
           </dl>
         </div>
       </div>

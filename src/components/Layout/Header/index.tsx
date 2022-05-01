@@ -16,10 +16,10 @@ const navData: NavData[] = [
     name: 'ARTICLES',
     href: '/articles'
   },
-  {
-    name: 'GITHUB',
-    href: 'https://github.com/yugo-ibuki'
-  },
+  // {
+  //   name: 'GITHUB',
+  //   href: 'https://github.com/yugo-ibuki'
+  // },
   {
     name: 'CONTACT',
     href: '/contact'
