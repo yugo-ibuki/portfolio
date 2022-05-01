@@ -30,7 +30,10 @@ const Contact: FC = () => {
         <div className={'mt-5 flex flex-col'}>
           <form onSubmit={handleSubmit(onSubmit)} className={'flex flex-col gap-y-4'}>
             <FormControl isInvalid={Boolean(errors.name)}>
-              <FormLabel htmlFor='name'>名前:</FormLabel>
+              <FormLabel htmlFor='name'>
+                <span className={'text-red-500'}>*</span>
+                Name(名前):
+              </FormLabel>
               <Input
                 id='name'
                 {...register('name', {
@@ -45,7 +48,10 @@ const Contact: FC = () => {
             </FormControl>
 
             <FormControl isInvalid={Boolean(errors.email)}>
-              <FormLabel htmlFor='email'>メールアドレス:</FormLabel>
+              <FormLabel htmlFor='email'>
+                <span className={'text-red-500'}>*</span>
+                E-mail(メールアドレス):
+              </FormLabel>
               <Input
                 id='email'
                 type='email'
@@ -64,7 +70,9 @@ const Contact: FC = () => {
             </FormControl>
 
             <FormControl isInvalid={Boolean(errors.belonging)}>
-              <FormLabel htmlFor='belonging'>所属:</FormLabel>
+              <FormLabel htmlFor='belonging'>
+                Belongings(所属):
+              </FormLabel>
               <Input
                 id='belonging'
                 type='text'
@@ -76,7 +84,10 @@ const Contact: FC = () => {
             </FormControl>
 
             <FormControl isInvalid={Boolean(errors.content)}>
-              <FormLabel htmlFor='content'>内容:</FormLabel>
+              <FormLabel htmlFor='content'>
+                <span className={'text-red-500'}>*</span>
+                Content(内容):
+              </FormLabel>
               <Textarea
                 id='content'
                 h={300}
