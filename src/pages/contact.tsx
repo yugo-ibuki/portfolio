@@ -9,6 +9,7 @@ import {
 import { Input } from '@chakra-ui/react'
 import type { IFormInputs } from '@lib/sendMail'
 import { sendMail } from '@lib/sendMail'
+import { hasErrors } from '@lib/hasErrors'
 
 const Contact: FC = () => {
   const {
@@ -18,9 +19,7 @@ const Contact: FC = () => {
   } = useForm<IFormInputs>()
 
   const onSubmit = async (data: IFormInputs): Promise<void> => {
-    // エラーがあるかどうかチェック
-    const hasError = Object.values(errors).map((value) => value).length != 0
-    if (hasError) return
+    if (hasErrors(errors)) return
     await sendMail(data)
   }
   return (
