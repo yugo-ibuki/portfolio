@@ -26,7 +26,7 @@ const experiences: {
     jobTitle: 'Backend Engineer',
   },
   {
-    title: '3-shake',
+    title: '■ ■ ■ ■ ■',
     terms: '2021.11 ~ present',
     jobTitle: 'Frontend Engineer',
   },
