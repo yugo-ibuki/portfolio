@@ -9,13 +9,13 @@ export const contentToMe = ({
   belonging: string
   message: string
 }) => `
-お問合せがありました。\n
+You got a mail.\n
 
-名前: ${name}\n
+name: ${name}\n
 
-メールアドレス: ${email}\n
+email: ${email}\n
 
-所属: ${belonging}\n
+belonging: ${belonging}\n
 
-内容: ${message}\n
+content: ${message}\n
 `

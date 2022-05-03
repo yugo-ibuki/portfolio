@@ -9,13 +9,13 @@ export const contentToSender = ({
   belonging: string
   message: string
 }) => `
-お問合せを受け付けました\n
+The mail is sent. Please wait for the reply.\n
 
-名前: ${name}\n
+name: ${name}\n
 
-メールアドレス: ${email}\n
+email: ${email}\n
 
-所属: ${belonging}\n
+belonging: ${belonging}\n
 
-内容: ${message}\n
+content: ${message}\n
 `
