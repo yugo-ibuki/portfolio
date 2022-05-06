@@ -21,9 +21,13 @@ const navData: NavData[] = [
   //   href: 'https://github.com/yugo-ibuki'
   // },
   {
+    name: 'WORKS',
+    href: '/works'
+  },
+  {
     name: 'CONTACT',
     href: '/contact'
-  }
+  },
 ]
 
 export const Header: React.FC = () => {
