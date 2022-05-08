@@ -12,7 +12,7 @@ const handler = (req: NextApiRequest, res: NextApiResponse) => {
     const msgToSender = {
       to: body.email,
       from: 'support@y-ibuki91.app',
-      subject: 'お問合せありがとうございました。',
+      subject: 'Thank you for contacting',
       text: contentToSender({ name: body.name, email: body.email, belonging: body.belonging, message: body.message }),
     }
     const msgToMe = {
