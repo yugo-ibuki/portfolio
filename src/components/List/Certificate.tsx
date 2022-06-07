@@ -1,5 +1,4 @@
 import type { FC } from 'react'
-import Link from 'next/link'
 
 const certificates: {
   name: string
