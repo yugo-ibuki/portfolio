@@ -3,6 +3,7 @@ import type { NextPage } from 'next'
 import Image from 'next/image'
 import { AiFillGithub } from 'react-icons/ai'
 import Link from 'next/link'
+import { Certificate } from '@components/List/Certificate'
 
 type TProfiles = {
   name: string
@@ -74,6 +75,13 @@ const Home: NextPage = () => {
         <Title>GRADUATE</Title>
         <div className={'mt-[25px] w-[90%] mx-auto'}>
           <Graduate />
+        </div>
+      </Block>
+
+      <Block>
+        <Title>Certificate</Title>
+        <div className={'mt-[25px] w-[90%] mx-auto'}>
+          <Certificate />
         </div>
       </Block>
 
