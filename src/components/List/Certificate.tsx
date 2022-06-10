@@ -9,7 +9,7 @@ const certificates: {
     lank: 875
   },
   {
-    name: 'EIKEM (English Test in Japan)',
+    name: 'EIKEN (English Test in Japan)',
     lank: 'Grade Pre-1'
   },
   {
