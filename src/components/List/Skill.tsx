@@ -26,6 +26,21 @@ const skills: {
     level: 65,
   },
   {
+    name: 'Nest.js',
+    terms: 0.5,
+    level: 20,
+  },
+  {
+    name: 'GraphQL',
+    terms: 0.5,
+    level: 30,
+  },
+  {
+    name: 'Firebase',
+    terms: 1,
+    level: 45,
+  },
+  {
     name: 'Laravel',
     terms: 2,
     level: 55,
