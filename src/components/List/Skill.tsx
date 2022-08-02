@@ -4,8 +4,7 @@ import type { TSkill, TSkills } from './data/skills'
 import { Text } from '@chakra-ui/react'
 import { firstUppercase } from '@lib/firstUppercase'
 
-export const Skill: FC = () => {
-  return (
+export const Skill: FC = () => (
     <ul className={'flex flex-col gap-y-[20px]'}>
       {
         (Object.keys(skills) as (keyof TSkills)[]).map(title => {
@@ -32,7 +31,6 @@ export const Skill: FC = () => {
       }
     </ul>
   )
-}
 
 const List = ({ skill }: { skill: TSkill }) => (
   <li  key={skill.name}>
