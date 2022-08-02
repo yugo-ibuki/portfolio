@@ -1,87 +1,31 @@
 import type { FC } from 'react'
-
-const skills: {
-  name: string
-  terms: number
-  level: number | string
-}[] = [
-  {
-    name: 'JavaScript',
-    terms: 3,
-    level: 70,
-  },
-  {
-    name: 'TypeScript',
-    terms: 2,
-    level: 60,
-  },
-  {
-    name: 'Next.js',
-    terms: 2,
-    level: 60,
-  },
-  {
-    name: 'React.js',
-    terms: 2,
-    level: 65,
-  },
-  {
-    name: 'Nest.js',
-    terms: 0.5,
-    level: 20,
-  },
-  {
-    name: 'GraphQL',
-    terms: 0.5,
-    level: 30,
-  },
-  {
-    name: 'Firebase',
-    terms: 1,
-    level: 45,
-  },
-  {
-    name: 'Laravel',
-    terms: 2,
-    level: 55,
-  },
-  {
-    name: 'PHP',
-    terms: 4,
-    level: 60,
-  },
-  {
-    name: 'Docker',
-    terms: 2,
-    level: 30,
-  },
-  {
-    name: 'Go',
-    terms: 0.2,
-    level: 'Learning...',
-  }
-]
+import { skills } from './data/skills'
+import type { TSkill, TSkills } from './data/skills'
+import { Text } from '@chakra-ui/react'
+import { firstUppercase } from '@lib/firstUppercase'
 
 export const Skill: FC = () => {
   return (
     <ul className={'flex flex-col gap-y-[20px]'}>
       {
-        skills.map(skill => {
+        (Object.keys(skills) as (keyof TSkills)[]).map(title => {
           return (
-            <li  key={skill.name}>
-              <dl className={'c-sp-list gap-x-5'}>
-                <dt className={'w-[100px]'}>{skill.name}</dt>
-                <dd className={'w-[70px]'}>{skill.terms} years</dd>
-                <dd>
-                  <div className={'border w-[300px] h-[17px] relative'}>
-                    <span className={'absolute text-white top-[-5px]'}>confidence</span>
-                    <div
-                      className={'bg-slate-400 h-[17px]'}
-                      style={{ width: typeof skill.level === 'number' ? `${skill.level}%` : '0px' }}
+            <li key={title} className={'flex flex-col gap-y-2'}>
+              <h4 className={'text-xl'}>
+                <span className={'border-b border-b-[5px]'}>
+                  {firstUppercase(title)}
+                </span>
+              </h4>
+              <ul className={'flex flex-col gap-y-2'}>
+                {
+                  skills[title].map((skill: TSkill) => (
+                    <List
+                      key={skill.name}
+                      skill={skill}
                     />
-                  </div>
-                </dd>
-              </dl>
+                  ))
+                }
+              </ul>
             </li>
           )
         })
@@ -89,3 +33,23 @@ export const Skill: FC = () => {
     </ul>
   )
 }
+
+const List = ({ skill }: { skill: TSkill }) => (
+  <li  key={skill.name}>
+    <dl className={'c-sp-list gap-x-5'}>
+      <dt className={'w-[120px]'}>
+        <Text>{skill.name}</Text>
+      </dt>
+      <dd className={'w-[90px]'}>{skill.terms} years</dd>
+      <dd>
+        <div className={'border w-[300px] h-[17px] relative'}>
+          <span className={'absolute text-white top-[-5px]'}>confidence</span>
+          <div
+            className={'bg-slate-400 h-[17px]'}
+            style={{ width: typeof skill.level === 'number' ? `${skill.level}%` : '0px' }}
+          />
+        </div>
+      </dd>
+    </dl>
+  </li>
+)

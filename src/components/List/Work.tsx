@@ -11,7 +11,7 @@ const works: {
     name: 'Japanese population graph by prefecture',
     description: 'It shows population in Japan by prefecture.',
     url: 'https://population-app.vercel.app/',
-    photo: '/assets/population-app.png',
+    photo: '/data/population-app.png',
   },
 ]
 
