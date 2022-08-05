@@ -23,12 +23,12 @@ const experiences: {
   {
     title: 'Asia Quest',
     terms: '2020.1 ~ 2021.10',
-    jobTitle: 'Backend Engineer',
+    jobTitle: 'Backend Developer',
   },
   {
     title: '■ ■ ■ ■ ■',
     terms: '2021.11 ~ present',
-    jobTitle: 'Frontend Engineer',
+    jobTitle: 'Frontend Developer',
   },
 ]
 
