@@ -12,6 +12,10 @@ const articles: {
   {
     name: 'Note',
     link: 'https://note.com/eve_key/'
+  },
+  {
+    name: 'Qiita',
+    link: 'https://qiita.com/yugo-ibuki'
   }
 ]
 
