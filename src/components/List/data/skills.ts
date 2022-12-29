@@ -30,8 +30,8 @@ export const skills: TSkills = {
     },
     {
       name: 'Go',
-      terms: 0.2,
-      level: 'Learning...',
+      terms: 0.5,
+      level: 20,
     }
   ],
   framework: [
@@ -64,20 +64,20 @@ export const skills: TSkills = {
     },
     {
       name: 'GCP',
-      terms: 0.8,
+      terms: 1,
       level: 20,
     },
   ],
   others: [
     {
       name: 'React.js',
-      terms: 2,
+      terms: 3,
       level: 65,
     },
     {
       name: 'GraphQL',
       terms: 0.5,
-      level: 30,
+      level: 40,
     },
     {
       name: 'Firebase',
