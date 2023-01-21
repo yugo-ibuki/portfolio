@@ -21,7 +21,7 @@ const articles: {
   {
     name: 'Reading Book Blog',
     link: 'https://ugo-ev.hatenablog.com/'
-  }
+  },
 ]
 
 export const Articles: FC = () => {
