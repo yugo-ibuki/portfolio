@@ -34,7 +34,7 @@ const handler = (req: NextApiRequest, res: NextApiResponse) => {
     })()
   }
 
-  res.status(200)
+  res.status(200).end()
 }
 
 export default handler
