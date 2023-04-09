@@ -4,7 +4,7 @@ const Custom404: FC = () => {
   return (
     <div className={'w-full h-[700px] flex justify-center items-center'}>
       <h2>
-        not found
+        not found dayo
       </h2>
     </div>
   )
