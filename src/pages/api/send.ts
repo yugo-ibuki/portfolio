@@ -6,7 +6,6 @@ import { contentToMe } from '@lib/mailTemplate/toMe'
 const handler = (req: NextApiRequest, res: NextApiResponse) => {
   if(req.method === 'POST') {
     const sgMail = require('@sendgrid/mail')
-    console.log(process.env.NEXT_PUBLIC_SENDGRID_KEY)
     sgMail.setApiKey(process.env.NEXT_PUBLIC_SENDGRID_KEY)
     const body = JSON.parse(req.body)
 
@@ -18,7 +17,7 @@ const handler = (req: NextApiRequest, res: NextApiResponse) => {
     }
     const msgToMe = {
       to: process.env.NEXT_PUBLIC_MY_EMAIL,
-      from: body.email,
+      from: 'support@y-ibuki91.app',
       subject: 'お問合せがありました。',
       text: contentToMe({ name: body.name, email: body.email, belonging: body.belonging, message: body.message }),
     }
