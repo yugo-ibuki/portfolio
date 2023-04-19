@@ -30,6 +30,7 @@ const handler = (req: NextApiRequest, res: NextApiResponse) => {
         if (err.response) {
           console.error(err.response.body)
         }
+        throw err
       }
     })()
   }
