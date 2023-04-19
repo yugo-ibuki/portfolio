@@ -6,6 +6,7 @@ import { contentToMe } from '@lib/mailTemplate/toMe'
 const handler = (req: NextApiRequest, res: NextApiResponse) => {
   if(req.method === 'POST') {
     const sgMail = require('@sendgrid/mail')
+    console.log(process.env.NEXT_PUBLIC_SENDGRID_KEY)
     sgMail.setApiKey(process.env.NEXT_PUBLIC_SENDGRID_KEY)
     const body = JSON.parse(req.body)
 
@@ -30,6 +31,7 @@ const handler = (req: NextApiRequest, res: NextApiResponse) => {
         if (err.response) {
           console.error(err.response.body)
         }
+        throw err
       }
     })()
   }
