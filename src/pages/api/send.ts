@@ -2,11 +2,11 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import type { ResponseError } from '@sendgrid/helpers/classes'
 import { contentToSender } from '@lib/mailTemplate/toSender'
 import { contentToMe } from '@lib/mailTemplate/toMe'
+import * as sgMail from '@sendgrid/mail'
 
 const handler = (req: NextApiRequest, res: NextApiResponse) => {
   if(req.method === 'POST') {
-    const sgMail = require('@sendgrid/mail')
-    sgMail.setApiKey(process.env.NEXT_PUBLIC_SENDGRID_KEY)
+    sgMail.setApiKey(process.env.NEXT_PUBLIC_SENDGRID_KEY as string)
     const body = JSON.parse(req.body)
 
     const msgToSender = {
