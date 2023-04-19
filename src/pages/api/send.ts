@@ -18,7 +18,7 @@ const handler = (req: NextApiRequest, res: NextApiResponse) => {
     }
     const msgToMe = {
       to: process.env.NEXT_PUBLIC_MY_EMAIL,
-      from: body.email,
+      from: 'support@y-ibuki91.app',
       subject: 'お問合せがありました。',
       text: contentToMe({ name: body.name, email: body.email, belonging: body.belonging, message: body.message }),
     }
