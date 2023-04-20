@@ -6,6 +6,7 @@ import { theme } from '../config/chakra'
 import { Header } from '@components/Layout/Header'
 import { LayoutWrapper } from '@components/Layout/LayoutWrapper'
 import App from 'next/app'
+import { Analytics } from '@vercel/analytics/react';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -19,6 +20,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
         <LayoutWrapper>
           <Component {...pageProps} />
+          <Analytics />
         </LayoutWrapper>
       </ChakraProvider>
     </>
