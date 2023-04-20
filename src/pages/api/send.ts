@@ -4,7 +4,7 @@ import { contentToSender } from '@lib/mailTemplate/toSender'
 import { contentToMe } from '@lib/mailTemplate/toMe'
 import * as sgMail from '@sendgrid/mail'
 
-const handler = (req: NextApiRequest, res: NextApiResponse) => {
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if(req.method === 'POST') {
     sgMail.setApiKey(process.env.NEXT_PUBLIC_SENDGRID_KEY as string)
     const body = JSON.parse(req.body)
@@ -21,21 +21,16 @@ const handler = (req: NextApiRequest, res: NextApiResponse) => {
       subject: 'お問合せがありました。',
       text: contentToMe({ name: body.name, email: body.email, belonging: body.belonging, message: body.message }),
     }
-    ;(async () => {
-      try {
-        await sgMail.send(msgToSender)
-        await sgMail.send(msgToMe)
-      } catch (error) {
-        const err = error as ResponseError
-        if (err.response) {
-          console.error(err.response.body)
-        }
-        throw err
-      }
-    })()
+    try {
+      await sgMail.send(msgToSender)
+      await sgMail.send(msgToMe)
+    } catch (error) {
+      console.error(error)
+      throw error
+    }
   }
 
-  res.status(200).end()
+  await res.status(200).end()
 }
 
 export default handler
