@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import type { FC } from 'react'
 import { Block, Title } from '@components'
 import { useForm } from 'react-hook-form'
 import { Button, FormControl, FormErrorMessage, FormLabel, Input, Textarea, useToast } from '@chakra-ui/react'
@@ -8,7 +8,6 @@ import { hasErrors } from '@lib/hasErrors'
 
 const Contact: FC = () => {
   const toast = useToast()
-  const [err, setErr] = useState<Error|undefined>(undefined)
   const {
     register,
     handleSubmit,

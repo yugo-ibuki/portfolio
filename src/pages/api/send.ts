@@ -1,5 +1,4 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import type { ResponseError } from '@sendgrid/helpers/classes'
 import { contentToSender } from '@lib/mailTemplate/toSender'
 import { contentToMe } from '@lib/mailTemplate/toMe'
 import * as sgMail from '@sendgrid/mail'
