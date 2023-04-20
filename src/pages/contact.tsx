@@ -1,12 +1,13 @@
 import type { FC } from 'react'
 import { Block, Title } from '@components'
 import { useForm } from 'react-hook-form'
-import { Button, FormControl, FormErrorMessage, FormLabel, Input, Textarea } from '@chakra-ui/react'
+import { Button, FormControl, FormErrorMessage, FormLabel, Input, Textarea, useToast } from '@chakra-ui/react'
 import type { IFormInputs } from '@lib/sendMail'
 import { sendMail } from '@lib/sendMail'
 import { hasErrors } from '@lib/hasErrors'
 
 const Contact: FC = () => {
+  const toast = useToast()
   const {
     register,
     handleSubmit,
@@ -15,8 +16,26 @@ const Contact: FC = () => {
 
   const onSubmit = async (data: IFormInputs): Promise<void> => {
     if (hasErrors(errors)) return
-    await sendMail(data)
+    try {
+      await sendMail(data)
+      toast({
+        title: 'Mail sent successfully!',
+        status: 'success',
+        duration: 3000,
+        isClosable: true,
+        position: 'bottom-left',
+      })
+    } catch (err) {
+      toast({
+        title: 'Mail sent failed',
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+        position: 'bottom-left',
+      })
+    }
   }
+
   return (
     <main>
       <Block>
