@@ -1,12 +1,15 @@
+import React from 'react'
 import '../style/global.css'
-import type { AppContext, AppProps } from 'next/app'
+import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import { ChakraProvider } from '@chakra-ui/react'
 import { theme } from '../config/chakra'
 import { Header } from '@components/Layout/Header'
 import { LayoutWrapper } from '@components/Layout/LayoutWrapper'
-import App from 'next/app'
 import { Analytics } from '@vercel/analytics/react'
+
+// https://stackoverflow.com/questions/58070996/how-to-fix-the-warning-uselayouteffect-does-nothing-on-the-server
+React.useLayoutEffect = React.useEffect
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -25,11 +28,6 @@ function MyApp({ Component, pageProps }: AppProps) {
       </ChakraProvider>
     </>
   )
-}
-
-MyApp.getInitialProps = async (appContext : AppContext) => {
-  const appProps = await App.getInitialProps(appContext)
-  return { ...appProps }
 }
 
 export default MyApp

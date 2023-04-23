@@ -18,7 +18,7 @@
     "classcat": "^5.0.4",
     "date-fns": "^2.28.0",
     "framer-motion": "^6",
-    "next": "^12.1.5",
+    "next": "^13.3.1",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-hook-form": "^7.30.0",
