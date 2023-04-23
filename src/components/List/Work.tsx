@@ -24,11 +24,9 @@ export const Work: FC = () => {
             <li key={w.name}>
               <dl className={'flex flex-col gap-y-[10px]'}>
                 <dt>
-                  <Link href={w.url}>
-                    <a className={'text-cyan-600 flex flex-col gap-y-3'}>
-                      {w.name}
-                      <img src={w.photo} alt={w.name} />
-                    </a>
+                  <Link href={w.url}className={'text-cyan-600 flex flex-col gap-y-3'}>
+                    {w.name}
+                    <img src={w.photo} alt={w.name} />
                   </Link>
                 </dt>
                 <dd className={'ml-[30px]'}>{w.description}</dd>

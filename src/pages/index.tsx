@@ -43,10 +43,8 @@ const Home: NextPage = () => {
               })
             }
             <dd>
-              <Link href="https://github.com/yugo-ibuki">
-                <a className={'inline-block mt-2 sp:mt-3'} target={'_blank'}>
-                  <AiFillGithub size={20} />
-                </a>
+              <Link href="https://github.com/yugo-ibuki" className={'inline-block mt-2 sp:mt-3'} target={'_blank'}>
+                <AiFillGithub size={20} />
               </Link>
             </dd>
           </dl>

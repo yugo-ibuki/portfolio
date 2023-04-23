@@ -22,10 +22,8 @@ export const HeaderList: FC<HeaderListProps> = ({
         navData.map(nav => {
           return (
             <li key={nav.name} className={'hover:border-b-2 hover:border-red-600 border-b-2 border-white-600'} onClick={onClose}>
-              <Link href={nav.href}>
-                <a className={'w-full block'}>
-                  {nav.name}
-                </a>
+              <Link href={nav.href} className={'w-full block'}>
+                {nav.name}
               </Link>
             </li>
           )

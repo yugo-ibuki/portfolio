@@ -38,15 +38,13 @@ export const Header: React.FC = () => {
       <div className={'px-[10px]'}>
         <div className={'w-[700px] sp:w-full py-[15px] c-flex mx-auto'}>
           <div className={'c-flex gap-x-3 w-full'}>
-            <Link href="/">
-              <a className={'c-flex gap-x-3'}>
-                {
-                  colorMode === 'light'
-                    ? <ImWink />
-                    : <ImWink2 />
-                }
-                <h1 className={'font-bold text-lg mr-2'}>Yugo Ibuki</h1>
-              </a>
+            <Link href="/" className={'c-flex gap-x-3'}>
+              {
+                colorMode === 'light'
+                  ? <ImWink />
+                  : <ImWink2 />
+              }
+              <h1 className={'font-bold text-lg mr-2'}>Yugo Ibuki</h1>
             </Link>
             <ul className={'c-appearance-flex justify-between items-center gap-x-3'}>
               <HeaderList navData={navData} onClose={onClose} />

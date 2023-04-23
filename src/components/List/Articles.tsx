@@ -34,8 +34,9 @@ export const Articles: FC = () => {
               <dl className={'flex flex-col gap-y-[10px]'}>
                 <dt className={'text-cyan-600'}>{article.name}</dt>
                 <dd className={'ml-[30px]'}>
-                  <Link href={article.link}>
-                    <a target='_blank' className={'flex justify-start items-center gap-x-3'}>{article.link} <FaExternalLinkAlt /></a>
+                  <Link href={article.link} target='_blank' className={'flex justify-start items-center gap-x-3'}>
+                    {article.link}
+                    <FaExternalLinkAlt />
                   </Link>
                 </dd>
               </dl>

@@ -34,10 +34,8 @@ export const Stack: FC = () => {
         stacks.map(stack => {
           return (
             <li key={stack.name}>
-              <Link href={stack.url}>
-                <a target={'_blank'}>
-                  {stack.name}
-                </a>
+              <Link href={stack.url} target={'_blank'}>
+                {stack.name}
               </Link>
             </li>
           )
