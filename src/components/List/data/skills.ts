@@ -20,7 +20,7 @@ export const skills: TSkills = {
     },
     {
       name: 'TypeScript',
-      terms: 2,
+      terms: 2.5,
       level: 60,
     },
     {
@@ -30,8 +30,8 @@ export const skills: TSkills = {
     },
     {
       name: 'Go',
-      terms: 0.5,
-      level: 20,
+      terms: 0.8,
+      level: 30,
     }
   ],
   framework: [
@@ -60,20 +60,15 @@ export const skills: TSkills = {
     {
       name: 'AWS',
       terms: 1.5,
-      level: 30,
+      level: 25,
     },
     {
       name: 'GCP',
-      terms: 1,
-      level: 20,
+      terms: 1.5,
+      level: 40,
     },
   ],
   others: [
-    {
-      name: 'React.js',
-      terms: 3,
-      level: 65,
-    },
     {
       name: 'GraphQL',
       terms: 0.5,
@@ -86,8 +81,13 @@ export const skills: TSkills = {
     },
     {
       name: 'Docker',
-      terms: 2,
-      level: 30,
+      terms: 3,
+      level: 50,
+    },
+    {
+      name: 'GitHub Actions',
+      terms: 1.5,
+      level: 50,
     },
   ]
 }
