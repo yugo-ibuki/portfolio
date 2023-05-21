@@ -9,6 +9,8 @@ export type TSkills = {
   framework: TSkill[]
   cloud: TSkill[]
   others: TSkill[]
+  ide: TSkill[]
+  environment: TSkill[]
 }
 
 export const skills: TSkills = {
@@ -89,5 +91,34 @@ export const skills: TSkills = {
       terms: 1.5,
       level: 50,
     },
-  ]
+  ],
+  ide: [
+    {
+      name: 'JetBrains',
+      terms: 3,
+      level: 60,
+    },
+    {
+      name: 'Vim',
+      terms: 1.5,
+      level: 30,
+    },
+  ],
+  environment: [
+    {
+      name: 'macOS',
+      terms: 5,
+      level: 50,
+    },
+    {
+      name: 'tmux',
+      terms: 2,
+      level: 50,
+    },
+    {
+      name: 'fish',
+      terms: 2,
+      level: 50,
+    }
+  ],
 }

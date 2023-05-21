@@ -28,7 +28,7 @@ const experiences: {
   {
     title: '■ ■ ■ ■ ■',
     terms: '2021.11 ~ present',
-    jobTitle: 'Frontend Developer',
+    jobTitle: 'Frontend Developer / Backend Developer'
   },
 ]
 
