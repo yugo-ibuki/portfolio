@@ -10,7 +10,7 @@ export type TSkills = {
   cloud: TSkill[]
   others: TSkill[]
   ide: TSkill[]
-  environment: TSkill[]
+  team: TSkill[]
 }
 
 export const skills: TSkills = {
@@ -43,19 +43,9 @@ export const skills: TSkills = {
       level: 60,
     },
     {
-      name: 'Vue.js',
-      terms: 0.8,
-      level: 30,
-    },
-    {
       name: 'Laravel',
       terms: 2,
       level: 55,
-    },
-    {
-      name: 'Nest.js',
-      terms: 0.5,
-      level: 20,
     },
   ],
   cloud: [
@@ -104,21 +94,16 @@ export const skills: TSkills = {
       level: 40,
     },
   ],
-  environment: [
+  team: [
     {
-      name: 'macOS',
-      terms: 5,
-      level: 50,
+      name: 'Agile',
+      terms: 2,
+      level: 40,
     },
     {
-      name: 'tmux',
+      name: 'Scrum',
       terms: 2,
-      level: 50,
-    },
-    {
-      name: 'fish',
-      terms: 2,
-      level: 50,
+      level: 40,
     },
   ],
 }
