@@ -1,7 +1,9 @@
-import { Block, Articles as ArticleList, Title } from '@components'
-import type { NextPage } from 'next'
+'use client'
 
-const Articles: NextPage = () => {
+import type { NextPage } from 'next'
+import { Articles as ArticleList, Block, Title } from '@components'
+
+const Page: NextPage = () => {
   return (
     <main>
       <Block>
@@ -14,4 +16,4 @@ const Articles: NextPage = () => {
   )
 }
 
-export default Articles
+export default Page
