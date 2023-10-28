@@ -25,11 +25,7 @@
       "@models/*": ["./src/models/*"],
       "@lib/*": ["./src/lib/*"]
     },
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ]
+    "plugins": [{"name": "next"}]
   },
   "include": [
     "next-env.d.ts",
