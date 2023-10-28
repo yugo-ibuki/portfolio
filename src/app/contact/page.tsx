@@ -51,10 +51,7 @@ const Contact: FC = () => {
       <Block>
         <Title>Contact</Title>
         <div className={'mt-5 flex flex-col'}>
-          <form
-            onSubmit={handleSubmit(onSubmit)}
-            className={'flex flex-col gap-y-4'}
-          >
+          <form onSubmit={handleSubmit(onSubmit)} className={'flex flex-col gap-y-4'}>
             <FormControl isInvalid={Boolean(errors.name)}>
               <FormLabel htmlFor="name">
                 <span className={'text-red-500'}>*</span>
@@ -62,7 +59,6 @@ const Contact: FC = () => {
               </FormLabel>
               <Input
                 id="name"
-                size="sm"
                 {...register('name', {
                   required: '"name" is required',
                   maxLength: {
@@ -75,9 +71,7 @@ const Contact: FC = () => {
                   },
                 })}
               />
-              <FormErrorMessage>
-                {errors.name && errors.name.message}
-              </FormErrorMessage>
+              <FormErrorMessage>{errors.name && errors.name.message}</FormErrorMessage>
             </FormControl>
 
             <FormControl isInvalid={Boolean(errors.email)}>
@@ -100,9 +94,7 @@ const Contact: FC = () => {
                   },
                 })}
               />
-              <FormErrorMessage>
-                {errors.email && errors.email.message}
-              </FormErrorMessage>
+              <FormErrorMessage>{errors.email && errors.email.message}</FormErrorMessage>
             </FormControl>
 
             <FormControl isInvalid={Boolean(errors.belonging)}>
@@ -119,9 +111,7 @@ const Contact: FC = () => {
                   },
                 })}
               />
-              <FormErrorMessage>
-                {errors.belonging && errors.belonging.message}
-              </FormErrorMessage>
+              <FormErrorMessage>{errors.belonging && errors.belonging.message}</FormErrorMessage>
             </FormControl>
 
             <FormControl isInvalid={Boolean(errors.content)}>
@@ -136,14 +126,13 @@ const Contact: FC = () => {
                   required: '"content" is required',
                 })}
               />
-              <FormErrorMessage>
-                {errors.content && errors.content.message}
-              </FormErrorMessage>
+              <FormErrorMessage>{errors.content && errors.content.message}</FormErrorMessage>
             </FormControl>
 
             <div className={'flex justify-center mt-5'}>
               <Button
                 w={40}
+                variant={'outline'}
                 colorScheme="gray"
                 isLoading={isSubmitting}
                 type="submit"
