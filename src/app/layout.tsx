@@ -19,8 +19,8 @@ const RootLayout: FC<Props> = ({ children }) => {
       </head>
       <body>
         <Providers>
+          <Header />
           <div className={'max-w-[700px] sp:max-w-[100%] mx-auto px-5 mb-[60px]'}>
-            <Header />
             {children}
             <Analytics />
           </div>
