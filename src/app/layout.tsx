@@ -5,6 +5,7 @@ import React from 'react'
 import '../style/global.css'
 import { Header } from '@components'
 import { Analytics } from '@vercel/analytics/react'
+import { Providers } from './providers'
 
 type Props = {
   children: ReactNode
@@ -17,11 +18,13 @@ const RootLayout: FC<Props> = ({ children }) => {
         <title>Yugo Ibuki</title>
       </head>
       <body>
-        <div className={'max-w-[700px] sp:max-w-[100%] mx-auto px-5 mb-[60px]'}>
-          <Header />
-          {children}
-          <Analytics />
-        </div>
+        <Providers>
+          <div className={'max-w-[700px] sp:max-w-[100%] mx-auto px-5 mb-[60px]'}>
+            <Header />
+            {children}
+            <Analytics />
+          </div>
+        </Providers>
       </body>
     </html>
   )
