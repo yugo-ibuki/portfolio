@@ -20,18 +20,10 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
-      "@components": [
-        "./src/components"
-      ],
-      "@components/*": [
-        "./src/components/*"
-      ],
-      "@models/*": [
-        "./src/models/*"
-      ],
-      "@lib/*": [
-        "./src/lib/*"
-      ]
+      "@components": ["./src/components"],
+      "@components/*": ["./src/components/*"],
+      "@models/*": ["./src/models/*"],
+      "@lib/*": ["./src/lib/*"]
     },
     "plugins": [
       {
