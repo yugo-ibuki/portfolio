@@ -6,9 +6,10 @@ import {
   DrawerOverlay,
 } from '@chakra-ui/react'
 import { GiHamburgerMenu } from 'react-icons/gi'
-import type { FC } from 'react'
+import type { FC, ReactNode } from 'react'
 
 type Props = {
+  children: ReactNode
   disclosure: {
     isOpen: boolean
     onOpen: () => void
@@ -21,13 +22,11 @@ export const Menu: FC<Props> = ({ children, disclosure }) => {
   return (
     <div>
       <GiHamburgerMenu onClick={onOpen} width={80} />
-      <Drawer placement='left' onClose={onClose} isOpen={isOpen}>
+      <Drawer placement="left" onClose={onClose} isOpen={isOpen}>
         <DrawerOverlay />
         <DrawerContent>
-          <DrawerHeader borderBottomWidth='1px'>Menu</DrawerHeader>
-          <DrawerBody>
-            { children }
-          </DrawerBody>
+          <DrawerHeader borderBottomWidth="1px">Menu</DrawerHeader>
+          <DrawerBody>{children}</DrawerBody>
         </DrawerContent>
       </Drawer>
     </div>

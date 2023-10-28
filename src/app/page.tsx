@@ -17,7 +17,7 @@ const profiles: TProfiles[] = [
   { name: 'Job Title', description: 'Frontend Developer / Backend Developer' },
 ]
 
-const Home: NextPage = () => {
+const Page: NextPage = () => {
   return (
     <main>
       <div className={'mt-[30px] flex items-center gap-x-10 sp:flex-col'}>
@@ -32,18 +32,22 @@ const Home: NextPage = () => {
         </figure>
         <div className={'gap-x-5 w-[40%] sp:w-[60%] sp:mt-[20px]'}>
           <dl>
-            {
-              profiles.map(profile => {
-                return (
-                  <>
-                    <dt className={'float-left sp:float-none mr-2 sp:mr-0 sp:mt-3 font-bold'}>{profile.name}:</dt>
-                    <dd>{profile.description}</dd>
-                  </>
-                )
-              })
-            }
+            {profiles.map((profile) => {
+              return (
+                <>
+                  <dt className={'float-left sp:float-none mr-2 sp:mr-0 sp:mt-3 font-bold'}>
+                    {profile.name}:
+                  </dt>
+                  <dd>{profile.description}</dd>
+                </>
+              )
+            })}
             <dd>
-              <Link href="https://github.com/yugo-ibuki" className={'inline-block mt-2 sp:mt-3'} target={'_blank'}>
+              <Link
+                href="https://github.com/yugo-ibuki"
+                className={'inline-block mt-2 sp:mt-3'}
+                target={'_blank'}
+              >
                 <AiFillGithub size={20} />
               </Link>
             </dd>
@@ -55,9 +59,12 @@ const Home: NextPage = () => {
         <Title>COMMENT</Title>
         <div className={'mt-[25px] w-[90%] mx-auto'}>
           <p>
-            Hello, this is Yugo.<br />
-            I'm a web developer, living in Japan, who desires to work overseas.<br />
-            My skills are below here, please take a little look at it.<br />
+            Hello, this is Yugo.
+            <br />
+            I'm a web developer, living in Japan, who desires to work overseas.
+            <br />
+            My skills are below here, please take a little look at it.
+            <br />
           </p>
         </div>
       </Block>
@@ -93,4 +100,4 @@ const Home: NextPage = () => {
   )
 }
 
-export default Home
+export default Page

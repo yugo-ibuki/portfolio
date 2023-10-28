@@ -1,11 +1,9 @@
-import type { FC } from 'react'
+import type { FC, ReactNode } from 'react'
 
-export const Block: FC = ({
- children
-}) => {
-  return (
-    <div className={'mt-10'}>
-      {children}
-    </div>
-  )
+type Props = {
+  children: ReactNode
+}
+
+export const Block: FC<Props> = ({ children }) => {
+  return <div className={'mt-10'}>{children}</div>
 }
