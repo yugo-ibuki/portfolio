@@ -20,17 +20,31 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
-      "@components": ["./src/components"],
-      "@components/*": ["./src/components/*"],
-      "@models/*": ["./src/models/*"],
-      "@lib/*": ["./src/lib/*"]
-    }
+      "@components": [
+        "./src/components"
+      ],
+      "@components/*": [
+        "./src/components/*"
+      ],
+      "@models/*": [
+        "./src/models/*"
+      ],
+      "@lib/*": [
+        "./src/lib/*"
+      ]
+    },
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
   },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "**/*.js"
+    "**/*.js",
+    ".next/types/**/*.ts"
   ],
   "exclude": [
     "node_modules"
