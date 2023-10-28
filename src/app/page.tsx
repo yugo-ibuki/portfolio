@@ -35,11 +35,7 @@ const Page: NextPage = () => {
             {profiles.map((profile) => {
               return (
                 <>
-                  <dt
-                    className={
-                      'float-left sp:float-none mr-2 sp:mr-0 sp:mt-3 font-bold'
-                    }
-                  >
+                  <dt className={'float-left sp:float-none mr-2 sp:mr-0 sp:mt-3 font-bold'}>
                     {profile.name}:
                   </dt>
                   <dd>{profile.description}</dd>
