@@ -17,13 +17,13 @@ export const skills: TSkills = {
   language: [
     {
       name: 'JavaScript',
-      terms: 3,
+      terms: 4,
       level: 70,
     },
     {
       name: 'TypeScript',
-      terms: 2.5,
-      level: 60,
+      terms: 4,
+      level: 70,
     },
     {
       name: 'PHP',
@@ -32,14 +32,14 @@ export const skills: TSkills = {
     },
     {
       name: 'Go',
-      terms: 0.8,
-      level: 30,
-    }
+      terms: 1.5,
+      level: 40,
+    },
   ],
   framework: [
     {
       name: 'Next.js',
-      terms: 2,
+      terms: 3,
       level: 60,
     },
     {
@@ -66,42 +66,42 @@ export const skills: TSkills = {
     },
     {
       name: 'GCP',
-      terms: 1.5,
-      level: 40,
+      terms: 2.5,
+      level: 45,
     },
   ],
   others: [
     {
       name: 'GraphQL',
-      terms: 0.5,
-      level: 40,
-    },
-    {
-      name: 'Firebase',
-      terms: 1,
+      terms: 1.5,
       level: 45,
     },
     {
-      name: 'Docker',
-      terms: 3,
+      name: 'Firebase',
+      terms: 1.5,
       level: 50,
     },
     {
+      name: 'Docker',
+      terms: 4,
+      level: 60,
+    },
+    {
       name: 'GitHub Actions',
-      terms: 1.5,
-      level: 50,
+      terms: 2.5,
+      level: 60,
     },
   ],
   ide: [
     {
       name: 'JetBrains',
-      terms: 3,
+      terms: 4,
       level: 60,
     },
     {
       name: 'Vim',
-      terms: 1.5,
-      level: 30,
+      terms: 2,
+      level: 40,
     },
   ],
   environment: [
@@ -119,6 +119,6 @@ export const skills: TSkills = {
       name: 'fish',
       terms: 2,
       level: 50,
-    }
+    },
   ],
 }

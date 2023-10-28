@@ -13,28 +13,32 @@ const works: {
     url: 'https://population-app.vercel.app/',
     photo: '/assets/population-app.png',
   },
+  {
+    name: 'Cheeyo',
+    description: 'It means "Cheer you up". That is CLI to cheer you up through the terminal.',
+    url: 'https://github.com/yugo-ibuki/cheeyo',
+    photo: '/assets/cheeyo.png',
+  },
 ]
 
 export const Work: FC = () => {
   return (
     <ul className={'w-[90%] mx-auto flex flex-col gap-y-[20px]'}>
-      {
-        works.map(w => {
-          return (
-            <li key={w.name}>
-              <dl className={'flex flex-col gap-y-[10px]'}>
-                <dt>
-                  <Link href={w.url}className={'text-cyan-600 flex flex-col gap-y-3'}>
-                    {w.name}
-                    <img src={w.photo} alt={w.name} />
-                  </Link>
-                </dt>
-                <dd className={'ml-[30px]'}>{w.description}</dd>
-              </dl>
-            </li>
-          )
-        })
-      }
+      {works.map((w) => {
+        return (
+          <li key={w.name}>
+            <dl className={'flex flex-col gap-y-[10px]'}>
+              <dt>
+                <Link href={w.url} className={'text-cyan-600 flex flex-col gap-y-3'}>
+                  {w.name}
+                  <img src={w.photo} alt={w.name} />
+                </Link>
+              </dt>
+              <dd className={'ml-[30px]'}>{w.description}</dd>
+            </dl>
+          </li>
+        )
+      })}
     </ul>
   )
 }
