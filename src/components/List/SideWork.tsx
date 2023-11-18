@@ -1,44 +1,38 @@
 import type { FC } from 'react'
+import Link from 'next/link'
 
 const sideWorks: {
   title: string
-  description: string
+  term: string | number
+  link: string
 }[] = [
   {
     title: 'English Mentor',
-    description: `
-      I've worked as an English Mentor.
-      Describing the English expression especially for writing, speaking,
-      taught how to learn English.
-      I also wrote some article about learning English.
-      `,
+    term: '2018 - 2020',
+    link: '/background/01',
   },
   {
     title: 'Laravel Mentor',
-    description: `
-      I've worked as a Laravel Mentor.
-      Usually, writing PHP, how to setup the local developing environment, using MySQL, Laravel, Docker.
-      I also reviewed the DB design, depending on their original app that they plan to build.
-      Taught what the concept of Class, Interface, Object Oriented Programming are.
-    `,
-  }
+    term: '2021 - 2023',
+    link: '/background/02',
+  },
 ]
 
 export const SideWork: FC = () => {
   return (
     <ul className={'w-[90%] mx-auto flex flex-col gap-y-[20px]'}>
-      {
-        sideWorks.map(sw => {
-          return (
-            <li key={sw.title}>
-              <dl className={'flex flex-col gap-y-[10px]'}>
-                <dt>{sw.title}</dt>
-                <dd className={'ml-[30px]'}>{sw.description}</dd>
-              </dl>
-            </li>
-          )
-        })
-      }
+      {sideWorks.map((sw) => {
+        return (
+          <li key={sw.title}>
+            <dl className={'flex flex-col gap-y-[10px]'}>
+              <dt className={'underline decoration-sky-300'}>
+                <Link href={sw.link}>{sw.title}</Link>
+              </dt>
+              <dd className={'ml-[30px]'}>{sw.term}</dd>
+            </dl>
+          </li>
+        )
+      })}
     </ul>
   )
 }
