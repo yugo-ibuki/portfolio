@@ -1,22 +1,28 @@
-'use client'
-
 import type { FC, ReactNode } from 'react'
 import React from 'react'
 import '../style/global.css'
 import { Header } from '@components'
 import { Analytics } from '@vercel/analytics/react'
 import { Providers } from './providers'
+import type { Metadata } from 'next'
 
 type Props = {
   children: ReactNode
 }
 
+export const metadata: Metadata = {
+  title: {
+    default: 'Yugo Ibuki',
+    template: '%s | Acme',
+  },
+  icons: {
+    icon: '/icon.ico',
+  },
+}
+
 const RootLayout: FC<Props> = ({ children }) => {
   return (
     <html lang="en">
-      <head>
-        <title>Yugo Ibuki</title>
-      </head>
       <body>
         <Providers>
           <Header />
