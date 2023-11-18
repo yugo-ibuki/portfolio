@@ -23,7 +23,9 @@
       "@components": ["./src/components"],
       "@components/*": ["./src/components/*"],
       "@models/*": ["./src/models/*"],
-      "@lib/*": ["./src/lib/*"]
+      "@lib/*": ["./src/lib/*"],
+      "@config/*": ["./src/config/*"],
+      "@notFound": ["./src/app/not-found.tsx"],
     },
     "plugins": [{"name": "next"}]
   },
