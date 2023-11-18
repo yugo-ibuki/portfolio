@@ -9,12 +9,12 @@ const sideWorks: {
   {
     title: 'English Mentor',
     term: '2018 - 2020',
-    link: '/background/01',
+    link: '/background/english_mentor',
   },
   {
     title: 'Laravel Mentor',
     term: '2021 - 2023',
-    link: '/background/02',
+    link: '/background/programming_mentor',
   },
 ]
 
