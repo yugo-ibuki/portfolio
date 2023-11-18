@@ -16,7 +16,9 @@ const Page = () => {
     <main>
       <Box className={'mt-[25px]'}>
         <Title>{data.title}</Title>
-        <Description subtitle={data.place}>{data.description}</Description>
+        <Description subtitle={data.place}>
+          <div dangerouslySetInnerHTML={{ __html: data.description }} />
+        </Description>
       </Box>
     </main>
   )

@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react'
 import { ColorModeSwitch } from '@components/ColorModeSwitch'
 import { ImWink, ImWink2 } from 'react-icons/im'
@@ -10,11 +12,11 @@ import type { NavData } from './HeaderList'
 const navData: NavData[] = [
   {
     name: 'BACKGROUND',
-    href: '/background'
+    href: '/background',
   },
   {
     name: 'ARTICLES',
-    href: '/articles'
+    href: '/articles',
   },
   // {
   //   name: 'GITHUB',
@@ -22,11 +24,11 @@ const navData: NavData[] = [
   // },
   {
     name: 'WORKS',
-    href: '/works'
+    href: '/works',
   },
   {
     name: 'CONTACT',
-    href: '/contact'
+    href: '/contact',
   },
 ]
 
@@ -39,11 +41,7 @@ export const Header: React.FC = () => {
         <div className={'w-[700px] sp:w-full py-[15px] c-flex mx-auto'}>
           <div className={'c-flex gap-x-3 w-full'}>
             <Link href="/" className={'c-flex gap-x-3'}>
-              {
-                colorMode === 'light'
-                  ? <ImWink />
-                  : <ImWink2 />
-              }
+              {colorMode === 'light' ? <ImWink /> : <ImWink2 />}
               <h1 className={'font-bold text-lg mr-2'}>Yugo Ibuki</h1>
             </Link>
             <ul className={'c-appearance-flex justify-between items-center gap-x-3'}>
@@ -54,7 +52,7 @@ export const Header: React.FC = () => {
             </div>
           </div>
           <div className={'c-not-appearance-block'}>
-            <Menu disclosure={{isOpen, onOpen, onClose}}>
+            <Menu disclosure={{ isOpen, onOpen, onClose }}>
               <ul className={'flex justify-start flex-col gap-y-3 h-full'}>
                 <HeaderList navData={navData} onClose={onClose} />
                 <li className={'mt-auto'}>
