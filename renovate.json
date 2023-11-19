@@ -4,6 +4,6 @@
     "config:base"
   ],
   "schedule": [
-    "every Sunday at 10:00"
+    "after 7pm every weekday"
   ]
 }
