@@ -19,6 +19,12 @@ const works: {
     url: 'https://github.com/yugo-ibuki/cheeyo',
     photo: '/assets/cheeyo.png',
   },
+  {
+    name: "Yui's portfolio",
+    description: 'Introduction of the illustrations drawn by Yui.',
+    url: 'https://yuinosuke2.com',
+    photo: '/assets/yui-san.png',
+  },
 ]
 
 export const Work: FC = () => {
@@ -29,7 +35,11 @@ export const Work: FC = () => {
           <li key={w.name}>
             <dl className={'flex flex-col gap-y-[10px]'}>
               <dt>
-                <Link href={w.url} className={'text-cyan-600 flex flex-col gap-y-3'}>
+                <Link
+                  href={w.url}
+                  target="_blank"
+                  className={'text-cyan-600 flex flex-col gap-y-3'}
+                >
                   {w.name}
                   <img src={w.photo} alt={w.name} />
                 </Link>
