@@ -5,6 +5,7 @@ const sideWorks: {
   title: string
   term: string | number
   link: string
+  isExternal?: boolean
 }[] = [
   {
     title: 'English Mentor',
@@ -13,8 +14,14 @@ const sideWorks: {
   },
   {
     title: 'Laravel Mentor',
-    term: '2021 - 2023',
+    term: '2021 - present',
     link: '/background/programming_mentor',
+  },
+  {
+    title: 'Self Employee',
+    term: '2021 - present',
+    link: 'https://coconala.com/users/1842790',
+    isExternal: true,
   },
 ]
 
@@ -26,7 +33,9 @@ export const SideWork: FC = () => {
           <li key={sw.title}>
             <dl className={'flex flex-col gap-y-[10px]'}>
               <dt className={'underline decoration-sky-300'}>
-                <Link href={sw.link}>{sw.title}</Link>
+                <Link href={sw.link} target={sw.isExternal ? '_blank' : ''}>
+                  {sw.title}
+                </Link>
               </dt>
               <dd className={'ml-[30px]'}>{sw.term}</dd>
             </dl>
