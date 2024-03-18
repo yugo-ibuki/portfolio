@@ -17,12 +17,12 @@ export const skills: TSkills = {
   language: [
     {
       name: 'JavaScript',
-      terms: 4,
+      terms: 4.5,
       level: 70,
     },
     {
       name: 'TypeScript',
-      terms: 4,
+      terms: 4.5,
       level: 70,
     },
     {
