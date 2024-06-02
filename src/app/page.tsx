@@ -1,7 +1,7 @@
 import { Block, Title, Skill, Graduate, Stack } from '@components'
 import type { NextPage } from 'next'
 import Image from 'next/image'
-import { AiFillGithub, AiFillLinkedin } from 'react-icons/ai'
+import { AiFillGithub } from 'react-icons/ai'
 import Link from 'next/link'
 import { Certificate } from '@components/List/Certificate'
 
@@ -51,13 +51,13 @@ const Page: NextPage = () => {
                 >
                   <AiFillGithub size={25} />
                 </Link>
-                <Link
-                  href="https://www.linkedin.com/in/yugo-ibuki-7353b7138/"
-                  className={'inline-block mt-2 sp:mt-3'}
-                  target={'_blank'}
-                >
-                  <AiFillLinkedin size={25} />
-                </Link>
+                {/*<Link*/}
+                {/*  href="https://www.linkedin.com/in/yugo-ibuki-7353b7138/"*/}
+                {/*  className={'inline-block mt-2 sp:mt-3'}*/}
+                {/*  target={'_blank'}*/}
+                {/*>*/}
+                {/*  <AiFillLinkedin size={25} />*/}
+                {/*</Link>*/}
               </div>
             </dd>
           </dl>
