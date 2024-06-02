@@ -51,7 +51,11 @@ const Page: NextPage = () => {
                 >
                   <AiFillGithub size={25} />
                 </Link>
-                <Link href="" className={'inline-block mt-2 sp:mt-3'} target={'_blank'}>
+                <Link
+                  href="https://www.linkedin.com/in/yugo-ibuki-7353b7138/"
+                  className={'inline-block mt-2 sp:mt-3'}
+                  target={'_blank'}
+                >
                   <AiFillLinkedin size={25} />
                 </Link>
               </div>
