@@ -43,13 +43,22 @@ const Page: NextPage = () => {
               )
             })}
             <dd>
-              <Link
-                href="https://github.com/yugo-ibuki"
-                className={'inline-block mt-2 sp:mt-3'}
-                target={'_blank'}
-              >
-                <AiFillGithub size={20} />
-              </Link>
+              <div className="flex gap-2">
+                <Link
+                  href="https://github.com/yugo-ibuki"
+                  className={'inline-block mt-2 sp:mt-3'}
+                  target={'_blank'}
+                >
+                  <AiFillGithub size={25} />
+                </Link>
+                {/*<Link*/}
+                {/*  href="https://www.linkedin.com/in/yugo-ibuki-7353b7138/"*/}
+                {/*  className={'inline-block mt-2 sp:mt-3'}*/}
+                {/*  target={'_blank'}*/}
+                {/*>*/}
+                {/*  <AiFillLinkedin size={25} />*/}
+                {/*</Link>*/}
+              </div>
             </dd>
           </dl>
         </div>
