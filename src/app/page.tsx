@@ -93,7 +93,7 @@ const Page: NextPage = () => {
       </Block>
 
       <Block>
-        <Title>Certificate</Title>
+        <Title>CERTIFICATE</Title>
         <div className={'mt-[25px] w-[90%] mx-auto'}>
           <Certificate />
         </div>
