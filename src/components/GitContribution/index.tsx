@@ -23,20 +23,22 @@ export const GitContribution = () => {
   }
 
   return (
-    <Flex justifyContent="space-around">
-      {Array.from({ length: totalWeeks }, (_, weekIndex) => (
-        <Flex key={weekIndex} flexDirection="column">
-          {Array.from({ length: 7 }, (_, dayIndex) => {
-            const contribution = calendarData[`${weekIndex}-${dayIndex}`]
-            return contribution ? (
-              <Contribution key={weekIndex + dayIndex} contribution={contribution} />
-            ) : (
-              <Box width="14px" height="14px" m="1px" bg="#d3d3d3" borderRadius="sm" />
-            )
-          })}
-        </Flex>
-      ))}
-    </Flex>
+    <Box className="overflow-x-auto">
+      <Flex justifyContent="space-around">
+        {Array.from({ length: totalWeeks }, (_, weekIndex) => (
+          <Flex key={weekIndex} flexDirection="column">
+            {Array.from({ length: 7 }, (_, dayIndex) => {
+              const contribution = calendarData[`${weekIndex}-${dayIndex}`]
+              return contribution ? (
+                <Contribution key={weekIndex + dayIndex} contribution={contribution} />
+              ) : (
+                <Box width="14px" height="14px" m="1px" bg="#d3d3d3" borderRadius="sm" />
+              )
+            })}
+          </Flex>
+        ))}
+      </Flex>
+    </Box>
   )
 }
 
