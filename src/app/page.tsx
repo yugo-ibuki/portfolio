@@ -32,7 +32,7 @@ const Page: NextPage = () => {
           />
         </figure>
         <div className={'gap-x-5 w-[40%] sp:w-[60%] sp:mt-[20px]'}>
-          <dl>
+          <div>
             {profiles.map((profile) => {
               return (
                 <>
@@ -43,7 +43,7 @@ const Page: NextPage = () => {
                 </>
               )
             })}
-            <dd>
+            <div>
               <div className="flex gap-2">
                 <Link
                   href="https://github.com/yugo-ibuki"
@@ -60,8 +60,8 @@ const Page: NextPage = () => {
                 {/*  <AiFillLinkedin size={25} />*/}
                 {/*</Link>*/}
               </div>
-            </dd>
-          </dl>
+            </div>
+          </div>
         </div>
       </div>
 

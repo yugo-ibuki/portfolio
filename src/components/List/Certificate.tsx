@@ -49,12 +49,12 @@ export const Certificate: FC = () => {
       {certificates.map((certificate, index) => {
         return (
           <li key={certificate.name + index}>
-            <dl className={'flex flex-col gap-y-[10px]'}>
-              <dt className={'font-bold'}>
+            <div className={'flex flex-col gap-y-[10px]'}>
+              <div className={'font-bold'}>
                 {certificate.name}: <Tag>{certificate.type.toUpperCase()}</Tag>
-              </dt>
-              <dd className={'ml-[30px]'}>{certificate.lank}</dd>
-            </dl>
+              </div>
+              <div className={'ml-[30px]'}>{certificate.lank}</div>
+            </div>
           </li>
         )
       })}
