@@ -98,13 +98,6 @@ const Page: NextPage = () => {
           <Certificate />
         </div>
       </Block>
-
-      <Block>
-        <Title>THIS SITE STACK</Title>
-        <div className={'mt-[25px] w-[90%] mx-auto'}>
-          <Stack />
-        </div>
-      </Block>
     </main>
   )
 }
