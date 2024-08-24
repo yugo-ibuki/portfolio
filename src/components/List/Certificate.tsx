@@ -46,9 +46,9 @@ const certificates: {
 export const Certificate: FC = () => {
   return (
     <ul className={'mx-auto flex flex-col gap-y-[20px]'}>
-      {certificates.map((certificate) => {
+      {certificates.map((certificate, index) => {
         return (
-          <li key={certificate.name}>
+          <li key={certificate.name + index}>
             <dl className={'flex flex-col gap-y-[10px]'}>
               <dt className={'font-bold'}>
                 {certificate.name}: <Tag>{certificate.type.toUpperCase()}</Tag>
