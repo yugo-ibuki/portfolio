@@ -17,12 +17,12 @@ export const skills: TSkills = {
   language: [
     {
       name: 'JavaScript',
-      terms: 4.5,
+      terms: 5,
       level: 70,
     },
     {
       name: 'TypeScript',
-      terms: 4.5,
+      terms: 5,
       level: 70,
     },
     {
@@ -32,15 +32,15 @@ export const skills: TSkills = {
     },
     {
       name: 'Go',
-      terms: 1.5,
-      level: 40,
+      terms: 2,
+      level: 50,
     },
   ],
   framework: [
     {
       name: 'Next.js',
-      terms: 3,
-      level: 60,
+      terms: 4,
+      level: 65,
     },
     {
       name: 'Laravel',
@@ -56,15 +56,15 @@ export const skills: TSkills = {
     },
     {
       name: 'GCP',
-      terms: 2.5,
-      level: 45,
+      terms: 3,
+      level: 55,
     },
   ],
   others: [
     {
       name: 'GraphQL',
-      terms: 1.5,
-      level: 45,
+      terms: 2,
+      level: 50,
     },
     {
       name: 'Firebase',
@@ -97,13 +97,13 @@ export const skills: TSkills = {
   team: [
     {
       name: 'Agile',
-      terms: 2,
+      terms: 2.5,
       level: 40,
     },
     {
       name: 'Scrum',
-      terms: 2,
-      level: 40,
+      terms: 2.5,
+      level: 45,
     },
   ],
 }
