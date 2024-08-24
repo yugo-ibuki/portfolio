@@ -25,6 +25,7 @@
       "@models/*": ["./src/models/*"],
       "@lib/*": ["./src/lib/*"],
       "@config/*": ["./src/config/*"],
+      "@hooks/*": ["./src/hooks/*"],
       "@notFound": ["./src/app/not-found.tsx"],
     },
     "plugins": [{"name": "next"}]

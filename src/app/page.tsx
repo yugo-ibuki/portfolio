@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { AiFillGithub } from 'react-icons/ai'
 import Link from 'next/link'
 import { Certificate } from '@components/List/Certificate'
+import { GitContribution } from '@components/GitContribution'
 
 type TProfiles = {
   name: string
@@ -76,6 +77,10 @@ const Page: NextPage = () => {
             <br />
           </p>
         </div>
+      </Block>
+
+      <Block>
+        <GitContribution />
       </Block>
 
       <Block>
