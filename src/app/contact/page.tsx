@@ -35,7 +35,7 @@ const Contact: FC = () => {
         isClosable: true,
         position: 'bottom-left',
       })
-    } catch (err) {
+    } catch {
       toast({
         title: 'Mail sent failed',
         status: 'error',

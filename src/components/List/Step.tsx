@@ -52,14 +52,14 @@ export const Step: FC = () => {
 
         return (
           <li key={ex.title}>
-            <dl className={'flex flex-col gap-y-[10px]'}>
-              <dt>{ex.title}</dt>
-              <dd className={'ml-[30px]'}>{ex.jobTitle}</dd>
-              <dd className={'ml-[30px]'}>
+            <div className={'flex flex-col gap-y-[10px]'}>
+              <div>{ex.title}</div>
+              <div className={'ml-[30px]'}>{ex.jobTitle}</div>
+              <div className={'ml-[30px]'}>
                 {`${formattedStartDate} ~ ${formattedEndDate}`}
                 <span className="ml-2 text-sm text-gray-600">{duration}</span>
-              </dd>
-            </dl>
+              </div>
+            </div>
           </li>
         )
       })}

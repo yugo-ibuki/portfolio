@@ -43,17 +43,17 @@ export const SideWork: FC = () => {
 
         return (
           <li key={sw.title}>
-            <dl className={'flex flex-col gap-y-[10px]'}>
-              <dt className={'underline decoration-sky-300'}>
+            <div className={'flex flex-col gap-y-[10px]'}>
+              <div className={'underline decoration-sky-300'}>
                 <Link href={sw.link} target={sw.isExternal ? '_blank' : ''}>
                   {sw.title}
                 </Link>
-              </dt>
-              <dd className={'ml-[30px]'}>
+              </div>
+              <div className={'ml-[30px]'}>
                 {`${formattedStartDate} ~ ${formattedEndDate}`}
                 <span className="ml-2 text-sm text-gray-600">{duration}</span>
-              </dd>
-            </dl>
+              </div>
+            </div>
           </li>
         )
       })}

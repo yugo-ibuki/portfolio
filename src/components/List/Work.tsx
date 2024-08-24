@@ -33,8 +33,8 @@ export const Work: FC = () => {
       {works.map((w) => {
         return (
           <li key={w.name}>
-            <dl className={'flex flex-col gap-y-[10px]'}>
-              <dt>
+            <div className={'flex flex-col gap-y-[10px]'}>
+              <div>
                 <Link
                   href={w.url}
                   target="_blank"
@@ -43,9 +43,9 @@ export const Work: FC = () => {
                   {w.name}
                   <img src={w.photo} alt={w.name} />
                 </Link>
-              </dt>
-              <dd className={'ml-[30px]'}>{w.description}</dd>
-            </dl>
+              </div>
+              <div className={'ml-[30px]'}>{w.description}</div>
+            </div>
           </li>
         )
       })}

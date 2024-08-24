@@ -32,18 +32,16 @@ const Page: NextPage = () => {
           />
         </figure>
         <div className={'gap-x-5 w-[40%] sp:w-[60%] sp:mt-[20px]'}>
-          <dl>
-            {profiles.map((profile) => {
-              return (
-                <>
-                  <dt className={'float-left sp:float-none mr-2 sp:mr-0 sp:mt-3 font-bold'}>
-                    {profile.name}:
-                  </dt>
-                  <dd>{profile.description}</dd>
-                </>
-              )
-            })}
-            <dd>
+          <div>
+            {profiles.map((profile) => (
+              <div key={profile.name}>
+                <div className={'float-left sp:float-none mr-2 sp:mr-0 sp:mt-3 font-bold'}>
+                  {profile.name}:
+                </div>
+                <div>{profile.description}</div>
+              </div>
+            ))}
+            <div>
               <div className="flex gap-2">
                 <Link
                   href="https://github.com/yugo-ibuki"
@@ -60,8 +58,8 @@ const Page: NextPage = () => {
                 {/*  <AiFillLinkedin size={25} />*/}
                 {/*</Link>*/}
               </div>
-            </dd>
-          </dl>
+            </div>
+          </div>
         </div>
       </div>
 
