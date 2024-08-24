@@ -11,9 +11,7 @@ type CalendarData = {
 }
 
 export const useCalendar = ({ contributions }: { contributions: Contribution[] }) => {
-  const getJSTDate = useCallback((date: Date): Date => {
-    return toZonedTime(date, 'Asia/Tokyo')
-  }, [])
+  const getJSTDate = (date: Date): Date => toZonedTime(date, 'Asia/Tokyo')
   const today = getJSTDate(new Date())
   // 半年前から今日までの日付を取得
   const startDate = getJSTDate(new Date(today.getFullYear(), today.getMonth() - 6, today.getDate()))
