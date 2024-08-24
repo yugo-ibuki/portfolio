@@ -7,7 +7,7 @@ export type Contribution = {
 
 export const useGitContribution = () => {
   const [contributions, setContributions] = useState<Contribution[]>([])
-  const [loading, setLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
@@ -15,7 +15,7 @@ export const useGitContribution = () => {
   }, [])
 
   const fetchContributions = async () => {
-    setLoading(true)
+    setIsLoading(true)
     setError(null)
     try {
       const response = await fetch(`/api/github-contributions`, {
@@ -39,9 +39,9 @@ export const useGitContribution = () => {
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An unknown error occurred')
     } finally {
-      setLoading(false)
+      setIsLoading(false)
     }
   }
 
-  return { loading, error, contributions }
+  return { isLoading, error, contributions }
 }

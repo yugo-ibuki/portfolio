@@ -7,14 +7,14 @@ import type { FC } from 'react'
 import { getColor } from '@lib/getColor'
 
 export const GitContribution = () => {
-  const { loading, error, contributions } = useGitContribution()
+  const { isLoading, error, contributions } = useGitContribution()
   const { totalWeeks, calendarData } = useCalendar({ contributions })
 
   if (error) {
     return <Text color="red.300">エラーになりました。</Text>
   }
 
-  if (loading) {
+  if (isLoading) {
     return (
       <Flex direction="column" align="center" justify="center">
         <Spinner thickness="4px" speed="0.65s" emptyColor="gray.200" color="blue.500" size="xl" />
