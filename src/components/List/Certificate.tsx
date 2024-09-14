@@ -36,20 +36,25 @@ const certificates: {
     type: certificatesEnum.it,
     lank: 'Associate Cloud Engineer',
   },
+  {
+    name: 'Google Cloud Certification',
+    type: certificatesEnum.it,
+    lank: 'Professional DevOps Engineer',
+  },
 ]
 
 export const Certificate: FC = () => {
   return (
     <ul className={'mx-auto flex flex-col gap-y-[20px]'}>
-      {certificates.map((certificate) => {
+      {certificates.map((certificate, index) => {
         return (
-          <li key={certificate.name}>
-            <dl className={'flex flex-col gap-y-[10px]'}>
-              <dt className={'font-bold'}>
+          <li key={certificate.name + index}>
+            <div className={'flex flex-col gap-y-[10px]'}>
+              <div className={'font-bold'}>
                 {certificate.name}: <Tag>{certificate.type.toUpperCase()}</Tag>
-              </dt>
-              <dd className={'ml-[30px]'}>{certificate.lank}</dd>
-            </dl>
+              </div>
+              <div className={'ml-[30px]'}>{certificate.lank}</div>
+            </div>
           </li>
         )
       })}

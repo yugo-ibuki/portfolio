@@ -35,13 +35,13 @@ export const Articles: FC = () => {
         return (
           <Link href={article.link} target="_blank">
             <li key={article.name}>
-              <dl className={'flex flex-col gap-y-[10px]'}>
-                <dt className={'text-cyan-600'}>{article.name}</dt>
-                <dd className={'ml-[30px] flex justify-start items-center gap-x-3'}>
+              <div className={'flex flex-col gap-y-[10px]'}>
+                <div className={'text-cyan-600'}>{article.name}</div>
+                <div className={'ml-[30px] flex justify-start items-center gap-x-3'}>
                   {article.link}
                   <FaExternalLinkAlt />
-                </dd>
-              </dl>
+                </div>
+              </div>
             </li>
           </Link>
         )
