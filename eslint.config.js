@@ -1,9 +1,26 @@
-module.exports = {
-  root: true,
-  parser: '@typescript-eslint/parser',
-  plugins: ['prettier'],
-  extends: ['plugin:@typescript-eslint/recommended'],
+import typescriptParser from '@typescript-eslint/parser'
+import typescriptPlugin from '@typescript-eslint/eslint-plugin'
+import prettierPlugin from 'eslint-plugin-prettier'
+
+export default {
+  files: ['**/*.ts', '**/*.tsx'],
+  languageOptions: {
+    parser: typescriptParser,
+    parserOptions: {
+      project: './tsconfig.json',
+      ecmaVersion: 2020,
+      sourceType: 'module',
+      ecmaFeatures: {
+        jsx: true,
+      },
+    },
+  },
+  plugins: {
+    '@typescript-eslint': typescriptPlugin,
+    prettier: prettierPlugin,
+  },
   rules: {
+    ...typescriptPlugin.configs['recommended'].rules,
     semi: ['error', 'never', { beforeStatementContinuationChars: 'never' }],
     'semi-spacing': ['error', { after: true, before: false }],
     'semi-style': ['error', 'first'],
@@ -31,14 +48,5 @@ module.exports = {
         filter: { regex: '^_', match: false },
       },
     ],
-  },
-  parserOptions: {
-    project: './tsconfig.json',
-    parser: 'babel-eslint',
-    sourceType: 'module',
-    ecmaVersion: 2020,
-    ecmaFeatures: {
-      tsx: true,
-    },
   },
 }

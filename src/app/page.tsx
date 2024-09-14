@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { AiFillGithub } from 'react-icons/ai'
 import Link from 'next/link'
 import { Certificate } from '@components/List/Certificate'
+import { GitContribution } from '@components/GitContribution'
 
 type TProfiles = {
   name: string
@@ -31,18 +32,16 @@ const Page: NextPage = () => {
           />
         </figure>
         <div className={'gap-x-5 w-[40%] sp:w-[60%] sp:mt-[20px]'}>
-          <dl>
-            {profiles.map((profile) => {
-              return (
-                <>
-                  <dt className={'float-left sp:float-none mr-2 sp:mr-0 sp:mt-3 font-bold'}>
-                    {profile.name}:
-                  </dt>
-                  <dd>{profile.description}</dd>
-                </>
-              )
-            })}
-            <dd>
+          <div>
+            {profiles.map((profile) => (
+              <div key={profile.name}>
+                <div className={'float-left sp:float-none mr-2 sp:mr-0 sp:mt-3 font-bold'}>
+                  {profile.name}:
+                </div>
+                <div>{profile.description}</div>
+              </div>
+            ))}
+            <div>
               <div className="flex gap-2">
                 <Link
                   href="https://github.com/yugo-ibuki"
@@ -59,8 +58,8 @@ const Page: NextPage = () => {
                 {/*  <AiFillLinkedin size={25} />*/}
                 {/*</Link>*/}
               </div>
-            </dd>
-          </dl>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -79,6 +78,10 @@ const Page: NextPage = () => {
       </Block>
 
       <Block>
+        <GitContribution />
+      </Block>
+
+      <Block>
         <Title>SKILLS</Title>
         <div className={'mt-[25px] w-[90%] mx-auto'}>
           <Skill />
@@ -93,16 +96,9 @@ const Page: NextPage = () => {
       </Block>
 
       <Block>
-        <Title>Certificate</Title>
+        <Title>CERTIFICATE</Title>
         <div className={'mt-[25px] w-[90%] mx-auto'}>
           <Certificate />
-        </div>
-      </Block>
-
-      <Block>
-        <Title>THIS SITE STACK</Title>
-        <div className={'mt-[25px] w-[90%] mx-auto'}>
-          <Stack />
         </div>
       </Block>
     </main>
