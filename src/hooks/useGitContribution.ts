@@ -27,7 +27,6 @@ export const useGitContribution = () => {
       }
 
       const res = await response.json()
-      console.log('response: ', res)
       const contributionsData = res.weeks
         .flatMap((week: any) => week.contributionDays)
         .map((day: any) => ({
