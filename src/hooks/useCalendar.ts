@@ -1,5 +1,5 @@
 import { toZonedTime } from 'date-fns-tz'
-import { useCallback, useMemo } from 'react'
+import { useMemo } from 'react'
 import { addDays, differenceInWeeks, format, getDay, startOfWeek } from 'date-fns'
 import type { Contribution } from './useGitContribution'
 
