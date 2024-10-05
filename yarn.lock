@@ -701,7 +701,7 @@
     "@typescript-eslint/types" "8.8.0"
     eslint-visitor-keys "^3.4.3"
 
-"@upstash/redis@^1.31.3":
+"@upstash/redis@^1.34.0":
   version "1.34.2"
   resolved "https://registry.yarnpkg.com/@upstash/redis/-/redis-1.34.2.tgz#234e9b0569c5f81a2dcf155ce3c8e9b672615075"
   integrity sha512-sx7GbdiRCTzvHKDYmntXSsrLXz3Oslm+jsIvCll85PCLQgv9c++Vq4pTIG8frku4zclEdCNL5Zbz83cKMb7aJQ==
@@ -715,12 +715,12 @@
   dependencies:
     server-only "^0.0.1"
 
-"@vercel/kv@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@vercel/kv/-/kv-2.0.0.tgz#a0baa12563946cb35cee23d638b68f0fbbf76172"
-  integrity sha512-zdVrhbzZBYo5d1Hfn4bKtqCeKf0FuzW8rSHauzQVMUgv1+1JOwof2mWcBuI+YMJy8s0G0oqAUfQ7HgUDzb8EbA==
+"@vercel/kv@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@vercel/kv/-/kv-3.0.0.tgz#4579153536c9fc0ca8c52d3d7cfe944ccffd08c0"
+  integrity sha512-pKT8fRnfyYk2MgvyB6fn6ipJPCdfZwiKDdw7vB+HL50rjboEBHDVBEcnwfkEpVSp2AjNtoaOUH7zG+bVC/rvSg==
   dependencies:
-    "@upstash/redis" "^1.31.3"
+    "@upstash/redis" "^1.34.0"
 
 "@zag-js/dom-query@0.31.1":
   version "0.31.1"
