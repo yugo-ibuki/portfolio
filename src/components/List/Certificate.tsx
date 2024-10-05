@@ -1,5 +1,5 @@
 import type { FC } from 'react'
-import { Tag } from '@chakra-ui/tag'
+import { Tag } from '@chakra-ui/react'
 
 type CertificateType = 'english' | 'it' | 'other'
 
