@@ -11,7 +11,10 @@ export const useGitContribution = () => {
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    fetchContributions()
+    // eslint-disable-next-line
+    ;(async () => {
+      await fetchContributions()
+    })()
   }, [])
 
   const fetchContributions = async () => {
