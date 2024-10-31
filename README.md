@@ -15,5 +15,5 @@ localhost:3000
 ## production server
 
 ```bash
-https://y-ibuki91.app/
+https://y-ibuki91.app
 ```
