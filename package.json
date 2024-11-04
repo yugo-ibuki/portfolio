@@ -31,7 +31,7 @@
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.11.0",
-    "@types/node": "^20.8.9",
+    "@types/node": "^22.0.0",
     "@types/react": "^18.2.67",
     "@typescript-eslint/eslint-plugin": "^8.0.0",
     "@typescript-eslint/parser": "^8.0.0",
@@ -45,7 +45,7 @@
     "typescript": "^5.2.2"
   },
   "volta": {
-    "node": "20.18.0",
+    "node": "22.11.0",
     "yarn": "4.5.1"
   }
 }
