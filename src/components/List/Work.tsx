@@ -25,6 +25,12 @@ const works: {
     url: 'https://yuinosuke2.com',
     photo: '/assets/yui-san.png',
   },
+  {
+    name: 'Git and GitHub Learning Path',
+    description: 'Git and GitHub learning tutorial for beginners.',
+    url: 'https://chill-learn.work',
+    photo: '/assets/chill-learn.png',
+  },
 ]
 
 export const Work: FC = () => {
