@@ -46,6 +46,11 @@ const certificates: {
     type: certificatesEnum.it,
     lank: 'Professional Security Engineer',
   },
+  {
+    name: 'Google Cloud Certification',
+    type: certificatesEnum.it,
+    lank: 'Professional Cloud Architect',
+  },
 ]
 
 export const Certificate: FC = () => {
