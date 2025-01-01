@@ -1,4 +1,4 @@
-import { Block, Title, Skill, Graduate, Stack } from '@components'
+import { Block, Title, Skill, Graduate } from '@components'
 import type { NextPage } from 'next'
 import Image from 'next/image'
 import { AiFillGithub } from 'react-icons/ai'
