@@ -35,7 +35,9 @@ export async function GET() {
 
     if (cachedData) {
       console.log('Returning cached data', cachedData)
-      return NextResponse.json(cachedData)
+      const response = NextResponse.json(cachedData)
+      response.headers.set('Cache-Control', 'public, max-age=7200')
+      return response
     }
 
     const now = new Date()

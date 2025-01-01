@@ -15,6 +15,10 @@ export const useGitContribution = () => {
     ;(async () => {
       await fetchContributions()
     })()
+
+    // 2時間ごとに自動更新
+    const interval = setInterval(fetchContributions, 7200 * 1000)
+    return () => clearInterval(interval)
   }, [])
 
   const fetchContributions = async () => {
