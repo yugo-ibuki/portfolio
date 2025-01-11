@@ -17,12 +17,12 @@ export const skills: TSkills = {
   language: [
     {
       name: 'JavaScript',
-      terms: 5,
+      terms: 5.5,
       level: 70,
     },
     {
       name: 'TypeScript',
-      terms: 5,
+      terms: 5.5,
       level: 70,
     },
     {
@@ -39,7 +39,7 @@ export const skills: TSkills = {
   framework: [
     {
       name: 'Next.js',
-      terms: 4,
+      terms: 4.5,
       level: 65,
     },
     {
@@ -56,7 +56,7 @@ export const skills: TSkills = {
     },
     {
       name: 'GCP',
-      terms: 3,
+      terms: 3.5,
       level: 55,
     },
   ],
