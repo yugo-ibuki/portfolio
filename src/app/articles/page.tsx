@@ -1,19 +1,21 @@
 'use client'
 
 import type { NextPage } from 'next'
-import { Articles as ArticleList, Block, Title } from '@components'
+import { Block, Title } from '@components'
+import { Articles } from '@components/List/Articles'
+import { Card, CardContent } from '@/components/components/ui/card'
 
-const Page: NextPage = () => {
+const ArticlesPage: NextPage = () => {
   return (
-    <main>
+    <main className="space-y-10">
       <Block>
-        <Title>Articles</Title>
-        <div className={'mt-[25px] w-[90%] mx-auto'}>
-          <ArticleList />
+        <Title>WRITING PLATFORMS</Title>
+        <div className="mt-6">
+          <Articles />
         </div>
       </Block>
     </main>
   )
 }
 
-export default Page
+export default ArticlesPage
