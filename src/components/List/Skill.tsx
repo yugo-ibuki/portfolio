@@ -1,44 +1,45 @@
 import type { FC } from 'react'
 import { skills } from './data/skills'
 import type { TSkill, TSkills } from './data/skills'
-import { Text } from '@chakra-ui/react'
 import { firstUppercase } from '@lib/firstUppercase'
+import { Progress } from '@/components/components/ui/progress'
+import { Separator } from '@/components/components/ui/separator'
 
 export const Skill: FC = () => (
-  <ul className={'flex flex-col gap-y-[20px]'}>
-    {(Object.keys(skills) as (keyof TSkills)[]).map((title) => {
-      return (
-        <li key={title} className={'flex flex-col gap-y-2'}>
-          <h4 className={'text-xl'}>
-            <span className={'border-b border-b-[5px]'}>{firstUppercase(title)}</span>
-          </h4>
-          <ul className={'flex flex-col gap-y-2'}>
-            {skills[title].map((skill: TSkill) => (
-              <List key={skill.name} skill={skill} />
-            ))}
-          </ul>
-        </li>
-      )
-    })}
-  </ul>
-)
-
-const List = ({ skill }: { skill: TSkill }) => (
-  <li key={skill.name}>
-    <div className={'c-sp-list gap-x-5'}>
-      <div className={'w-[120px]'}>
-        <Text>{skill.name}</Text>
-      </div>
-      <div className={'w-[90px]'}>{skill.terms} years</div>
-      <div>
-        <div className={'border w-[300px] h-[17px] relative'}>
-          <span className={'absolute text-white top-[-5px]'}>confidence</span>
-          <div
-            className={'bg-slate-400 h-[17px]'}
-            style={{ width: typeof skill.level === 'number' ? `${skill.level}%` : '0px' }}
-          />
+  <div className="space-y-10">
+    {(Object.keys(skills) as (keyof TSkills)[]).map((title) => (
+      <div key={title}>
+        <h3 className="text-xl mb-6">
+          <span className="border-b-2 border-primary pb-1">
+            {firstUppercase(title)}
+          </span>
+        </h3>
+        <div className="space-y-6">
+          {skills[title].map((skill: TSkill) => (
+            <SkillItem key={skill.name} skill={skill} />
+          ))}
         </div>
       </div>
+    ))}
+  </div>
+)
+
+const SkillItem: FC<{ skill: TSkill }> = ({ skill }) => (
+  <div className="space-y-2">
+    <div className="flex items-center justify-between">
+      <div className="flex items-center gap-4">
+        <span className="font-medium min-w-[120px]">{skill.name}</span>
+        <span className="text-sm text-muted-foreground min-w-[80px]">
+          {skill.terms} years
+        </span>
+      </div>
+      <span className="text-sm text-muted-foreground">
+        {typeof skill.level === 'number' ? `${skill.level}%` : '-'}
+      </span>
     </div>
-  </li>
+    <Progress
+      value={typeof skill.level === 'number' ? skill.level : 0}
+      className="h-2"
+    />
+  </div>
 )
