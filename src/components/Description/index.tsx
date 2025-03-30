@@ -1,21 +1,25 @@
 import type { FC, ReactNode } from 'react'
-import { Box, HStack } from '@chakra-ui/react'
+import { Card, CardContent, CardHeader } from '@/components/components/ui/card'
+import { cn } from '@/lib/utils'
 
 type Props = {
   children: ReactNode
   subtitle: string
+  className?: string
 }
 
-export const Description: FC<Props> = ({ children, subtitle }) => {
+export const Description: FC<Props> = ({ children, subtitle, className }) => {
   return (
-    <Box className={'mt-[20px]'}>
-      <Box className={'border-4 border-gray-400 p-[10px]'}>
-        <HStack>
-          <Box as={'span'}>at: </Box>
-          <h2 className={'font-bold text-lg'}>{subtitle}</h2>
-        </HStack>
-      </Box>
-      <Box className={'mt-[10px] p-[10px] text-xl'}>{children}</Box>
-    </Box>
+    <Card className={cn('mt-5', className)}>
+      <CardHeader className="border-b-2 border-gray-200 dark:border-gray-700 py-3">
+        <div className="flex items-center gap-2">
+          <span className="text-muted-foreground">at:</span>
+          <h2 className="font-semibold text-lg">{subtitle}</h2>
+        </div>
+      </CardHeader>
+      <CardContent className="pt-5 text-lg">
+        {children}
+      </CardContent>
+    </Card>
   )
 }

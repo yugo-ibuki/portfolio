@@ -1,38 +1,29 @@
 'use client'
 
 import { MdDarkMode, MdLightMode } from 'react-icons/md'
-import React, { useEffect, useState } from 'react'
 import { useTheme } from 'next-themes'
-import { Button } from '../../components/components/ui/button'
+import { Button } from '@/components/components/ui/button'
+import { cn } from '@/lib/utils'
 
-export const ColorModeSwitch: React.FC = () => {
-  const [mounted, setMounted] = useState(false)
+export function ColorModeSwitch() {
   const { theme, setTheme } = useTheme()
 
-  useEffect(() => {
-    setMounted(true)
-  }, [])
-
-  if (!mounted) {
-    return null
-  }
-  
-  const toggleTheme = () => {
-    setTheme(theme === 'light' ? 'dark' : 'light')
-  }
-  
   return (
     <Button
       variant="ghost"
       size="icon"
-      onClick={toggleTheme}
-      className="hover:bg-transparent"
+      onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
+      className={cn(
+        'hover:bg-transparent transition-colors duration-200',
+        'focus-visible:ring-1 focus-visible:ring-offset-1'
+      )}
     >
       {theme === 'light' ? (
-        <MdDarkMode size={30} />
+        <MdDarkMode className="h-6 w-6 transition-transform duration-200 rotate-0 dark:-rotate-90" />
       ) : (
-        <MdLightMode size={30} />
+        <MdLightMode className="h-6 w-6 transition-transform duration-200 rotate-90 dark:rotate-0" />
       )}
+      <span className="sr-only">Toggle theme</span>
     </Button>
   )
 }
