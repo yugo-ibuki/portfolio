@@ -5,14 +5,14 @@ import { Title, Block, Work } from '@components'
 
 const Works: NextPage = () => {
   return (
-    <div>
+    <main className="space-y-10">
       <Block>
         <Title>WHAT I HAVE BUILT</Title>
-        <div className={'mt-[25px]'}>
+        <div className="mt-6">
           <Work />
         </div>
       </Block>
-    </div>
+    </main>
   )
 }
 
