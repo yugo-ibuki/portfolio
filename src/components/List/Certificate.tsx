@@ -1,5 +1,6 @@
 import type { FC } from 'react'
-import { Tag } from '@chakra-ui/react'
+import { Separator } from '@/components/components/ui/separator'
+import { Badge } from '@/components/components/ui/badge'
 
 type CertificateType = 'english' | 'it' | 'other'
 
@@ -55,19 +56,23 @@ const certificates: {
 
 export const Certificate: FC = () => {
   return (
-    <ul className={'mx-auto flex flex-col gap-y-[20px]'}>
-      {certificates.map((certificate, index) => {
-        return (
-          <li key={certificate.name + index}>
-            <div className={'flex flex-col gap-y-[10px]'}>
-              <div className={'font-bold'}>
-                {certificate.name}: <Tag>{certificate.type.toUpperCase()}</Tag>
-              </div>
-              <div className={'ml-[30px]'}>{certificate.lank}</div>
+    <div className="space-y-6">
+      {certificates.map((certificate, index) => (
+        <div key={certificate.name + index} className="space-y-4">
+          <div className="flex flex-col gap-2">
+            <div className="flex items-center gap-2">
+              <span className="font-medium">{certificate.name}</span>
+              <Badge variant="outline" className="uppercase">
+                {certificate.type}
+              </Badge>
             </div>
-          </li>
-        )
-      })}
-    </ul>
+            <div className="text-muted-foreground pl-4">
+              {certificate.lank}
+            </div>
+          </div>
+          {index < certificates.length - 1 && <Separator />}
+        </div>
+      ))}
+    </div>
   )
 }

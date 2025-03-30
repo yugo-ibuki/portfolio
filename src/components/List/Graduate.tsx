@@ -1,4 +1,5 @@
 import type { FC } from 'react'
+import { Separator } from '@/components/components/ui/separator'
 
 const graduates: {
   name: string
@@ -19,18 +20,17 @@ const graduates: {
 
 export const Graduate: FC = () => {
   return (
-    <ul className={'flex flex-col gap-y-[20px]'}>
-      {graduates.map((grd) => {
-        return (
-          <li key={grd.name}>
-            <div className={'c-sp-list gap-x-5'}>
-              <div className={'w-[150px] sp:w-full font-bold'}>{grd.name}</div>
-              <div className={'w-[180px] sp:ml-[10px]'}>{grd.place}</div>
-              <div className={'sp:ml-[10px]'}>{grd.major}</div>
-            </div>
-          </li>
-        )
-      })}
-    </ul>
+    <div className="space-y-6">
+      {graduates.map((grad, index) => (
+        <div key={grad.name} className="space-y-4">
+          <div className="flex flex-col md:flex-row gap-2 md:gap-6">
+            <div className="font-medium min-w-[180px]">{grad.name}</div>
+            <div className="text-muted-foreground min-w-[160px]">{grad.place}</div>
+            <div className="text-muted-foreground">{grad.major}</div>
+          </div>
+          {index < graduates.length - 1 && <Separator />}
+        </div>
+      ))}
+    </div>
   )
 }
