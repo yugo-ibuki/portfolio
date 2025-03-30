@@ -1,6 +1,7 @@
 import type { FC } from 'react'
 import { formatDate } from '@lib/formatDate'
 import { calculateDuration } from '@lib/calculateDuration'
+import { Separator } from '@/components/components/ui/separator'
 
 type Experience = {
   title: string
@@ -44,25 +45,29 @@ const experiences: Experience[] = [
 
 export const Step: FC = () => {
   return (
-    <ul className={'w-[90%] mx-auto flex flex-col gap-y-[20px]'}>
-      {experiences.map((ex) => {
+    <div className="space-y-8">
+      {experiences.map((ex, index) => {
         const formattedStartDate = formatDate(ex.startDate)
         const formattedEndDate = ex.endDate ? formatDate(ex.endDate) : 'present'
         const duration = calculateDuration(ex.startDate, ex.endDate)
 
         return (
-          <li key={ex.title}>
-            <div className={'flex flex-col gap-y-[10px]'}>
-              <div>{ex.title}</div>
-              <div className={'ml-[30px]'}>{ex.jobTitle}</div>
-              <div className={'ml-[30px]'}>
-                {`${formattedStartDate} ~ ${formattedEndDate}`}
-                <span className="ml-2 text-sm text-gray-600">{duration}</span>
+          <div key={ex.title} className="space-y-4">
+            <div className="space-y-2">
+              <h3 className="text-lg font-medium">{ex.title}</h3>
+              <div className="pl-4 space-y-1">
+                <p className="text-muted-foreground">{ex.jobTitle}</p>
+                <p className="text-sm text-muted-foreground">
+                  {`${formattedStartDate} ~ ${formattedEndDate}`}
+                  <span className="ml-2 text-xs">{duration}</span>
+                </p>
               </div>
             </div>
-          </li>
+            {index < experiences.length - 1 && <Separator />}
+          </div>
         )
       })}
-    </ul>
+    </div>
   )
 }
+

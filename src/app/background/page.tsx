@@ -6,24 +6,24 @@ import { Volunteer } from '@components/List/Volunteer'
 
 const Background: NextPage = () => {
   return (
-    <main>
+    <main className="space-y-10">
       <Block>
         <Title>EXPERIENCE</Title>
-        <div className={'mt-[25px] w-[90%] mx-auto'}>
+        <div className="mt-6">
           <Step />
         </div>
       </Block>
 
       <Block>
         <Title>SIDE WORK</Title>
-        <div className={'mt-[25px] w-[90%] mx-auto'}>
+        <div className="mt-6">
           <SideWork />
         </div>
       </Block>
 
       <Block>
         <Title>VOLUNTEER</Title>
-        <div className={'mt-[25px] w-[90%] mx-auto'}>
+        <div className="mt-6">
           <Volunteer />
         </div>
       </Block>

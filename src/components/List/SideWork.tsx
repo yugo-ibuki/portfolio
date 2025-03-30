@@ -2,6 +2,7 @@ import type { FC } from 'react'
 import Link from 'next/link'
 import { formatDate } from '@lib/formatDate'
 import { calculateDuration } from '@lib/calculateDuration'
+import { Separator } from '@/components/components/ui/separator'
 
 type SideWork = {
   title: string
@@ -35,28 +36,34 @@ const sideWorks: SideWork[] = [
 
 export const SideWork: FC = () => {
   return (
-    <ul className={'w-[90%] mx-auto flex flex-col gap-y-[20px]'}>
-      {sideWorks.map((sw) => {
+    <div className="space-y-8">
+      {sideWorks.map((sw, index) => {
         const formattedStartDate = formatDate(sw.startDate)
         const formattedEndDate = sw.endDate ? formatDate(sw.endDate) : 'present'
         const duration = calculateDuration(sw.startDate, sw.endDate)
 
         return (
-          <li key={sw.title}>
-            <div className={'flex flex-col gap-y-[10px]'}>
-              <div className={'underline decoration-sky-300'}>
-                <Link href={sw.link} target={sw.isExternal ? '_blank' : ''}>
-                  {sw.title}
-                </Link>
-              </div>
-              <div className={'ml-[30px]'}>
-                {`${formattedStartDate} ~ ${formattedEndDate}`}
-                <span className="ml-2 text-sm text-gray-600">{duration}</span>
+          <div key={sw.title} className="space-y-4">
+            <div className="space-y-2">
+              <Link
+                href={sw.link}
+                target={sw.isExternal ? '_blank' : undefined}
+                className="text-lg font-medium hover:text-primary transition-colors"
+              >
+                {sw.title}
+              </Link>
+              <div className="pl-4">
+                <p className="text-sm text-muted-foreground">
+                  {`${formattedStartDate} ~ ${formattedEndDate}`}
+                  <span className="ml-2 text-xs">{duration}</span>
+                </p>
               </div>
             </div>
-          </li>
+            {index < sideWorks.length - 1 && <Separator />}
+          </div>
         )
       })}
-    </ul>
+    </div>
   )
 }
+

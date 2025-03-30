@@ -1,5 +1,6 @@
 import type { FC } from 'react'
 import Link from 'next/link'
+import { Separator } from '@/components/components/ui/separator'
 
 const volunteers: {
   title: string
@@ -13,28 +14,27 @@ const volunteers: {
 
 export const Volunteer: FC = () => {
   return (
-    <ul className={'w-[90%] mx-auto flex flex-col gap-y-[20px]'}>
-      {volunteers.map((v) => {
-        return (
-          <li key={v.title}>
-            <div className={'flex flex-col gap-y-[10px]'}>
-              <div>{v.title}</div>
-              <div className={'ml-[30px]'}>{v.content}</div>
-              <div className={'ml-[30px]'}>
-                <Link
-                  href="https://www.kisfvf.com/"
-                  target={'_blank'}
-                  className={'text-cyan-600 hover:cursor-pointer'}
-                >
-                  Kyoto International Student Film & Video Festival
-                  <br />
-                  (京都国際学生映画祭)
-                </Link>
-              </div>
+    <div className="space-y-8">
+      {volunteers.map((v, index) => (
+        <div key={v.title} className="space-y-4">
+          <div className="space-y-2">
+            <h3 className="text-lg font-medium">{v.title}</h3>
+            <div className="pl-4 space-y-4">
+              <p className="text-muted-foreground">{v.content}</p>
+              <Link
+                href="https://www.kisfvf.com/"
+                target="_blank"
+                className="inline-block text-primary hover:text-primary/80 transition-colors"
+              >
+                Kyoto International Student Film & Video Festival
+                <br />
+                <span className="text-sm">(京都国際学生映画祭)</span>
+              </Link>
             </div>
-          </li>
-        )
-      })}
-    </ul>
+          </div>
+          {index < volunteers.length - 1 && <Separator />}
+        </div>
+      ))}
+    </div>
   )
 }
