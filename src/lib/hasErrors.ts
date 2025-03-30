@@ -1,4 +1,3 @@
-export const hasErrors = (errors: any) => {
-  const errorCount = Object.values(errors).map((value) => value).length
-  return errorCount != 0
+export const hasErrors = (errors: Record<string, any>) => {
+  return Object.keys(errors).length > 0
 }

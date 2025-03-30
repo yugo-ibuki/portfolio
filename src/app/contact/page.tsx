@@ -5,8 +5,6 @@ import { Block, Title } from '@components'
 import { useForm } from 'react-hook-form'
 import type { IFormInputs } from '@lib/sendMail'
 import { sendMail } from '@lib/sendMail'
-import { hasErrors } from '@lib/hasErrors'
-import { useToast } from '@/components/hooks/use-toast'
 import { Button } from '@/components/components/ui/button'
 import {
   Form,
@@ -15,16 +13,24 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
+  FormDescription,
 } from '@/components/components/ui/form'
 import { Input } from '@/components/components/ui/input'
 import { Textarea } from '@/components/components/ui/textarea'
 import { toast } from '@/components/hooks/use-toast'
 
 const Contact: FC = () => {
-  const form = useForm<IFormInputs>()
+  const form = useForm<IFormInputs>({
+    mode: 'onBlur',
+    defaultValues: {
+      name: '',
+      email: '',
+      belonging: '',
+      content: ''
+    }
+  })
 
   const onSubmit = async (data: IFormInputs): Promise<void> => {
-    if (hasErrors(form.formState.errors)) return
     try {
       await sendMail(data)
       toast({
@@ -32,7 +38,9 @@ const Contact: FC = () => {
         description: 'Mail sent successfully!',
         variant: 'default',
       })
-    } catch {
+      form.reset()
+    } catch (error) {
+      console.error('Send mail error:', error)
       toast({
         title: 'Error',
         description: 'Failed to send mail. Please try again.',
@@ -42,10 +50,12 @@ const Contact: FC = () => {
   }
 
   return (
-    <main className="container mx-auto px-4">
-      <Block>
-        <Title>Contact</Title>
-        <div className="mt-8">
+    <main className="w-full">
+      <Block className="w-full max-w-none px-0">
+        <div className="px-6">
+          <Title>GET IN TOUCH</Title>
+        </div>
+        <div className="mt-6 px-6">      
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
               <FormField
@@ -64,9 +74,7 @@ const Contact: FC = () => {
                 }}
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>
-                      Name <span className="text-red-500">*</span>
-                    </FormLabel>
+                    <FormLabel>Name</FormLabel>
                     <FormControl>
                       <Input placeholder="Your name" {...field} />
                     </FormControl>
@@ -91,9 +99,7 @@ const Contact: FC = () => {
                 }}
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>
-                      Email <span className="text-red-500">*</span>
-                    </FormLabel>
+                    <FormLabel>Email</FormLabel>
                     <FormControl>
                       <Input type="email" placeholder="your@email.com" {...field} />
                     </FormControl>
@@ -113,10 +119,13 @@ const Contact: FC = () => {
                 }}
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Belonging (Company, Organization, Freelance...etc)</FormLabel>
+                    <FormLabel>Organization</FormLabel>
                     <FormControl>
-                      <Input placeholder="Your organization" {...field} />
+                      <Input placeholder="Company, Organization, etc." {...field} />
                     </FormControl>
+                    <FormDescription>
+                      Optional: Let me know where you're from
+                    </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -130,13 +139,11 @@ const Contact: FC = () => {
                 }}
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>
-                      Content <span className="text-red-500">*</span>
-                    </FormLabel>
+                    <FormLabel>Message</FormLabel>
                     <FormControl>
                       <Textarea
                         placeholder="Your message"
-                        className="min-h-[300px]"
+                        className="min-h-[200px] resize-none"
                         {...field}
                       />
                     </FormControl>
@@ -148,12 +155,11 @@ const Contact: FC = () => {
               <div className="flex justify-center">
                 <Button
                   type="submit"
-                  variant="outline"
                   size="lg"
                   disabled={form.formState.isSubmitting}
                   className="min-w-[160px]"
                 >
-                  {form.formState.isSubmitting ? 'Sending...' : 'Submit'}
+                  {form.formState.isSubmitting ? 'Sending...' : 'Send Message'}
                 </Button>
               </div>
             </form>
