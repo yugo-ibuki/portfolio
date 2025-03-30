@@ -5,6 +5,7 @@ import { Header } from '@components'
 import { Analytics } from '@vercel/analytics/react'
 import { Providers } from './providers'
 import type { Metadata } from 'next'
+import { Toaster } from '@/components/components/ui/toaster'
 
 type Props = {
   children: ReactNode
@@ -30,6 +31,7 @@ const RootLayout: FC<Props> = ({ children }) => {
             {children}
             <Analytics />
           </div>
+          <Toaster />
         </Providers>
       </body>
     </html>
