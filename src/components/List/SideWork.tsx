@@ -26,6 +26,12 @@ const sideWorks: SideWork[] = [
     link: '/background/programming_mentor',
   },
   {
+    title: 'Programming Mentor',
+    startDate: '2023-01',
+    endDate: null,
+    link: '/background/programming_mentor_2',
+  },
+  {
     title: 'Self Employee',
     startDate: '2021-01',
     endDate: null,
@@ -66,4 +72,3 @@ export const SideWork: FC = () => {
     </div>
   )
 }
-
