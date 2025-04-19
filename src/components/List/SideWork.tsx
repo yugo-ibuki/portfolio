@@ -22,12 +22,12 @@ const sideWorks: SideWork[] = [
   {
     title: 'Laravel Mentor',
     startDate: '2020-06',
-    endDate: '2024-02',
+    endDate: '2025-02',
     link: '/background/programming_mentor',
   },
   {
     title: 'Programming Mentor',
-    startDate: '2024-03',
+    startDate: '2025-03',
     endDate: null,
     link: '/background/programming_mentor_2',
   },
