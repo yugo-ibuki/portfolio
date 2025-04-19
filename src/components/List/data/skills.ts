@@ -22,8 +22,8 @@ export const skills: TSkills = {
     },
     {
       name: 'TypeScript',
-      terms: 5.5,
-      level: 70,
+      terms: 6,
+      level: 75,
     },
     {
       name: 'PHP',
@@ -47,6 +47,11 @@ export const skills: TSkills = {
       terms: 2,
       level: 55,
     },
+    {
+      name: 'Remix',
+      terms: 1,
+      level: 45,
+    },
   ],
   cloud: [
     {
@@ -56,8 +61,8 @@ export const skills: TSkills = {
     },
     {
       name: 'GCP',
-      terms: 3.5,
-      level: 55,
+      terms: 4,
+      level: 60,
     },
   ],
   others: [
@@ -92,6 +97,11 @@ export const skills: TSkills = {
       name: 'Vim',
       terms: 2,
       level: 40,
+    },
+    {
+      name: 'Cursor',
+      terms: 1,
+      level: 30,
     },
   ],
   team: [
