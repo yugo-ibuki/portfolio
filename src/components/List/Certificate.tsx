@@ -52,6 +52,11 @@ const certificates: {
     type: certificatesEnum.it,
     lank: 'Professional Cloud Architect',
   },
+  {
+    name: 'Google Cloud Certification',
+    type: certificatesEnum.it,
+    lank: 'Professional Cloud Developer',
+  },
 ]
 
 export const Certificate: FC = () => {
@@ -66,9 +71,7 @@ export const Certificate: FC = () => {
                 {certificate.type}
               </Badge>
             </div>
-            <div className="text-muted-foreground pl-4">
-              {certificate.lank}
-            </div>
+            <div className="text-muted-foreground pl-4">{certificate.lank}</div>
           </div>
           {index < certificates.length - 1 && <Separator />}
         </div>
