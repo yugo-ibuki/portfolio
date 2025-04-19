@@ -21,7 +21,7 @@ const profiles: TProfiles[] = [
   { name: 'Name', description: 'YUGO IBUKI' },
   // { name: 'Age', description: '30' },
   { name: 'Language', description: 'JP / EN' },
-  { name: 'Job Title', description: 'Frontend Developer / Backend Developer' },
+  { name: 'Job Title', description: 'Frontend Developer / Backend Developer / Cloud Developer' },
 ]
 
 const Page: NextPage = () => {
@@ -37,7 +37,10 @@ const Page: NextPage = () => {
             <div className="space-y-4 flex-1">
               <div className="space-y-2">
                 {profiles.map((profile) => (
-                  <div key={profile.name} className="flex flex-col md:flex-row md:items-center gap-1 md:gap-2">
+                  <div
+                    key={profile.name}
+                    className="flex flex-col md:flex-row md:items-center gap-1 md:gap-2"
+                  >
                     <span className="font-semibold text-muted-foreground min-w-24">
                       {profile.name}:
                     </span>
