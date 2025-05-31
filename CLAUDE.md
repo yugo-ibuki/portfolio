@@ -104,3 +104,47 @@ When asked to optimize any codebase, systematically analyze and improve the foll
 3. Review code for obvious improvements (duplications, complexity)
 4. Test changes to ensure no regressions
 5. Document significant changes and their impact
+
+## Bug Documentation
+
+When encountering and fixing bugs, document them for future reference:
+
+### Bug Tracking Process
+1. **Create Bug Documentation**: When a bug is identified and fixed, create a documentation file in `.claude/bugs/` directory
+2. **File Naming**: Use date followed by bug summary: `YYYY-MM-DD-<bug-summary>.md`
+   - Example: `2024-01-15-contact-form-validation-error.md`
+   - Example: `2024-02-20-github-api-rate-limit.md`
+3. **Documentation Format**:
+   ```markdown
+   # Bug: [Brief Description]
+   
+   ## Date
+   [YYYY-MM-DD]
+   
+   ## Description
+   [Detailed description of the bug]
+   
+   ## Root Cause
+   [What was causing the bug]
+   
+   ## Solution
+   [How the bug was fixed]
+   
+   ## Prevention
+   [How to prevent similar bugs in the future]
+   
+   ## Related Files
+   [List of files that were affected/modified]
+   ```
+
+### Directory Structure
+```
+.claude/
+└── bugs/
+    ├── 2024-01-15-contact-form-validation-error.md
+    ├── 2024-02-20-github-api-rate-limit.md
+    ├── 2024-03-10-dark-mode-toggle-not-persisting.md
+    └── ...
+```
+
+This helps maintain a knowledge base of resolved issues and their solutions.
