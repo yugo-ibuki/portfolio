@@ -29,6 +29,17 @@ const sideWork: SideWorkData = {
       I also reviewed the DB design, depending on their original app that they plan to build. Taught what the concept of Class, Interface, Object Oriented Programming are.
     `,
   },
+  programming_mentor_2: {
+    title: 'Programming Mentor',
+    place: 'Tech Train',
+    description: `
+      I've worked as a Mentor for Engineering.
+      <br />
+      I taught React, Go, Laravel, and Web Development.
+      I also reviewed the code, and gave them feedback.
+      Also, I taught them how to study programming, what should they do to improve their skills.
+    `,
+  },
 }
 
 export const useSideWorkPage = () => {

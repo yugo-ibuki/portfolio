@@ -22,8 +22,14 @@ const sideWorks: SideWork[] = [
   {
     title: 'Laravel Mentor',
     startDate: '2020-06',
-    endDate: '2022-12',
+    endDate: '2025-02',
     link: '/background/programming_mentor',
+  },
+  {
+    title: 'Programming Mentor',
+    startDate: '2025-03',
+    endDate: null,
+    link: '/background/programming_mentor_2',
   },
   {
     title: 'Self Employee',
@@ -66,4 +72,3 @@ export const SideWork: FC = () => {
     </div>
   )
 }
-
