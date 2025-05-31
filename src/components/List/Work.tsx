@@ -13,13 +13,6 @@ const works: {
   github?: string
 }[] = [
   {
-    name: 'Japanese population graph by prefecture',
-    description: 'It shows population in Japan by prefecture.',
-    url: 'https://population-app.vercel.app/',
-    photo: '/assets/population-app.png',
-    github: 'https://github.com/yugo-ibuki/population-app'
-  },
-  {
     name: 'Cheeyo',
     description: 'It means "Cheer you up". That is CLI to cheer you up through the terminal.',
     url: 'https://github.com/yugo-ibuki/cheeyo',
