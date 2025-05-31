@@ -1,10 +1,10 @@
 'use client'
 
-import React from 'react'
+import React, { useState } from 'react'
 import { ColorModeSwitch } from '@components/ColorModeSwitch'
 import { ImWink, ImWink2 } from 'react-icons/im'
 import Link from 'next/link'
-import { useColorMode, useDisclosure } from '@chakra-ui/react'
+import { useTheme } from 'next-themes'
 import { Menu } from '@components/Layout/Drawer'
 import { HeaderList } from './HeaderList'
 import type { NavData } from './HeaderList'
@@ -33,15 +33,19 @@ const navData: NavData[] = [
 ]
 
 export const Header: React.FC = () => {
-  const { colorMode } = useColorMode()
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { theme } = useTheme()
+  const [isOpen, setIsOpen] = useState(false)
+  
+  const onOpen = () => setIsOpen(true)
+  const onClose = () => setIsOpen(false)
+  
   return (
     <header>
       <div className={'px-[10px]'}>
         <div className={'w-[700px] sp:w-full py-[15px] c-flex mx-auto'}>
           <div className={'c-flex gap-x-3 w-full'}>
             <Link href="/" className={'c-flex gap-x-3'}>
-              {colorMode === 'light' ? <ImWink /> : <ImWink2 />}
+              {theme === 'light' ? <ImWink /> : <ImWink2 />}
               <h1 className={'font-bold text-lg mr-2'}>Yugo Ibuki</h1>
             </Link>
             <ul className={'c-appearance-flex justify-between items-center gap-x-3'}>
@@ -51,7 +55,7 @@ export const Header: React.FC = () => {
               <ColorModeSwitch />
             </div>
           </div>
-          <div className={'c-not-appearance-block'}>
+          <div className={'c-not-appearance-block ml-auto'}>
             <Menu disclosure={{ isOpen, onOpen, onClose }}>
               <ul className={'flex justify-start flex-col gap-y-3 h-full'}>
                 <HeaderList navData={navData} onClose={onClose} />
