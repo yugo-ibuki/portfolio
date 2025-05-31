@@ -16,8 +16,8 @@ export const useGitContribution = () => {
       await fetchContributions()
     })()
 
-    // 2時間ごとに自動更新
-    const interval = setInterval(fetchContributions, 7200 * 1000)
+    // 1時間ごとに自動更新
+    const interval = setInterval(fetchContributions, 3600 * 1000)
     return () => clearInterval(interval)
   }, [])
 
@@ -26,7 +26,7 @@ export const useGitContribution = () => {
     setError(null)
     try {
       const response = await fetch(`/api/github-contributions`, {
-        next: { revalidate: 3600 },
+        next: { revalidate: 3600 }, // 1時間でrevalidate
       })
 
       if (!response.ok) {

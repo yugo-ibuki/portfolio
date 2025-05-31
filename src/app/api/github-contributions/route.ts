@@ -36,7 +36,7 @@ export async function GET() {
     if (cachedData) {
       console.log('Returning cached data', cachedData)
       const response = NextResponse.json(cachedData)
-      response.headers.set('Cache-Control', 'public, max-age=7200')
+      response.headers.set('Cache-Control', 'public, max-age=3600, stale-while-revalidate=1800')
       return response
     }
 
@@ -62,10 +62,12 @@ export async function GET() {
 
     console.log('Caching new data for:', username)
 
-    // 2時間キャッシュ
-    await kv.set(cacheKey, contributionsData, { ex: 7200 })
+    // 1時間キャッシュ（3600秒）
+    await kv.set(cacheKey, contributionsData, { ex: 3600 })
 
-    return NextResponse.json(contributionsData)
+    const freshResponse = NextResponse.json(contributionsData)
+    freshResponse.headers.set('Cache-Control', 'public, max-age=3600, stale-while-revalidate=1800')
+    return freshResponse
   } catch (error) {
     console.error('Error fetching GitHub contributions:', error)
     return NextResponse.json({ error: 'An error occurred while fetching data' }, { status: 500 })
