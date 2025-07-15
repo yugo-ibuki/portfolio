@@ -40,7 +40,7 @@ a:hover {
 
 
 @layer base {
-  :root {
+    :root {
         --background: 0 0% 100%;
         --foreground: 0 0% 3.9%;
         --card: 0 0% 100%;
@@ -67,7 +67,7 @@ a:hover {
         --chart-5: 27 87% 67%;
         --radius: 0.5rem;
     }
-  .dark {
+    .dark {
         --background: 222 47% 11%;
         --foreground: 210 40% 98%;
         --card: 222 47% 11%;
@@ -98,10 +98,36 @@ a:hover {
 
 
 @layer base {
-  * {
-    @apply border-border;
+    * {
+        @apply border-border;
     }
-  body {
-    @apply bg-background text-foreground;
+
+    body {
+        @apply bg-background text-foreground;
     }
+}
+
+/* Floating animations for background elements */
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+
+    25% {
+        transform: translateY(-20px) rotate(90deg);
+    }
+
+    50% {
+        transform: translateY(-10px) rotate(180deg);
+    }
+
+    75% {
+        transform: translateY(-30px) rotate(270deg);
+    }
+}
+
+.animate-float {
+    animation: float 8s ease-in-out infinite;
 }
