@@ -107,7 +107,7 @@ a:hover {
     }
 }
 
-/* Floating animations for background elements */
+/* Floating animations for background elements of 3D objects */
 @keyframes float {
 
     0%,
