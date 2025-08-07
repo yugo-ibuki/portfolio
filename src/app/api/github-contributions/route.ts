@@ -34,7 +34,6 @@ export async function GET() {
     const cachedData = await kv.get(cacheKey)
 
     if (cachedData) {
-      console.log('Returning cached data', cachedData)
       const response = NextResponse.json(cachedData)
       response.headers.set('Cache-Control', 'public, max-age=3600, stale-while-revalidate=1800')
       return response
@@ -60,8 +59,6 @@ export async function GET() {
     const data = await response.json()
     const contributionsData = data.data.user.contributionsCollection.contributionCalendar
 
-    console.log('Caching new data for:', username)
-
     // 1時間キャッシュ（3600秒）
     await kv.set(cacheKey, contributionsData, { ex: 3600 })
 
@@ -69,7 +66,7 @@ export async function GET() {
     freshResponse.headers.set('Cache-Control', 'public, max-age=3600, stale-while-revalidate=1800')
     return freshResponse
   } catch (error) {
-    console.error('Error fetching GitHub contributions:', error)
+    // In production, you might want to use a proper logging service
     return NextResponse.json({ error: 'An error occurred while fetching data' }, { status: 500 })
   }
 }

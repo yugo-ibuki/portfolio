@@ -34,9 +34,21 @@ export const useGitContribution = () => {
       }
 
       const res = await response.json()
-      const contributionsData = res.weeks
-        .flatMap((week: any) => week.contributionDays)
-        .map((day: any) => ({
+      // Type for GitHub API response
+      interface GitHubWeek {
+        contributionDays: Array<{
+          date: string
+          contributionCount: number
+        }>
+      }
+
+      interface GitHubResponse {
+        weeks: GitHubWeek[]
+      }
+
+      const contributionsData = (res as GitHubResponse).weeks
+        .flatMap((week) => week.contributionDays)
+        .map((day) => ({
           date: day.date,
           count: day.contributionCount,
         }))

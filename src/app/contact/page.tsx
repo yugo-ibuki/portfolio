@@ -40,7 +40,7 @@ const Contact: FC = () => {
       })
       form.reset()
     } catch (error) {
-      console.error('Send mail error:', error)
+      // In production, you might want to use a proper logging service
       toast({
         title: 'Error',
         description: 'Failed to send mail. Please try again.',

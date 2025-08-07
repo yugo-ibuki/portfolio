@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useCallback, useState } from 'react';
+import type * as THREE from 'three';
 
 interface Background3DProps {
     className?: string;
@@ -18,10 +19,10 @@ export default function Background3D({ className = '' }: Background3DProps) {
     useEffect(() => {
         if (!isClient || !mountRef.current) return;
 
-        let scene: any;
-        let camera: any;
-        let renderer: any;
-        let objects: any[] = [];
+        let scene: THREE.Scene;
+        let camera: THREE.PerspectiveCamera;
+        let renderer: THREE.WebGLRenderer;
+        let objects: THREE.Mesh[] = [];
 
         const initThreeJS = async () => {
             try {
@@ -179,7 +180,7 @@ export default function Background3D({ className = '' }: Background3DProps) {
                         mesh.scale.setScalar(scaleBase);
 
                         // Opacity variation - much more visible
-                        const material = mesh.material as any;
+                        const material = mesh.material as THREE.MeshBasicMaterial;
                         const baseOpacity = 0.5 + Math.random() * 0.2; // Base opacity 0.5-0.7
                         material.opacity = baseOpacity + Math.sin(time + index) * 0.15 * motionMultiplier;
                     });
@@ -210,7 +211,8 @@ export default function Background3D({ className = '' }: Background3DProps) {
                 window.addEventListener('resize', handleResize);
 
             } catch (error) {
-                console.error('Failed to initialize 3D background:', error);
+                // Silently fail - 3D background is not critical functionality
+                // In production, you might want to use a proper logging service
             }
         };
 
