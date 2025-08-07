@@ -39,9 +39,7 @@ export async function GET() {
       return response
     }
 
-    const now = new Date()
-    const halfAYearAgo = new Date(now.getFullYear() - 1, now.getMonth(), now.getDate())
-    const variables = { username, from: halfAYearAgo.toISOString(), to: now.toISOString() }
+    const variables = { username }
 
     const response = await fetch(GITHUB_API_URL, {
       method: 'POST',

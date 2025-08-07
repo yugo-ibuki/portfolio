@@ -123,6 +123,7 @@ export default function Background3D({ className = '' }: Background3DProps) {
                         originalPosition: mesh.position.clone(),
                         floatOffset: Math.random() * Math.PI * 2,
                         floatSpeed: 0.3 + Math.random() * 0.3, // Slower floating
+                        baseOpacity: 0.5 + Math.random() * 0.2, // Pre-calculated opacity
                     };
 
                     scene.add(mesh);
@@ -181,8 +182,7 @@ export default function Background3D({ className = '' }: Background3DProps) {
 
                         // Opacity variation - much more visible
                         const material = mesh.material as THREE.MeshBasicMaterial;
-                        const baseOpacity = 0.5 + Math.random() * 0.2; // Base opacity 0.5-0.7
-                        material.opacity = baseOpacity + Math.sin(time + index) * 0.15 * motionMultiplier;
+                        material.opacity = userData.baseOpacity + Math.sin(time + index) * 0.15 * motionMultiplier;
                     });
 
                     // Subtle camera movement
@@ -209,6 +209,9 @@ export default function Background3D({ className = '' }: Background3DProps) {
 
                 // Event listeners
                 window.addEventListener('resize', handleResize);
+                
+                // Store the handler reference for cleanup
+                return handleResize;
 
             } catch (error) {
                 // Silently fail - 3D background is not critical functionality
@@ -216,7 +219,13 @@ export default function Background3D({ className = '' }: Background3DProps) {
             }
         };
 
-        initThreeJS();
+        let handleResize: (() => void) | null = null;
+        
+        const initializeAndGetHandler = async () => {
+            handleResize = await initThreeJS();
+        };
+        
+        initializeAndGetHandler();
 
         // Cleanup function
         return () => {
@@ -224,7 +233,9 @@ export default function Background3D({ className = '' }: Background3DProps) {
                 cancelAnimationFrame(frameRef.current);
             }
 
-            window.removeEventListener('resize', () => { });
+            if (handleResize) {
+                window.removeEventListener('resize', handleResize);
+            }
 
             if (mountRef.current && renderer?.domElement) {
                 mountRef.current.removeChild(renderer.domElement);

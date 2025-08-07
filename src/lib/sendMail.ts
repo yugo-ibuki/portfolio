@@ -13,7 +13,11 @@ export interface IFormInputs {
 
 export const sendMail = async (data: IFormInputs) => {
   // Fixed: Removed NEXT_PUBLIC_ prefix to keep API key server-side only
-  sgMail.setApiKey(process.env.SENDGRID_API_KEY as string)
+  const apiKey = process.env.SENDGRID_API_KEY
+  if (!apiKey) {
+    throw new Error('SENDGRID_API_KEY environment variable is not set.')
+  }
+  sgMail.setApiKey(apiKey)
 
   const msgToSender = makeMailSenderObject(data)
   const msgToMe = makeToMeMailObject(data)

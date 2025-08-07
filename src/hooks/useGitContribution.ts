@@ -25,9 +25,7 @@ export const useGitContribution = () => {
     setIsLoading(true)
     setError(null)
     try {
-      const response = await fetch(`/api/github-contributions`, {
-        next: { revalidate: 3600 }, // 1時間でrevalidate
-      })
+      const response = await fetch(`/api/github-contributions`)
 
       if (!response.ok) {
         throw new Error('Failed to fetch GitHub contributions')
