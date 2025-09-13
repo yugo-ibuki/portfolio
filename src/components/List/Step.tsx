@@ -36,7 +36,7 @@ const experiences: Experience[] = [
     jobTitle: 'Backend Developer',
   },
   {
-    title: '■ ■ ■ ■ ■',
+    title: '3-shake',
     startDate: '2021-11',
     endDate: '2025-07',
     jobTitle: 'Product Developer (Frontend Developer / Backend Developer)',
@@ -45,7 +45,7 @@ const experiences: Experience[] = [
     title: '■ ■ ■ ■ ■ (New)',
     startDate: '2025-09',
     endDate: null,
-    jobTitle: 'Product Developer (Frontend Developer / Backend Developer / Mobile Developer)',
+    jobTitle: 'AI Product Developer',
   },
 ]
 
