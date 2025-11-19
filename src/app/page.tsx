@@ -21,7 +21,7 @@ const profiles: TProfiles[] = [
   { name: 'Name', description: 'YUGO IBUKI' },
   // { name: 'Age', description: '30' },
   { name: 'Language', description: 'JP / EN' },
-  { name: 'Job Title', description: 'Frontend Developer / Backend Developer / Cloud Developer' },
+  { name: 'Job Title', description: 'AI Application Engineer' },
 ]
 
 const Page: NextPage = () => {
