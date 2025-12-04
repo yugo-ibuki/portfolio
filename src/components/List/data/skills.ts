@@ -7,6 +7,7 @@ export type TSkill = {
 export type TSkills = {
   language: TSkill[]
   framework: TSkill[]
+  ai: TSkill[]
   cloud: TSkill[]
   others: TSkill[]
   ide: TSkill[]
@@ -51,6 +52,28 @@ export const skills: TSkills = {
       name: 'Remix',
       terms: 1,
       level: 45,
+    },
+  ],
+  ai: [
+    {
+      name: 'Claude',
+      terms: 2,
+      level: 70,
+    },
+    {
+      name: 'ChatGPT',
+      terms: 1,
+      level: 60,
+    },
+    {
+      name: 'cursor',
+      terms: 1,
+      level: 50,
+    },
+    {
+      name: 'Gemini',
+      terms: 1,
+      level: 30,
     },
   ],
   cloud: [

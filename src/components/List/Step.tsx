@@ -45,7 +45,7 @@ const experiences: Experience[] = [
     title: '■ ■ ■ ■ ■ (New)',
     startDate: '2025-09',
     endDate: null,
-    jobTitle: 'AI Product Developer',
+    jobTitle: 'AI Application Engineer',
   },
 ]
 
