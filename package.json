@@ -60,8 +60,5 @@
     "prettier": "^3.0.3",
     "typescript": "^5.2.2"
   },
-  "volta": {
-    "node": "22.21.1",
-    "yarn": "4.12.0"
-  }
+  "packageManager": "bun@1.2.16"
 }
