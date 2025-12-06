@@ -1,7 +1,7 @@
 export * from './Skill'
 export * from './Graduate'
 export * from './Work'
-export * from './Stack'
+
 export * from './Step'
 export * from './SideWork'
 export * from './Articles'

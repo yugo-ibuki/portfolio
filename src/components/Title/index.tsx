@@ -1,5 +1,4 @@
 import type { FC, ReactNode } from 'react'
-import { ImPushpin } from 'react-icons/im'
 import { cn } from '@/lib/utils'
 
 type Props = {
@@ -9,12 +8,8 @@ type Props = {
 
 export const Title: FC<Props> = ({ children, className }) => {
   return (
-    <h2 className={cn(
-      'flex items-center text-xl gap-x-3 font-semibold tracking-tight',
-      className
-    )}>
-      <ImPushpin className="h-5 w-5" />
+    <h1 className={cn('text-3xl font-bold mb-4', className)}>
       {children}
-    </h2>
+    </h1>
   )
 }
