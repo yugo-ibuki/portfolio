@@ -1,20 +1,20 @@
 'use client'
 
 import type { NextPage } from 'next'
-import { Block, Title } from '@components'
 import { Articles } from '@components/List/Articles'
-import { Card, CardContent } from '@/components/components/ui/card'
 
 const ArticlesPage: NextPage = () => {
   return (
-    <main className="space-y-10">
-      <Block>
-        <Title>WRITING PLATFORMS</Title>
-        <div className="mt-6">
-          <Articles />
-        </div>
-      </Block>
-    </main>
+    <div className="space-y-6">
+      <div className="flex items-baseline justify-between border-b pb-2 mb-4">
+        <h3 className="text-2xl font-semibold tracking-tight">
+          WRITING PLATFORMS
+        </h3>
+      </div>
+      <div className="mt-6">
+        <Articles />
+      </div>
+    </div>
   )
 }
 

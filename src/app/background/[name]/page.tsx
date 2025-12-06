@@ -1,6 +1,6 @@
 'use client'
 
-import { Description, Title } from '@components'
+import { Description } from '@components'
 import { useSideWorkPage } from '../../../hooks/useSideWorkPage'
 import NotFound from '@notFound'
 
@@ -14,7 +14,11 @@ const Page = () => {
   return (
     <main>
       <div className="mt-[25px]">
-        <Title>{data.title}</Title>
+        <div className="flex items-baseline justify-between border-b pb-2 mb-4">
+          <h3 className="text-2xl font-semibold tracking-tight">
+            {data.title}
+          </h3>
+        </div>
         <Description subtitle={data.place}>
           <div dangerouslySetInnerHTML={{ __html: data.description }} />
         </Description>

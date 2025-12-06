@@ -1,18 +1,20 @@
 'use client'
 
 import type { NextPage } from 'next'
-import { Title, Block, Work } from '@components'
+import { Work } from '@components'
 
 const Works: NextPage = () => {
   return (
-    <main className="space-y-10">
-      <Block>
-        <Title>WHAT I HAVE BUILT</Title>
-        <div className="mt-6">
-          <Work />
-        </div>
-      </Block>
-    </main>
+    <div className="space-y-6">
+      <div className="flex items-baseline justify-between border-b pb-2 mb-4">
+        <h3 className="text-2xl font-semibold tracking-tight">
+          WHAT I HAVE BUILT
+        </h3>
+      </div>
+      <div className="mt-6">
+        <Work />
+      </div>
+    </div>
   )
 }
 

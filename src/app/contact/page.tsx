@@ -1,26 +1,26 @@
 import type { FC } from 'react'
-import { Block, Title } from '@components'
+
 
 const EMAIL_ADDRESS = 'y.ibuki91@gmail.com'
 
 const Contact: FC = () => {
   return (
-    <main className="w-full">
-      <Block className="w-full max-w-none px-0">
-        <div className="px-6">
-          <Title>GET IN TOUCH</Title>
-        </div>
-        <div className="mt-8 px-6 text-center">
-          <p className="text-lg mb-4">Feel free to reach out via email:</p>
-          <a 
-            href={`mailto:${EMAIL_ADDRESS}`}
-            className="text-xl font-medium text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 transition-colors"
-          >
-            {EMAIL_ADDRESS}
-          </a>
-        </div>
-      </Block>
-    </main>
+    <div className="space-y-6">
+      <div className="flex items-baseline justify-between border-b pb-2 mb-4">
+        <h3 className="text-2xl font-semibold tracking-tight">
+          GET IN TOUCH
+        </h3>
+      </div>
+      <div className="mt-8">
+        <p className="text-lg text-muted-foreground mb-4">Feel free to reach out via email:</p>
+        <a
+          href={`mailto:${EMAIL_ADDRESS}`}
+          className="text-2xl font-medium text-primary hover:text-primary/80 transition-colors border-b-2 border-primary/20 hover:border-primary"
+        >
+          {EMAIL_ADDRESS}
+        </a>
+      </div>
+    </div>
   )
 }
 
