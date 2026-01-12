@@ -4,6 +4,7 @@ import React from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { AiFillGithub } from 'react-icons/ai'
+import { HiMapPin } from 'react-icons/hi2'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/components/ui/avatar'
 import { cn } from '@/lib/utils'
 import { ColorModeSwitch } from '@components/ColorModeSwitch'
@@ -35,6 +36,10 @@ export const ProfileSidebar = ({ className, onNavClick }: { className?: string, 
                     </Link>
                     <p className="text-lg text-muted-foreground font-medium">
                         AI Application Engineer
+                    </p>
+                    <p className="text-sm text-muted-foreground flex items-center gap-1">
+                        <HiMapPin className="w-4 h-4" />
+                        <span>Japan</span>
                     </p>
                 </div>
 
