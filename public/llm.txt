@@ -1,0 +1,37 @@
+# Yugo Ibuki - Portfolio
+
+> Personal portfolio website of Yugo Ibuki, an AI Application Engineer based in Japan.
+
+## About
+
+Yugo Ibuki is a web developer based in Japan, passionate about building AI-driven applications. This portfolio showcases his technical skills, work experience, projects, and articles.
+
+## Site Structure
+
+### Main Pages
+
+- **Home** (`/`): Overview with technical skills, GitHub contributions, education history, and certifications
+- **Background** (`/background`): Professional experience, side work, and volunteer activities
+- **Works** (`/works`): Portfolio of projects and applications built
+- **Articles** (`/articles`): Writing platforms and published articles
+- **Contact** (`/contact`): Contact information for inquiries
+
+## Technical Details
+
+- **Framework**: Next.js 14 with App Router
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS, shadcn/ui components
+- **Hosting**: Vercel
+
+## Contact
+
+- **Email**: y.ibuki91@gmail.com
+- **GitHub**: https://github.com/yugo-ibuki
+
+## Links
+
+- Home: /
+- Background: /background
+- Works: /works
+- Articles: /articles
+- Contact: /contact
