@@ -14,6 +14,7 @@ const navItems = [
     { name: 'BACKGROUND', href: '/background' },
     { name: 'WORKS', href: '/works' },
     { name: 'ARTICLES', href: '/articles' },
+    { name: 'PRESENTATION', href: '/presentation' },
     { name: 'CONTACT', href: '/contact' },
 ]
 
