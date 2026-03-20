@@ -32,6 +32,13 @@ const works: {
     photo: '/assets/chill-learn.png',
     github: 'https://github.com/yugo-ibuki/git-learning'
   },
+  {
+    name: 'Huge Mouse',
+    description: 'An interactive mouse cursor enhancement tool.',
+    url: 'https://github.com/yugo-ibuki/huge-mouse',
+    photo: '/assets/huge-mouse.png',
+    github: 'https://github.com/yugo-ibuki/huge-mouse'
+  },
 ]
 
 export const Work: FC = () => {
