@@ -33,11 +33,11 @@ const works: {
     github: 'https://github.com/yugo-ibuki/git-learning'
   },
   {
-    name: 'Huge Mouse',
+    name: 'UnitMux',
     description: 'Easy coding agent switcher with vim-like operation.',
-    url: 'https://github.com/yugo-ibuki/huge-mouse',
-    photo: '/assets/huge-mouse.png',
-    github: 'https://github.com/yugo-ibuki/huge-mouse'
+    url: 'https://github.com/yugo-ibuki/unitmux',
+    photo: '/assets/unitmux.png',
+    github: 'https://github.com/yugo-ibuki/unitmux'
   },
 ]
 
