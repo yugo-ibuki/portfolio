@@ -3,7 +3,7 @@
 ## up
 
 ```bash
-yarn dev
+bun dev
 ```
 
 ## local server
