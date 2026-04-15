@@ -1,0 +1,19 @@
+0 verbose cli /Users/yugo/.local/share/mise/installs/node/24.5.0/bin/node /Users/yugo/.local/share/mise/installs/node/24.5.0/lib/node_modules/npm/bin/npm-cli.js
+1 info using npm@11.5.1
+2 info using node@v24.5.0
+3 silly config load:file:/Users/yugo/.local/share/mise/installs/node/24.5.0/lib/node_modules/npm/npmrc
+4 silly config load:file:/Users/yugo/ghq/github.com/yugo-ibuki/takt-worktrees/20260415T0906-wotasuku-ni-tosutame-mazu-gith/.npmrc
+5 silly config load:file:/Users/yugo/.npmrc
+6 silly config load:file:/Users/yugo/.local/share/mise/installs/node/24.5.0/etc/npmrc
+7 verbose title npm view @types/ws@8.18.1 dist.integrity dependencies
+8 verbose argv "view" "@types/ws@8.18.1" "dist.integrity" "dependencies" "--json" "--cache" "./.npm-cache"
+9 verbose logfile logs-max:10 dir:/Users/yugo/ghq/github.com/yugo-ibuki/takt-worktrees/20260415T0906-wotasuku-ni-tosutame-mazu-gith/.npm-cache/_logs/2026-04-15T09_25_32_034Z-
+10 verbose logfile /Users/yugo/ghq/github.com/yugo-ibuki/takt-worktrees/20260415T0906-wotasuku-ni-tosutame-mazu-gith/.npm-cache/_logs/2026-04-15T09_25_32_034Z-debug-0.log
+11 silly logfile done cleaning log files
+12 http fetch GET 200 https://registry.npmjs.org/@types%2fws 107ms (cache miss)
+13 verbose cwd /Users/yugo/ghq/github.com/yugo-ibuki/takt-worktrees/20260415T0906-wotasuku-ni-tosutame-mazu-gith
+14 verbose os Darwin 25.0.0
+15 verbose node v24.5.0
+16 verbose npm  v11.5.1
+17 verbose exit 0
+18 info ok

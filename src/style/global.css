@@ -107,7 +107,6 @@ a:hover {
     }
 }
 
-/* Floating animations for background elements of 3D objects */
 @keyframes float {
 
     0%,
@@ -130,4 +129,48 @@ a:hover {
 
 .animate-float {
     animation: float 8s ease-in-out infinite;
+}
+
+@keyframes contribution-cell-enter {
+    from {
+        opacity: 0;
+        transform: translate3d(var(--contribution-translate-x), var(--contribution-translate-y), 0) scale(0.35);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+}
+
+.contribution-cell {
+    --contribution-translate-x: 0px;
+    --contribution-translate-y: 0px;
+    transform: translate3d(0, 0, 0) scale(1);
+    transform-origin: center;
+    will-change: transform, opacity;
+}
+
+.contribution-cell[data-direction='up'] {
+    --contribution-translate-y: -24px;
+}
+
+.contribution-cell[data-direction='down'] {
+    --contribution-translate-y: 24px;
+}
+
+.contribution-cell[data-direction='left'] {
+    --contribution-translate-x: -24px;
+}
+
+.contribution-cell[data-direction='right'] {
+    --contribution-translate-x: 24px;
+}
+
+.contribution-cell[data-animate='idle'] {
+    animation: none;
+}
+
+.contribution-cell[data-animate='running'] {
+    animation: contribution-cell-enter var(--contribution-animation-duration) cubic-bezier(0.22, 1, 0.36, 1) both;
 }

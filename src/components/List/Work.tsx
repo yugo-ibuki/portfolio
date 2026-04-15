@@ -2,7 +2,6 @@ import type { FC } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Card, CardContent } from '@/components/components/ui/card'
-import { Badge } from '@/components/components/ui/badge'
 import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa'
 
 const works: {
@@ -17,7 +16,7 @@ const works: {
     description: 'It means "Cheer you up". That is CLI to cheer you up through the terminal.',
     url: 'https://github.com/yugo-ibuki/cheeyo',
     photo: '/assets/cheeyo.png',
-    github: 'https://github.com/yugo-ibuki/cheeyo'
+    github: 'https://github.com/yugo-ibuki/cheeyo',
   },
   {
     name: "Yui's portfolio",
@@ -30,14 +29,14 @@ const works: {
     description: 'Git and GitHub learning tutorial for beginners.',
     url: 'https://chill-learn.work',
     photo: '/assets/chill-learn.png',
-    github: 'https://github.com/yugo-ibuki/git-learning'
+    github: 'https://github.com/yugo-ibuki/git-learning',
   },
   {
     name: 'UnitMux',
     description: 'Easy coding agent switcher with vim-like operation.',
     url: 'https://github.com/yugo-ibuki/unitmux',
     photo: '/assets/unitmux.png',
-    github: 'https://github.com/yugo-ibuki/unitmux'
+    github: 'https://github.com/yugo-ibuki/unitmux',
   },
 ]
 
@@ -60,9 +59,7 @@ export const Work: FC = () => {
               <div className="flex items-center justify-between mb-2">
                 <h3 className="text-xl font-semibold">{work.name}</h3>
               </div>
-              <p className="text-muted-foreground mb-4">
-                {work.description}
-              </p>
+              <p className="text-muted-foreground mb-4">{work.description}</p>
               <div className="space-y-4">
                 <div className="flex items-center gap-4">
                   {work.github && (
