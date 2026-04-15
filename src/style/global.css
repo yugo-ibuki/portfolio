@@ -66,6 +66,7 @@ a:hover {
         --chart-4: 43 74% 66%;
         --chart-5: 27 87% 67%;
         --radius: 0.5rem;
+    --motion-ease: cubic-bezier(0.22, 1, 0.36, 1);
     }
     .dark {
         --background: 222 47% 11%;
@@ -173,4 +174,50 @@ a:hover {
 
 .contribution-cell[data-animate='running'] {
     animation: contribution-cell-enter var(--contribution-animation-duration) cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes section-enter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.motion-page-enter {
+  animation: page-enter var(--motion-page-duration, 220ms) var(--motion-ease);
+  will-change: opacity, transform;
+}
+
+.motion-section-reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  animation: section-enter var(--motion-section-duration, 420ms) var(--motion-ease) forwards;
+  animation-delay: var(--motion-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .motion-page-enter,
+  .motion-section-reveal {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
 }

@@ -22,21 +22,23 @@ function genId() {
   return count.toString()
 }
 
+type ActionType = 'ADD_TOAST' | 'UPDATE_TOAST' | 'DISMISS_TOAST' | 'REMOVE_TOAST'
+
 type Action =
   | {
-      type: 'ADD_TOAST'
+      type: Extract<ActionType, 'ADD_TOAST'>
       toast: ToasterToast
     }
   | {
-      type: 'UPDATE_TOAST'
+      type: Extract<ActionType, 'UPDATE_TOAST'>
       toast: Partial<ToasterToast>
     }
   | {
-      type: 'DISMISS_TOAST'
+      type: Extract<ActionType, 'DISMISS_TOAST'>
       toastId?: ToasterToast['id']
     }
   | {
-      type: 'REMOVE_TOAST'
+      type: Extract<ActionType, 'REMOVE_TOAST'>
       toastId?: ToasterToast['id']
     }
 
@@ -168,7 +170,7 @@ function useToast() {
         listeners.splice(index, 1)
       }
     }
-  }, [state])
+  }, [])
 
   return {
     ...state,

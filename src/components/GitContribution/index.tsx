@@ -1,8 +1,7 @@
 'use client'
-import { useGitContribution } from '@hooks/useGitContribution'
-import { useCalendar } from '@hooks/useCalendar'
-import type { Contribution as GitHubContribution } from '@hooks/useGitContribution'
-import { getColor } from '@lib/getColor'
+
+import { useEffect, useState } from 'react'
+import type { CSSProperties } from 'react'
 import { Spinner } from '@components/components/ui/spinner'
 import {
   Tooltip,
@@ -10,8 +9,10 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@components/components/ui/tooltip'
-import type { CSSProperties } from 'react'
-import { useEffect, useState } from 'react'
+import { useCalendar } from '@hooks/useCalendar'
+import type { Contribution as GitHubContribution } from '@hooks/useGitContribution'
+import { useGitContribution } from '@hooks/useGitContribution'
+import { getColor } from '@lib/getColor'
 
 const CONTRIBUTION_ANIMATION_DURATION_MS = 3000
 const CONTRIBUTION_ANIMATION_DURATION = `${CONTRIBUTION_ANIMATION_DURATION_MS}ms`
@@ -120,7 +121,7 @@ export const GitContribution = () => {
                       dayIndex,
                       animationState,
                     )}
-                    className={`${CONTRIBUTION_CELL_CLASS_NAME} w-[14px] h-[14px] m-[1px] bg-gray-300 rounded-sm`}
+                    className={`${CONTRIBUTION_CELL_CLASS_NAME} w-[14px] h-[14px] m-[1px] rounded-sm bg-gray-300`}
                   />
                 )
               })}
@@ -149,13 +150,15 @@ const ContributionCell = ({
         <button
           type="button"
           {...getCellAnimationAttributes(weekIndex, dayIndex, animationState)}
-          className={`${CONTRIBUTION_CELL_CLASS_NAME} w-[14px] h-[14px] m-[1px] rounded-sm hover:outline hover:outline-2 hover:outline-offset-1 hover:outline-gray-400 transition-all`}
+          className={`${CONTRIBUTION_CELL_CLASS_NAME} w-[14px] h-[14px] m-[1px] rounded-sm hover:outline hover:outline-2 hover:outline-offset-1 hover:outline-gray-400 transition-[transform,box-shadow,outline-color] duration-200 ease-out hover:-translate-y-px hover:shadow-[0_8px_18px_-14px_rgba(15,23,42,0.8)] motion-reduce:transition-none motion-reduce:hover:translate-y-0`}
           style={{ backgroundColor: getColor(contribution.count) }}
           aria-label={`${contribution.count} contributions on ${contribution.date}`}
         />
       </TooltipTrigger>
       <TooltipContent>
-        <p>{contribution.count} contributions on {contribution.date}</p>
+        <p>
+          {contribution.count} contributions on {contribution.date}
+        </p>
       </TooltipContent>
     </Tooltip>
   )

@@ -1,11 +1,16 @@
+import { defineConfig } from 'eslint/config'
+import nextVitals from 'eslint-config-next/core-web-vitals'
+import nextTypescript from 'eslint-config-next/typescript'
 import typescriptParser from '@typescript-eslint/parser'
 import typescriptPlugin from '@typescript-eslint/eslint-plugin'
 import prettierPlugin from 'eslint-plugin-prettier'
 
-export default [
+export default defineConfig([
   {
-    ignores: ['.next/**', 'next-env.d.ts', 'node_modules/**', 'out/**'],
+    ignores: ['.next/**', 'node_modules/**', 'out/**', 'build/**', 'next-env.d.ts'],
   },
+  ...nextVitals,
+  ...nextTypescript,
   {
     files: ['**/*.ts', '**/*.tsx'],
     languageOptions: {
@@ -24,7 +29,6 @@ export default [
       prettier: prettierPlugin,
     },
     rules: {
-      ...typescriptPlugin.configs['recommended'].rules,
       semi: ['error', 'never', { beforeStatementContinuationChars: 'never' }],
       'semi-spacing': ['error', { after: true, before: false }],
       'semi-style': ['error', 'first'],
@@ -50,6 +54,7 @@ export default [
           filter: { regex: '^_', match: false },
         },
       ],
+      'prettier/prettier': 'error',
     },
   },
-]
+])

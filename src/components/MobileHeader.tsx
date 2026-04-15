@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import { useState } from 'react'
 import Link from 'next/link'
 import { Menu } from '@/components/Layout/Drawer'
 import { ProfileSidebar } from '@/components/ProfileSidebar'
@@ -21,7 +21,10 @@ export const MobileHeader = () => {
         </Menu>
 
         <div className="ml-4 flex items-center gap-2">
-          <Link href="/" className="font-bold text-lg tracking-tight flex items-center gap-2">
+          <Link
+            href="/"
+            className="flex items-center gap-2 font-bold text-lg tracking-tight transition-[opacity,transform] duration-200 ease-out hover:opacity-80 hover:-translate-y-0.5 motion-reduce:transition-none motion-reduce:hover:translate-y-0"
+          >
             <Avatar className="w-8 h-8">
               <AvatarImage src="/assets/me.jpeg" alt="Yugo Ibuki" />
               <AvatarFallback>YI</AvatarFallback>
