@@ -7,7 +7,7 @@ declare module 'bun:test' {
   export const mock: {
     module: (
       id: string,
-      factory: () => Record<string, unknown> | Promise<Record<string, unknown>>,
+      factory: () => Record<string, unknown> | Promise<Record<string, unknown>>
     ) => void
   }
 

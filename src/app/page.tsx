@@ -1,6 +1,6 @@
 import { Skill, Graduate } from '@components'
 import { Certificate } from '@components/List/Certificate'
-import { GitContribution } from '@/features/github-contributions'
+import { GitContribution } from '@/features/github-contributions/GitContribution'
 import { MotionSection } from '@/components/MotionSection'
 
 const Page = () => {

@@ -1,9 +1,7 @@
 import { NextResponse } from 'next/server'
 import { kv } from '@vercel/kv'
-import {
-  fetchGitHubContributionCalendar,
-  getContributionDateRange,
-} from '@/features/github-contributions'
+import { fetchGitHubContributionCalendar } from '@/features/github-contributions/api'
+import { getContributionDateRange } from '@/features/github-contributions/model'
 
 export const dynamic = 'force-dynamic'
 

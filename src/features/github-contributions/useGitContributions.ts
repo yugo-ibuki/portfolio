@@ -1,3 +1,5 @@
+'use client'
+
 import { useEffect, useState } from 'react'
 import { mapContributionCalendar } from './model'
 import type { Contribution, GitHubContributionCalendar } from './types'
