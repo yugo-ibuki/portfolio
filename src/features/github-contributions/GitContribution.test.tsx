@@ -2,7 +2,7 @@ import { afterEach, beforeEach, describe, expect, it, mock } from 'bun:test'
 import type { ReactNode } from 'react'
 import { act } from 'react'
 import { createRoot, type Root } from 'react-dom/client'
-import type { Contribution } from '@hooks/useGitContribution'
+import type { Contribution } from './types'
 
 type GitContributionState = {
   isLoading: boolean
@@ -37,26 +37,24 @@ const hookState: {
   },
 }
 
-mock.module('@hooks/useGitContribution', () => ({
-  useGitContribution: () => hookState.gitContribution,
+mock.module('./useGitContributions', () => ({
+  useGitContributions: () => hookState.gitContribution,
 }))
 
-mock.module('@hooks/useCalendar', () => ({
-  useCalendar: () => hookState.calendar,
+mock.module('./model', () => ({
+  buildContributionCalendar: () => hookState.calendar,
 }))
 
-mock.module('@components/components/ui/spinner', () => ({
+mock.module('@/components/components/ui/spinner', () => ({
   Spinner: () => <div data-spinner="true" />,
 }))
 
-mock.module('@components/components/ui/tooltip', () => ({
+mock.module('@/components/components/ui/tooltip', () => ({
   TooltipProvider: ({ children }: { children: ReactNode }) => <>{children}</>,
   Tooltip: ({ children }: { children: ReactNode }) => <>{children}</>,
   TooltipTrigger: ({ children }: { children: ReactNode }) => <>{children}</>,
   TooltipContent: ({ children }: { children: ReactNode }) => <>{children}</>,
 }))
-
-const { GitContribution } = await import('./index')
 
 const allowedDirections = new Set(['up', 'down', 'left', 'right'])
 const domEnvironmentError =
@@ -122,6 +120,7 @@ const ensureDomEnvironment = () => {
 
 let mountedRoot: Root | null = null
 let mountedContainer: HTMLDivElement | null = null
+let GitContribution: (() => ReactNode) | null = null
 
 type ObserverRecord = {
   callback: IntersectionObserverCallback
@@ -192,11 +191,20 @@ const triggerIntersection = async (isIntersecting: boolean) => {
 const renderGitContribution = async () => {
   ensureDomEnvironment()
 
+  if (!GitContribution) {
+    const featureModule = await import('./GitContribution')
+    GitContribution = featureModule.GitContribution
+  }
+
   mountedContainer = document.createElement('div')
   document.body.appendChild(mountedContainer)
   mountedRoot = createRoot(mountedContainer)
 
   await act(async () => {
+    if (!GitContribution) {
+      throw new Error('GitContribution component was not loaded')
+    }
+
     mountedRoot?.render(<GitContribution />)
   })
 
@@ -256,7 +264,7 @@ describe('GitContribution', () => {
 
     const container = await renderGitContribution()
 
-    expect(container.textContent).toContain('エラーになりました。')
+    expect(container.textContent?.includes('エラーになりました。')).toBe(true)
   })
 
   it('assigns a direction and a 3000ms animation contract to every grid cell', async () => {
@@ -267,7 +275,7 @@ describe('GitContribution', () => {
     const cells = queryAnimatedCells(container)
 
     expect(grid.style.getPropertyValue('--contribution-animation-duration')).toBe('3000ms')
-    expect(cells).toHaveLength(14)
+    expect(cells.length).toBe(14)
 
     cells.forEach((cell) => {
       expect(allowedDirections.has(cell.dataset.direction ?? '')).toBe(true)

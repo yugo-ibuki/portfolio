@@ -2,18 +2,7 @@ import type { FC } from 'react'
 import Link from 'next/link'
 import { FaExternalLinkAlt } from 'react-icons/fa'
 import { Card, CardContent } from '@/components/components/ui/card'
-
-const presentations: {
-  name: string
-  link: string
-  description: string
-}[] = [
-  {
-    name: 'Speaker Deck',
-    link: 'https://speakerdeck.com/yugo',
-    description: 'Slides from tech talks and conference presentations',
-  },
-]
+import { presentations } from '@/content/presentations'
 
 export const Presentations: FC = () => {
   return (

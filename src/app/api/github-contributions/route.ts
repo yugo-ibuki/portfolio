@@ -1,29 +1,13 @@
 import { NextResponse } from 'next/server'
 import { kv } from '@vercel/kv'
-import { getContributionDateRange } from '@/lib/githubContributions'
+import {
+  fetchGitHubContributionCalendar,
+  getContributionDateRange,
+} from '@/features/github-contributions'
 
 export const dynamic = 'force-dynamic'
 
-const GITHUB_API_URL = 'https://api.github.com/graphql'
 const GITHUB_TOKEN = process.env.GITHUB_API_KEY
-
-const query = `
-  query($username: String!, $from: DateTime!, $to: DateTime!) {
-    user(login: $username) {
-      contributionsCollection(from: $from, to: $to) {
-        contributionCalendar {
-          totalContributions
-          weeks {
-            contributionDays {
-              contributionCount
-              date
-            }
-          }
-        }
-      }
-    }
-  }
-`
 
 export async function GET() {
   const username = process.env.GITHUB_USER_NAME
@@ -50,21 +34,14 @@ export async function GET() {
       to: endDate.toISOString(),
     }
 
-    const response = await fetch(GITHUB_API_URL, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${GITHUB_TOKEN}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ query, variables }),
-    })
-
-    if (!response.ok) {
-      throw response.body
+    if (!GITHUB_TOKEN) {
+      return NextResponse.json({ error: 'GitHub token is required' }, { status: 500 })
     }
 
-    const data = await response.json()
-    const contributionsData = data.data.user.contributionsCollection.contributionCalendar
+    const contributionsData = await fetchGitHubContributionCalendar({
+      token: GITHUB_TOKEN,
+      ...variables,
+    })
 
     console.log('Caching new data for:', username)
 

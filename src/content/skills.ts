@@ -1,20 +1,14 @@
-export type TSkill = {
+export type SkillEntry = {
   name: string
   terms: number
   level: number | string
 }
 
-export type TSkills = {
-  language: TSkill[]
-  framework: TSkill[]
-  ai: TSkill[]
-  cloud: TSkill[]
-  others: TSkill[]
-  ide: TSkill[]
-  team: TSkill[]
-}
+export type SkillGroupKey = 'language' | 'framework' | 'ai' | 'cloud' | 'others' | 'ide' | 'team'
 
-export const skills: TSkills = {
+export type SkillGroups = Record<SkillGroupKey, SkillEntry[]>
+
+export const skills: SkillGroups = {
   language: [
     {
       name: 'JavaScript',

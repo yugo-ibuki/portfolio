@@ -1,18 +1,18 @@
 'use client'
 
-import { useEffect, useState } from 'react'
 import type { CSSProperties } from 'react'
-import { Spinner } from '@components/components/ui/spinner'
+import { useEffect, useMemo, useState } from 'react'
+import { Spinner } from '@/components/components/ui/spinner'
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '@components/components/ui/tooltip'
-import { useCalendar } from '@hooks/useCalendar'
-import type { Contribution as GitHubContribution } from '@hooks/useGitContribution'
-import { useGitContribution } from '@hooks/useGitContribution'
-import { getColor } from '@lib/getColor'
+} from '@/components/components/ui/tooltip'
+import { getColor } from '@/lib/getColor'
+import { buildContributionCalendar } from './model'
+import { useGitContributions } from './useGitContributions'
+import type { Contribution as GitHubContribution } from './types'
 
 const CONTRIBUTION_ANIMATION_DURATION_MS = 3000
 const CONTRIBUTION_ANIMATION_DURATION = `${CONTRIBUTION_ANIMATION_DURATION_MS}ms`
@@ -44,8 +44,11 @@ const contributionGridStyle: ContributionGridStyle = {
 }
 
 export const GitContribution = () => {
-  const { isLoading, error, contributions } = useGitContribution()
-  const { totalWeeks, calendarData } = useCalendar({ contributions })
+  const { isLoading, error, contributions } = useGitContributions()
+  const { totalWeeks, calendarData } = useMemo(
+    () => buildContributionCalendar(contributions),
+    [contributions]
+  )
   const [gridElement, setGridElement] = useState<HTMLDivElement | null>(null)
   const [animationState, setAnimationState] = useState<AnimationState>(ANIMATION_STATE_IDLE)
 
@@ -71,9 +74,7 @@ export const GitContribution = () => {
 
     observer.observe(gridElement)
 
-    return () => {
-      observer.disconnect()
-    }
+    return () => observer.disconnect()
   }, [gridElement])
 
   if (error) {
@@ -96,6 +97,7 @@ export const GitContribution = () => {
             <div key={weekIndex} className="flex flex-col">
               {Array.from({ length: 7 }, (_, dayIndex) => {
                 const contribution = calendarData[`${weekIndex}-${dayIndex}`]
+
                 return contribution ? (
                   <ContributionCell
                     key={`${weekIndex}-${dayIndex}`}

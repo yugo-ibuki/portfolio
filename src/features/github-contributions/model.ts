@@ -1,28 +1,8 @@
 import { addDays, differenceInCalendarWeeks, format, getDay, startOfWeek } from 'date-fns'
 import { toZonedTime } from 'date-fns-tz'
-import type { Contribution } from '@hooks/useGitContribution'
+import type { Contribution, ContributionCalendarDay, GitHubContributionCalendar } from './types'
 
 const CONTRIBUTION_TIMEZONE = 'Asia/Tokyo'
-
-export type GitHubContributionDay = {
-  contributionCount: number
-  date: string
-}
-
-export type GitHubContributionWeek = {
-  contributionDays: GitHubContributionDay[]
-}
-
-export type GitHubContributionCalendar = {
-  weeks: GitHubContributionWeek[]
-}
-
-export type ContributionCalendarDay = {
-  date: string
-  count: number
-  dayOfWeek: number
-  weekNumber: number
-}
 
 export const getContributionDateRange = (referenceDate = new Date()) => {
   const today = toZonedTime(referenceDate, CONTRIBUTION_TIMEZONE)
