@@ -3,42 +3,7 @@ import Link from 'next/link'
 import { formatDate } from '@lib/formatDate'
 import { calculateDuration } from '@lib/calculateDuration'
 import { Separator } from '@/components/components/ui/separator'
-
-type SideWork = {
-  title: string
-  startDate: string
-  endDate: string | null
-  link: string
-  isExternal?: boolean
-}
-
-const sideWorks: SideWork[] = [
-  {
-    title: 'English Mentor',
-    startDate: '2018-01',
-    endDate: '2020-12',
-    link: '/background/english_mentor',
-  },
-  {
-    title: 'Laravel Mentor',
-    startDate: '2020-06',
-    endDate: '2025-02',
-    link: '/background/programming_mentor',
-  },
-  {
-    title: 'Programming Mentor',
-    startDate: '2025-03',
-    endDate: null,
-    link: '/background/programming_mentor_2',
-  },
-  {
-    title: 'Self Employee',
-    startDate: '2021-01',
-    endDate: null,
-    link: 'https://coconala.com/users/1842790',
-    isExternal: true,
-  },
-]
+import { getSideWorkHref, isInternalSideWork, sideWorks } from '@/content/background'
 
 export const SideWork: FC = () => {
   return (
@@ -49,11 +14,11 @@ export const SideWork: FC = () => {
         const duration = calculateDuration(sw.startDate, sw.endDate)
 
         return (
-          <div key={sw.title} className="space-y-4">
+          <div key={getSideWorkHref(sw)} className="space-y-4">
             <div className="space-y-2">
               <Link
-                href={sw.link}
-                target={sw.isExternal ? '_blank' : undefined}
+                href={getSideWorkHref(sw)}
+                target={isInternalSideWork(sw) ? undefined : '_blank'}
                 className="text-lg font-medium hover:text-primary transition-colors"
               >
                 {sw.title}

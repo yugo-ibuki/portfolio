@@ -29,13 +29,6 @@ const SkillItem: FC<{ skill: TSkill }> = ({ skill }) => {
   const [displayLevel, setDisplayLevel] = useState(0)
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
-
-    if (mediaQuery.matches) {
-      setDisplayLevel(targetLevel)
-      return
-    }
-
     const frameId = window.requestAnimationFrame(() => {
       setDisplayLevel(targetLevel)
     })

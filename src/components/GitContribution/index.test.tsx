@@ -101,9 +101,7 @@ const setLoadedState = () => {
 
 const queryGrid = (container: HTMLElement) => {
   const grid = Array.from(container.querySelectorAll<HTMLElement>('div')).find(
-    (element) =>
-      element.style.getPropertyValue('--contribution-animation-duration') ===
-      '3000ms',
+    (element) => element.style.getPropertyValue('--contribution-animation-duration') === '3000ms'
   )
 
   if (!grid) {
@@ -159,7 +157,9 @@ class MockIntersectionObserver implements IntersectionObserver {
   }
 
   unobserve(target: Element) {
-    this.record.observedElements = this.record.observedElements.filter((element) => element !== target)
+    this.record.observedElements = this.record.observedElements.filter(
+      (element) => element !== target
+    )
   }
 }
 
@@ -184,7 +184,7 @@ const triggerIntersection = async (isIntersecting: boolean) => {
           target,
         } as IntersectionObserverEntry,
       ],
-      {} as IntersectionObserver,
+      {} as IntersectionObserver
     )
   })
 }
@@ -214,7 +214,8 @@ beforeEach(() => {
     calendarData: {},
   }
   observerRecords.length = 0
-  globalThis.IntersectionObserver = MockIntersectionObserver as unknown as typeof IntersectionObserver
+  globalThis.IntersectionObserver =
+    MockIntersectionObserver as unknown as typeof IntersectionObserver
 })
 
 afterEach(async () => {
@@ -243,7 +244,7 @@ describe('GitContribution', () => {
 
     const container = await renderGitContribution()
 
-    expect(container.querySelector('[data-spinner="true"]')).not.toBeNull()
+    expect(container.querySelector('[data-spinner="true"]') !== null).toBe(true)
   })
 
   it('shows the existing error message when contribution loading fails', async () => {

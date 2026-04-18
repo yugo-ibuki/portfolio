@@ -11,27 +11,27 @@ const articles: {
   {
     name: 'Zenn',
     link: 'https://zenn.dev/nana',
-    description: 'Technical articles about modern web development, React, and TypeScript'
+    description: 'Technical articles about modern web development, React, and TypeScript',
   },
   {
     name: 'Note',
     link: 'https://note.com/eve_key/',
-    description: 'Essays and thoughts about software development and career growth'
+    description: 'Essays and thoughts about software development and career growth',
   },
   {
     name: 'Qiita',
     link: 'https://qiita.com/yugo-ibuki',
-    description: 'Deep dives into programming concepts and best practices'
+    description: 'Deep dives into programming concepts and best practices',
   },
   {
     name: 'Reading Book Blog',
     link: 'https://ugo-ev.hatenablog.com/',
-    description: 'Book reviews and insights from technical and non-technical readings'
+    description: 'Book reviews and insights from technical and non-technical readings',
   },
   {
     name: 'Novel',
     link: 'https://sizu.me/ugo',
-    description: 'Creative writing and storytelling experiments'
+    description: 'Creative writing and storytelling experiments',
   },
 ]
 
@@ -48,12 +48,8 @@ export const Articles: FC = () => {
                 </h3>
                 <FaExternalLinkAlt className="h-3 w-3 text-muted-foreground group-hover:text-primary transition-colors" />
               </div>
-              <p className="text-sm text-muted-foreground">
-                {article.description}
-              </p>
-              <div className="text-xs text-muted-foreground mt-2 truncate">
-                {article.link}
-              </div>
+              <p className="text-sm text-muted-foreground">{article.description}</p>
+              <div className="text-xs text-muted-foreground mt-2 truncate">{article.link}</div>
             </CardContent>
           </Link>
         </Card>

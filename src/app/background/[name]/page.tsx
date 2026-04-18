@@ -1,15 +1,26 @@
-'use client'
-
 import { Description } from '@components'
-import { useSideWorkPage } from '../../../hooks/useSideWorkPage'
-import NotFound from '@notFound'
 import { MotionSection } from '@/components/MotionSection'
+import { getSideWorkBySlug, internalSideWorks } from '@/content/background'
+import { notFound } from 'next/navigation'
 
-const Page = () => {
-  const { data, isPageExists } = useSideWorkPage()
+type Props = {
+  params: Promise<{
+    name: string
+  }>
+}
 
-  if (!isPageExists) {
-    return <NotFound />
+export const generateStaticParams = async () => {
+  return internalSideWorks.map((sideWork) => ({
+    name: sideWork.slug,
+  }))
+}
+
+const Page = async ({ params }: Props) => {
+  const { name } = await params
+  const data = getSideWorkBySlug(name)
+
+  if (!data) {
+    notFound()
   }
 
   return (
@@ -19,7 +30,11 @@ const Page = () => {
           <h3 className="text-2xl font-semibold tracking-tight">{data.title}</h3>
         </div>
         <Description subtitle={data.place}>
-          <div dangerouslySetInnerHTML={{ __html: data.description }} />
+          <div className="space-y-4">
+            {data.description.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
+          </div>
         </Description>
       </MotionSection>
     </main>

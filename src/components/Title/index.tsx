@@ -7,9 +7,5 @@ type Props = {
 }
 
 export const Title: FC<Props> = ({ children, className }) => {
-  return (
-    <h1 className={cn('text-3xl font-bold mb-4', className)}>
-      {children}
-    </h1>
-  )
+  return <h1 className={cn('text-3xl font-bold mb-4', className)}>{children}</h1>
 }

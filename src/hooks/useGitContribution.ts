@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { mapContributionCalendar } from '@/lib/githubContributions'
 
 export type Contribution = {
   date: string
@@ -34,12 +35,7 @@ export const useGitContribution = () => {
       }
 
       const res = await response.json()
-      const contributionsData = res.weeks
-        .flatMap((week: any) => week.contributionDays)
-        .map((day: any) => ({
-          date: day.date,
-          count: day.contributionCount,
-        }))
+      const contributionsData = mapContributionCalendar(res)
 
       setContributions(contributionsData)
     } catch (err) {

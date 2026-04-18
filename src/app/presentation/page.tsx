@@ -1,10 +1,7 @@
-'use client'
-
-import type { NextPage } from 'next'
 import { Presentations } from '@components/List/Presentations'
 import { MotionSection } from '@/components/MotionSection'
 
-const PresentationPage: NextPage = () => {
+const PresentationPage = () => {
   return (
     <MotionSection className="space-y-6" delayIndex={0}>
       <div className="flex items-baseline justify-between border-b pb-2 mb-4">

@@ -11,7 +11,7 @@ const presentations: {
   {
     name: 'Speaker Deck',
     link: 'https://speakerdeck.com/yugo',
-    description: 'Slides from tech talks and conference presentations'
+    description: 'Slides from tech talks and conference presentations',
   },
 ]
 
@@ -28,12 +28,8 @@ export const Presentations: FC = () => {
                 </h3>
                 <FaExternalLinkAlt className="h-3 w-3 text-muted-foreground group-hover:text-primary transition-colors" />
               </div>
-              <p className="text-sm text-muted-foreground">
-                {presentation.description}
-              </p>
-              <div className="text-xs text-muted-foreground mt-2 truncate">
-                {presentation.link}
-              </div>
+              <p className="text-sm text-muted-foreground">{presentation.description}</p>
+              <div className="text-xs text-muted-foreground mt-2 truncate">{presentation.link}</div>
             </CardContent>
           </Link>
         </Card>

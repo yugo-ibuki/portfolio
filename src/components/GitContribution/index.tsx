@@ -27,16 +27,13 @@ type AnimationState = typeof ANIMATION_STATE_IDLE | typeof ANIMATION_STATE_RUNNI
 type ContributionGridStyle = CSSProperties &
   Record<typeof CONTRIBUTION_ANIMATION_DURATION_CSS_VAR, string>
 
-const getContributionDirection = (
-  weekIndex: number,
-  dayIndex: number,
-): ContributionDirection =>
+const getContributionDirection = (weekIndex: number, dayIndex: number): ContributionDirection =>
   CONTRIBUTION_DIRECTIONS[(weekIndex + dayIndex) % CONTRIBUTION_DIRECTIONS.length]
 
 const getCellAnimationAttributes = (
   weekIndex: number,
   dayIndex: number,
-  animationState: AnimationState,
+  animationState: AnimationState
 ) => ({
   'data-direction': getContributionDirection(weekIndex, dayIndex),
   'data-animate': animationState,
@@ -50,9 +47,7 @@ export const GitContribution = () => {
   const { isLoading, error, contributions } = useGitContribution()
   const { totalWeeks, calendarData } = useCalendar({ contributions })
   const [gridElement, setGridElement] = useState<HTMLDivElement | null>(null)
-  const [animationState, setAnimationState] = useState<AnimationState>(
-    ANIMATION_STATE_IDLE,
-  )
+  const [animationState, setAnimationState] = useState<AnimationState>(ANIMATION_STATE_IDLE)
 
   useEffect(() => {
     if (!gridElement) {
@@ -96,11 +91,7 @@ export const GitContribution = () => {
   return (
     <TooltipProvider delayDuration={0}>
       <div className="overflow-x-auto">
-        <div
-          ref={setGridElement}
-          style={contributionGridStyle}
-          className="flex justify-around"
-        >
+        <div ref={setGridElement} style={contributionGridStyle} className="flex justify-around">
           {Array.from({ length: totalWeeks }, (_, weekIndex) => (
             <div key={weekIndex} className="flex flex-col">
               {Array.from({ length: 7 }, (_, dayIndex) => {
@@ -116,11 +107,7 @@ export const GitContribution = () => {
                 ) : (
                   <div
                     key={`empty-${weekIndex}-${dayIndex}`}
-                    {...getCellAnimationAttributes(
-                      weekIndex,
-                      dayIndex,
-                      animationState,
-                    )}
+                    {...getCellAnimationAttributes(weekIndex, dayIndex, animationState)}
                     className={`${CONTRIBUTION_CELL_CLASS_NAME} w-[14px] h-[14px] m-[1px] rounded-sm bg-gray-300`}
                   />
                 )

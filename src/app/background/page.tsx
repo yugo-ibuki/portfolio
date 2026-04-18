@@ -1,11 +1,8 @@
-'use client'
-
-import type { NextPage } from 'next'
 import { Step, SideWork } from '@components'
 import { Volunteer } from '@components/List/Volunteer'
 import { MotionSection } from '@/components/MotionSection'
 
-const Background: NextPage = () => {
+const Background = () => {
   return (
     <div className="space-y-20 pb-24">
       <MotionSection className="space-y-6" delayIndex={0}>
