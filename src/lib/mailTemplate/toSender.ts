@@ -2,7 +2,7 @@ export const contentToSender = ({
   name,
   email,
   belonging,
-  message
+  message,
 }: {
   name: string
   email: string

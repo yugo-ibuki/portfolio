@@ -35,7 +35,7 @@ export default function Background3D({ className = '' }: Background3DProps) {
 
     let renderer: Three.WebGLRenderer | null = null
     let handleResize: (() => void) | null = null
-    let objects: FloatingMesh[] = []
+    const objects: FloatingMesh[] = []
     let geometries: Three.BufferGeometry[] = []
     let isDisposed = false
 

@@ -52,7 +52,7 @@ export const ProfileSidebar = ({
         </div>
 
         <p className="leading-relaxed text-muted-foreground text-sm">
-          Hello, I'm Yugo. A web developer based in Japan, passionate about building AI-driven
+          Hello, I&apos;m Yugo. A web developer based in Japan, passionate about building AI-driven
           applications.
         </p>
       </div>

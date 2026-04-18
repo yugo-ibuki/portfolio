@@ -33,7 +33,6 @@ const RootLayout: FC<Props> = ({ children }) => {
           <MobileHeader />
           <div className="max-w-7xl mx-auto px-6 py-6 md:py-20 lg:py-24">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 items-start">
-
               {/* Left Sidebar (Desktop Only) */}
               <div className="hidden lg:block lg:col-span-3 lg:sticky lg:top-24">
                 <ProfileSidebar />
@@ -46,7 +45,6 @@ const RootLayout: FC<Props> = ({ children }) => {
                   <Analytics />
                 </div>
               </main>
-
             </div>
           </div>
           <Toaster />

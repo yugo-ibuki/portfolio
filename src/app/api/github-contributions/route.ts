@@ -1,28 +1,11 @@
 import { NextResponse } from 'next/server'
 import { kv } from '@vercel/kv'
+import { fetchGitHubContributionCalendar } from '@/features/github-contributions/api'
+import { getContributionDateRange } from '@/features/github-contributions/model'
 
 export const dynamic = 'force-dynamic'
 
-const GITHUB_API_URL = 'https://api.github.com/graphql'
 const GITHUB_TOKEN = process.env.GITHUB_API_KEY
-
-const query = `
-  query($username: String!) {
-    user(login: $username) {
-      contributionsCollection {
-        contributionCalendar {
-          totalContributions
-          weeks {
-            contributionDays {
-              contributionCount
-              date
-            }
-          }
-        }
-      }
-    }
-  }
-`
 
 export async function GET() {
   const username = process.env.GITHUB_USER_NAME
@@ -42,25 +25,21 @@ export async function GET() {
       return response
     }
 
-    const now = new Date()
-    const halfAYearAgo = new Date(now.getFullYear() - 1, now.getMonth(), now.getDate())
-    const variables = { username, from: halfAYearAgo.toISOString(), to: now.toISOString() }
-
-    const response = await fetch(GITHUB_API_URL, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${GITHUB_TOKEN}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ query, variables }),
-    })
-
-    if (!response.ok) {
-      throw response.body
+    const { startDate, endDate } = getContributionDateRange()
+    const variables = {
+      username,
+      from: startDate.toISOString(),
+      to: endDate.toISOString(),
     }
 
-    const data = await response.json()
-    const contributionsData = data.data.user.contributionsCollection.contributionCalendar
+    if (!GITHUB_TOKEN) {
+      return NextResponse.json({ error: 'GitHub token is required' }, { status: 500 })
+    }
+
+    const contributionsData = await fetchGitHubContributionCalendar({
+      token: GITHUB_TOKEN,
+      ...variables,
+    })
 
     console.log('Caching new data for:', username)
 

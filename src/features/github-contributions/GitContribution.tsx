@@ -1,18 +1,18 @@
 'use client'
 
-import { useEffect, useState } from 'react'
 import type { CSSProperties } from 'react'
-import { Spinner } from '@components/components/ui/spinner'
+import { useEffect, useMemo, useState } from 'react'
+import { Spinner } from '@/components/components/ui/spinner'
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '@components/components/ui/tooltip'
-import { useCalendar } from '@hooks/useCalendar'
-import type { Contribution as GitHubContribution } from '@hooks/useGitContribution'
-import { useGitContribution } from '@hooks/useGitContribution'
-import { getColor } from '@lib/getColor'
+} from '@/components/components/ui/tooltip'
+import { getColor } from '@/lib/getColor'
+import { buildContributionCalendar } from './model'
+import { useGitContributions } from './useGitContributions'
+import type { Contribution as GitHubContribution } from './types'
 
 const CONTRIBUTION_ANIMATION_DURATION_MS = 3000
 const CONTRIBUTION_ANIMATION_DURATION = `${CONTRIBUTION_ANIMATION_DURATION_MS}ms`
@@ -27,16 +27,13 @@ type AnimationState = typeof ANIMATION_STATE_IDLE | typeof ANIMATION_STATE_RUNNI
 type ContributionGridStyle = CSSProperties &
   Record<typeof CONTRIBUTION_ANIMATION_DURATION_CSS_VAR, string>
 
-const getContributionDirection = (
-  weekIndex: number,
-  dayIndex: number,
-): ContributionDirection =>
+const getContributionDirection = (weekIndex: number, dayIndex: number): ContributionDirection =>
   CONTRIBUTION_DIRECTIONS[(weekIndex + dayIndex) % CONTRIBUTION_DIRECTIONS.length]
 
 const getCellAnimationAttributes = (
   weekIndex: number,
   dayIndex: number,
-  animationState: AnimationState,
+  animationState: AnimationState
 ) => ({
   'data-direction': getContributionDirection(weekIndex, dayIndex),
   'data-animate': animationState,
@@ -47,12 +44,13 @@ const contributionGridStyle: ContributionGridStyle = {
 }
 
 export const GitContribution = () => {
-  const { isLoading, error, contributions } = useGitContribution()
-  const { totalWeeks, calendarData } = useCalendar({ contributions })
-  const [gridElement, setGridElement] = useState<HTMLDivElement | null>(null)
-  const [animationState, setAnimationState] = useState<AnimationState>(
-    ANIMATION_STATE_IDLE,
+  const { isLoading, error, contributions } = useGitContributions()
+  const { totalWeeks, calendarData } = useMemo(
+    () => buildContributionCalendar(contributions),
+    [contributions]
   )
+  const [gridElement, setGridElement] = useState<HTMLDivElement | null>(null)
+  const [animationState, setAnimationState] = useState<AnimationState>(ANIMATION_STATE_IDLE)
 
   useEffect(() => {
     if (!gridElement) {
@@ -76,9 +74,7 @@ export const GitContribution = () => {
 
     observer.observe(gridElement)
 
-    return () => {
-      observer.disconnect()
-    }
+    return () => observer.disconnect()
   }, [gridElement])
 
   if (error) {
@@ -96,15 +92,12 @@ export const GitContribution = () => {
   return (
     <TooltipProvider delayDuration={0}>
       <div className="overflow-x-auto">
-        <div
-          ref={setGridElement}
-          style={contributionGridStyle}
-          className="flex justify-around"
-        >
+        <div ref={setGridElement} style={contributionGridStyle} className="flex justify-around">
           {Array.from({ length: totalWeeks }, (_, weekIndex) => (
             <div key={weekIndex} className="flex flex-col">
               {Array.from({ length: 7 }, (_, dayIndex) => {
                 const contribution = calendarData[`${weekIndex}-${dayIndex}`]
+
                 return contribution ? (
                   <ContributionCell
                     key={`${weekIndex}-${dayIndex}`}
@@ -116,11 +109,7 @@ export const GitContribution = () => {
                 ) : (
                   <div
                     key={`empty-${weekIndex}-${dayIndex}`}
-                    {...getCellAnimationAttributes(
-                      weekIndex,
-                      dayIndex,
-                      animationState,
-                    )}
+                    {...getCellAnimationAttributes(weekIndex, dayIndex, animationState)}
                     className={`${CONTRIBUTION_CELL_CLASS_NAME} w-[14px] h-[14px] m-[1px] rounded-sm bg-gray-300`}
                   />
                 )

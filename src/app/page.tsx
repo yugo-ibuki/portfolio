@@ -1,10 +1,9 @@
 import { Skill, Graduate } from '@components'
-import type { NextPage } from 'next'
 import { Certificate } from '@components/List/Certificate'
-import { GitContribution } from '@components/GitContribution'
+import { GitContribution } from '@/features/github-contributions/GitContribution'
 import { MotionSection } from '@/components/MotionSection'
 
-const Page: NextPage = () => {
+const Page = () => {
   return (
     <div className="flex flex-col gap-20 pb-24">
       <MotionSection className="space-y-6" delayIndex={0}>

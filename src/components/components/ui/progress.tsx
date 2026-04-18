@@ -4,7 +4,7 @@ import * as React from 'react'
 import * as ProgressPrimitive from '@radix-ui/react-progress'
 import type { CSSProperties } from 'react'
 
-import { cn } from '@components/lib/utils'
+import { cn } from '@/lib/utils'
 
 type ProgressProps = React.ComponentPropsWithoutRef<typeof ProgressPrimitive.Root> & {
   indicatorClassName?: string

@@ -2,18 +2,7 @@ import type { FC } from 'react'
 import Link from 'next/link'
 import { FaExternalLinkAlt } from 'react-icons/fa'
 import { Card, CardContent } from '@/components/components/ui/card'
-
-const presentations: {
-  name: string
-  link: string
-  description: string
-}[] = [
-  {
-    name: 'Speaker Deck',
-    link: 'https://speakerdeck.com/yugo',
-    description: 'Slides from tech talks and conference presentations'
-  },
-]
+import { presentations } from '@/content/presentations'
 
 export const Presentations: FC = () => {
   return (
@@ -28,12 +17,8 @@ export const Presentations: FC = () => {
                 </h3>
                 <FaExternalLinkAlt className="h-3 w-3 text-muted-foreground group-hover:text-primary transition-colors" />
               </div>
-              <p className="text-sm text-muted-foreground">
-                {presentation.description}
-              </p>
-              <div className="text-xs text-muted-foreground mt-2 truncate">
-                {presentation.link}
-              </div>
+              <p className="text-sm text-muted-foreground">{presentation.description}</p>
+              <div className="text-xs text-muted-foreground mt-2 truncate">{presentation.link}</div>
             </CardContent>
           </Link>
         </Card>

@@ -17,9 +17,7 @@ export const Description: FC<Props> = ({ children, subtitle, className }) => {
           <h2 className="font-semibold text-lg">{subtitle}</h2>
         </div>
       </CardHeader>
-      <CardContent className="pt-5 text-lg">
-        {children}
-      </CardContent>
+      <CardContent className="pt-5 text-lg">{children}</CardContent>
     </Card>
   )
 }

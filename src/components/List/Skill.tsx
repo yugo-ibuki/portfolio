@@ -1,21 +1,21 @@
 'use client'
 
 import { useEffect, useState, type FC } from 'react'
-import { skills } from './data/skills'
-import type { TSkill, TSkills } from './data/skills'
 import { firstUppercase } from '@lib/firstUppercase'
 import { Progress } from '@/components/components/ui/progress'
 import { getProgressDuration } from '@/lib/motion'
+import { skills } from '@/content/skills'
+import type { SkillEntry, SkillGroups } from '@/content/skills'
 
 export const Skill: FC = () => (
   <div className="space-y-10">
-    {(Object.keys(skills) as (keyof TSkills)[]).map((title) => (
+    {(Object.keys(skills) as (keyof SkillGroups)[]).map((title) => (
       <div key={title}>
         <h3 className="text-xl mb-6">
           <span className="border-b-2 border-primary pb-1">{firstUppercase(title)}</span>
         </h3>
         <div className="space-y-6">
-          {skills[title].map((skill: TSkill) => (
+          {skills[title].map((skill: SkillEntry) => (
             <SkillItem key={skill.name} skill={skill} />
           ))}
         </div>
@@ -24,18 +24,11 @@ export const Skill: FC = () => (
   </div>
 )
 
-const SkillItem: FC<{ skill: TSkill }> = ({ skill }) => {
+const SkillItem: FC<{ skill: SkillEntry }> = ({ skill }) => {
   const targetLevel = typeof skill.level === 'number' ? skill.level : 0
   const [displayLevel, setDisplayLevel] = useState(0)
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
-
-    if (mediaQuery.matches) {
-      setDisplayLevel(targetLevel)
-      return
-    }
-
     const frameId = window.requestAnimationFrame(() => {
       setDisplayLevel(targetLevel)
     })
