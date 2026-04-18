@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { kv } from '@vercel/kv'
+import { getContributionDateRange } from '@/lib/githubContributions'
 
 export const dynamic = 'force-dynamic'
 
@@ -7,9 +8,9 @@ const GITHUB_API_URL = 'https://api.github.com/graphql'
 const GITHUB_TOKEN = process.env.GITHUB_API_KEY
 
 const query = `
-  query($username: String!) {
+  query($username: String!, $from: DateTime!, $to: DateTime!) {
     user(login: $username) {
-      contributionsCollection {
+      contributionsCollection(from: $from, to: $to) {
         contributionCalendar {
           totalContributions
           weeks {
@@ -42,9 +43,12 @@ export async function GET() {
       return response
     }
 
-    const now = new Date()
-    const halfAYearAgo = new Date(now.getFullYear() - 1, now.getMonth(), now.getDate())
-    const variables = { username, from: halfAYearAgo.toISOString(), to: now.toISOString() }
+    const { startDate, endDate } = getContributionDateRange()
+    const variables = {
+      username,
+      from: startDate.toISOString(),
+      to: endDate.toISOString(),
+    }
 
     const response = await fetch(GITHUB_API_URL, {
       method: 'POST',
