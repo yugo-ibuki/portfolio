@@ -17,7 +17,7 @@ export const skills: SkillGroups = {
     },
     {
       name: 'TypeScript',
-      terms: 6,
+      terms: 7,
       level: 75,
     },
     {
@@ -51,18 +51,18 @@ export const skills: SkillGroups = {
   ai: [
     {
       name: 'Claude',
-      terms: 2,
-      level: 70,
+      terms: 3,
+      level: 80,
     },
     {
       name: 'ChatGPT',
-      terms: 1,
-      level: 60,
+      terms: 1.5,
+      level: 65,
     },
     {
       name: 'cursor',
-      terms: 1,
-      level: 50,
+      terms: 1.5,
+      level: 55,
     },
     {
       name: 'Gemini',
@@ -78,8 +78,8 @@ export const skills: SkillGroups = {
     },
     {
       name: 'GCP',
-      terms: 4,
-      level: 60,
+      terms: 4.5,
+      level: 65,
     },
   ],
   others: [
@@ -100,8 +100,8 @@ export const skills: SkillGroups = {
     },
     {
       name: 'GitHub Actions',
-      terms: 2.5,
-      level: 60,
+      terms: 3,
+      level: 65,
     },
   ],
   ide: [
