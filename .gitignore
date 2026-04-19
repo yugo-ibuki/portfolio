@@ -13,3 +13,7 @@
 .idea
 
 .serena
+
+
+# APM dependencies
+apm_modules/
