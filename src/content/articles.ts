@@ -11,11 +11,6 @@ export const articles: ArticleEntry[] = [
     description: 'Technical articles about modern web development, React, and TypeScript',
   },
   {
-    name: 'Note',
-    link: 'https://note.com/eve_key/',
-    description: 'Essays and thoughts about software development and career growth',
-  },
-  {
     name: 'Qiita',
     link: 'https://qiita.com/yugo-ibuki',
     description: 'Deep dives into programming concepts and best practices',
