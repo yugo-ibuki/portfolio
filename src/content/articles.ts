@@ -25,9 +25,4 @@ export const articles: ArticleEntry[] = [
     link: 'https://ugo-ev.hatenablog.com/',
     description: 'Book reviews and insights from technical and non-technical readings',
   },
-  {
-    name: 'Novel',
-    link: 'https://sizu.me/ugo',
-    description: 'Creative writing and storytelling experiments',
-  },
 ]
