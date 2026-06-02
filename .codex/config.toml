@@ -1,0 +1,11 @@
+[mcp_servers.serena]
+command = "uvx"
+args = [
+    "--from",
+    "git+https://github.com/oraios/serena",
+    "serena-mcp-server",
+    "--context",
+    "ide-assistant",
+    "--project",
+    "/Users/yugo/ghq/github.com/yugo-ibuki/portfolio",
+]
