@@ -1,15 +1,22 @@
-import { Articles } from '@components/List/Articles'
+import { Articles, Publications } from '@components/List'
 import { MotionSection } from '@/components/MotionSection'
 
 const ArticlesPage = () => {
   return (
-    <MotionSection className="space-y-6" delayIndex={0}>
+    <MotionSection className="space-y-10" delayIndex={0}>
       <div className="flex items-baseline justify-between border-b pb-2 mb-4">
-        <h3 className="text-2xl font-semibold tracking-tight">WRITING PLATFORMS</h3>
+        <h3 className="text-2xl font-semibold tracking-tight">WRITING & PUBLICATIONS</h3>
       </div>
-      <div className="mt-6">
+
+      <section className="space-y-4">
+        <h4 className="text-lg font-semibold tracking-tight">Platforms</h4>
         <Articles />
-      </div>
+      </section>
+
+      <section className="space-y-4">
+        <h4 className="text-lg font-semibold tracking-tight">Publications</h4>
+        <Publications />
+      </section>
     </MotionSection>
   )
 }
