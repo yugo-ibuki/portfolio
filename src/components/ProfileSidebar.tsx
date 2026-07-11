@@ -10,11 +10,11 @@ import { ColorModeSwitch } from '@components/ColorModeSwitch'
 
 const navItems = [
   { name: 'HOME', href: '/' },
+  { name: 'PROFILE Q&A', href: '/chat' },
   { name: 'BACKGROUND', href: '/background' },
   { name: 'WORKS', href: '/works' },
   { name: 'ARTICLES', href: '/articles' },
   { name: 'PRESENTATION', href: '/presentation' },
-  { name: 'CHAT', href: '/chat' },
   { name: 'CONTACT', href: '/contact' },
 ]
 

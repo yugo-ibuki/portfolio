@@ -37,6 +37,12 @@ afterEach(async () => {
 })
 
 describe('ProfileChat', () => {
+  test('labels the experience as profile Q&A', async () => {
+    const container = await renderProfileChat()
+
+    expect(container.textContent?.includes('Profile Q&A')).toBe(true)
+  })
+
   test('uses a slower default response delay for a writing feel', () => {
     expect(DEFAULT_PROFILE_CHAT_RESPONSE_DELAY_MS).toBe(2000)
   })
@@ -44,7 +50,7 @@ describe('ProfileChat', () => {
   test('keeps rendered message ids unique across repeated replies', async () => {
     const container = await renderProfileChat()
     const suggestionButton = Array.from(container.querySelectorAll('button')).find((button) =>
-      button.textContent?.includes('作ったものについて教えて')
+      button.textContent?.includes('Tell me about your works')
     )
 
     if (!suggestionButton) {
@@ -78,7 +84,7 @@ describe('ProfileChat', () => {
   test('shows a writing indicator before adding the bot response', async () => {
     const container = await renderProfileChat()
     const suggestionButton = Array.from(container.querySelectorAll('button')).find((button) =>
-      button.textContent?.includes('作ったものについて教えて')
+      button.textContent?.includes('Tell me about your works')
     )
 
     if (!suggestionButton) {
@@ -89,7 +95,7 @@ describe('ProfileChat', () => {
       suggestionButton.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }))
     })
 
-    expect(container.textContent?.includes('書き込み中')).toBe(true)
+    expect(container.textContent?.includes('Writing')).toBe(true)
     expect(container.textContent?.includes('UnitMux')).toBe(false)
     expect(container.querySelector('.profile-chat-message-enter') !== null).toBe(true)
     expect(container.querySelector('.profile-chat-typing-bubble') !== null).toBe(true)
@@ -99,7 +105,7 @@ describe('ProfileChat', () => {
       await wait(20)
     })
 
-    expect(container.textContent?.includes('書き込み中')).toBe(false)
+    expect(container.textContent?.includes('Writing')).toBe(false)
     expect(container.textContent?.includes('UnitMux')).toBe(true)
     expect(container.querySelectorAll('.profile-chat-message-text p').length).toBeGreaterThan(1)
   })

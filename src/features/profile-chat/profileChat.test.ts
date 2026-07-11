@@ -14,15 +14,15 @@ describe('profile chat', () => {
     expect(reply).toContain('AI')
   })
 
-  test('answers Japanese work questions with project information', () => {
-    const reply = buildProfileChatReply('作ったものについて教えて')
+  test('answers work questions with project information', () => {
+    const reply = buildProfileChatReply('Tell me about your works')
 
     expect(reply).toContain('UnitMux')
     expect(reply).toContain('Cheeyo')
   })
 
   test('separates longer answers into paragraphs', () => {
-    const reply = buildProfileChatReply('作ったものについて教えて')
+    const reply = buildProfileChatReply('Tell me about your works')
 
     expect(reply).toContain('\n\n')
   })
@@ -30,7 +30,7 @@ describe('profile chat', () => {
   test('guides the visitor when the question is outside the profile data', () => {
     const reply = buildProfileChatReply('What is his favorite lunch?')
 
-    expect(reply).toContain('プロフィールにある範囲')
+    expect(reply).toContain('profile data')
     expect(reply).toContain('skills')
   })
 })

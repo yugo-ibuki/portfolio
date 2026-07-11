@@ -3,7 +3,7 @@ import profileChatData from '@/content/profile-chat.json'
 type ChatTopic = {
   id: string
   keywords: string[]
-  buildReply: (isJapaneseQuestion: boolean) => string
+  buildReply: () => string
 }
 
 const joinNatural = (items: string[]) => {
@@ -18,10 +18,6 @@ const includesAny = (text: string, keywords: string[]) => {
   return keywords.some((keyword) => text.includes(keyword.toLowerCase()))
 }
 
-const getLanguageMode = (question: string) => {
-  return /[ぁ-んァ-ン一-龯]/.test(question)
-}
-
 const buildParagraphs = (paragraphs: string[]) => {
   return paragraphs.join('\n\n')
 }
@@ -33,17 +29,10 @@ const isGreeting = (question: string) => {
   )
 }
 
-const buildSkillReply = (isJapaneseQuestion: boolean) => {
+const buildSkillReply = () => {
   const skills = profileChatData.skills
   const mainSkills = [...skills.languages, ...skills.frameworks.slice(0, 3)]
   const aiTools = skills.aiTools.join(', ')
-
-  if (isJapaneseQuestion) {
-    return buildParagraphs([
-      `プロフィール上では、${profileChatData.personal.name} は ${joinNatural(mainSkills)} を中心に扱っています。`,
-      `AIまわりでは ${aiTools} を使っていて、${profileChatData.personal.role} としてAIアプリケーション開発に軸があります。`,
-    ])
-  }
 
   return buildParagraphs([
     `${profileChatData.personal.name} mainly works with ${joinNatural(mainSkills)}.`,
@@ -51,19 +40,11 @@ const buildSkillReply = (isJapaneseQuestion: boolean) => {
   ])
 }
 
-const buildWorkReply = (isJapaneseQuestion: boolean) => {
+const buildWorkReply = () => {
   const workNames = profileChatData.works.map((work) => work.name)
   const workSummaries = profileChatData.works
     .map((work) => `${work.name}: ${work.summary}`)
     .join('\n')
-
-  if (isJapaneseQuestion) {
-    return buildParagraphs([
-      `作ったものだと ${joinNatural(workNames)} があります。`,
-      `ざっくり言うと、${workSummaries}`,
-      '個人開発寄りの小さく使えるプロダクトが多いです。',
-    ])
-  }
 
   return buildParagraphs([
     `His works include ${joinNatural(workNames)}.`,
@@ -72,19 +53,12 @@ const buildWorkReply = (isJapaneseQuestion: boolean) => {
   ])
 }
 
-const buildExperienceReply = (isJapaneseQuestion: boolean) => {
+const buildExperienceReply = () => {
   const current = profileChatData.experience.at(-1)
   const pastRoles = profileChatData.experience
     .slice(0, -1)
     .map((experience) => `${experience.company} as ${experience.role}`)
     .join('\n')
-
-  if (isJapaneseQuestion) {
-    return buildParagraphs([
-      `職歴としては、${pastRoles} を経験しています。`,
-      `現在のプロフィール上では、${current?.period} に ${current?.role} として働いています。`,
-    ])
-  }
 
   return buildParagraphs([
     `His experience includes:\n${pastRoles}`,
@@ -92,17 +66,10 @@ const buildExperienceReply = (isJapaneseQuestion: boolean) => {
   ])
 }
 
-const buildEducationReply = (isJapaneseQuestion: boolean) => {
+const buildEducationReply = () => {
   const education = profileChatData.education
     .map((entry) => `${entry.school} (${entry.major})`)
     .join('\n')
-
-  if (isJapaneseQuestion) {
-    return buildParagraphs([
-      `学歴は ${education} です。`,
-      '英語、コミュニケーション、通訳・翻訳のバックグラウンドがあります。',
-    ])
-  }
 
   return buildParagraphs([
     `His education includes:\n${education}`,
@@ -110,17 +77,10 @@ const buildEducationReply = (isJapaneseQuestion: boolean) => {
   ])
 }
 
-const buildSideWorkReply = (isJapaneseQuestion: boolean) => {
+const buildSideWorkReply = () => {
   const sideWork = profileChatData.sideWork
     .map((entry) => `${entry.title} at ${entry.place}`)
     .join('\n')
-
-  if (isJapaneseQuestion) {
-    return buildParagraphs([
-      `副業・メンター経験としては ${sideWork} があります。`,
-      '技術だけでなく、学習方法やコードレビューを教える経験もあります。',
-    ])
-  }
 
   return buildParagraphs([
     `His side work includes:\n${sideWork}`,
@@ -128,25 +88,14 @@ const buildSideWorkReply = (isJapaneseQuestion: boolean) => {
   ])
 }
 
-const buildAboutReply = (isJapaneseQuestion: boolean) => {
-  if (isJapaneseQuestion) {
-    return buildParagraphs([
-      `${profileChatData.personal.name} は日本在住の ${profileChatData.personal.role} です。`,
-      `${profileChatData.personal.summary} 強みとしては、AIアプリケーション開発、Web開発、メンター経験がプロフィールに載っています。`,
-    ])
-  }
-
+const buildAboutReply = () => {
   return buildParagraphs([
     `${profileChatData.personal.name} is an ${profileChatData.personal.role} based in ${profileChatData.personal.location}.`,
     `${profileChatData.personal.summary} The profile highlights AI application development, web development, and mentoring experience.`,
   ])
 }
 
-const buildContactReply = (isJapaneseQuestion: boolean) => {
-  if (isJapaneseQuestion) {
-    return `連絡したい場合は、このサイトの ${profileChatData.contact.contactPage} ページか GitHub (${profileChatData.contact.github}) がプロフィール上の導線です。`
-  }
-
+const buildContactReply = () => {
   return `The profile points visitors to the ${profileChatData.contact.contactPage} page or GitHub: ${profileChatData.contact.github}.`
 }
 
@@ -251,33 +200,28 @@ const topics: ChatTopic[] = [
 ]
 
 export const getSuggestedProfileQuestions = () => [
-  'どんなスキルがありますか？',
-  '作ったものについて教えて',
-  'これまでの経歴を知りたい',
-  '副業やメンター経験はありますか？',
+  'What skills does Yugo have?',
+  'Tell me about your works',
+  'What is your career background?',
+  'Do you have mentoring experience?',
 ]
 
 export const buildProfileChatReply = (question: string) => {
   const normalizedQuestion = question.trim().toLowerCase()
-  const isJapaneseQuestion = getLanguageMode(question)
 
   if (!normalizedQuestion) {
-    return isJapaneseQuestion
-      ? '聞きたいことを入力してくれたら、プロフィールにある範囲で答えます。'
-      : 'Ask me something and I will answer from the profile data.'
+    return 'Ask me something and I will answer from the profile data.'
   }
 
   if (isGreeting(normalizedQuestion)) {
-    return isJapaneseQuestion
-      ? `こんにちは。${profileChatData.personal.name} について、スキル・経歴・作品・副業経験などプロフィールにある範囲で答えます。`
-      : `Hi. I can answer questions about ${profileChatData.personal.name}'s skills, career, works, and side work from the profile data.`
+    return `Hi. I can answer questions about ${profileChatData.personal.name}'s skills, career, works, and side work from the profile data.`
   }
 
   const matchedTopic = topics.find((topic) => includesAny(normalizedQuestion, topic.keywords))
 
   if (matchedTopic) {
-    return matchedTopic.buildReply(isJapaneseQuestion)
+    return matchedTopic.buildReply()
   }
 
-  return 'プロフィールにある範囲だと、その質問にはまだ詳しく答えられません。From the profile data, try asking about skills, works, experience, education, or mentoring side work.'
+  return 'I can only answer from the profile data for now. Try asking about skills, works, experience, education, or mentoring side work.'
 }
