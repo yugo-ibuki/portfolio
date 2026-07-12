@@ -3,7 +3,6 @@ import React from 'react'
 import '../style/global.css'
 import { ProfileSidebar } from '@/components/ProfileSidebar'
 import { MobileHeader } from '@/components/MobileHeader'
-import { Analytics } from '@vercel/analytics/react'
 import { Providers } from './providers'
 import type { Metadata } from 'next'
 import { Toaster } from '@/components/components/ui/toaster'
@@ -39,12 +38,7 @@ const RootLayout: FC<Props> = ({ children }) => {
               </div>
 
               {/* Main Content Area */}
-              <main className="lg:col-span-9 min-h-[50vh]">
-                {children}
-                <div className="pt-20">
-                  <Analytics />
-                </div>
-              </main>
+              <main className="lg:col-span-9 min-h-[50vh]">{children}</main>
             </div>
           </div>
           <Toaster />

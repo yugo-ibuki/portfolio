@@ -1,5 +1,15 @@
 import type { GitHubContributionCalendar } from './types'
 
+type GitHubContributionResponse = {
+  data: {
+    user: {
+      contributionsCollection: {
+        contributionCalendar: GitHubContributionCalendar
+      }
+    }
+  }
+}
+
 export const GITHUB_CONTRIBUTIONS_QUERY = `
   query($username: String!, $from: DateTime!, $to: DateTime!) {
     user(login: $username) {
@@ -34,6 +44,7 @@ export const fetchGitHubContributionCalendar = async ({
     headers: {
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
+      'User-Agent': 'yugo-ibuki-portfolio',
     },
     body: JSON.stringify({
       query: GITHUB_CONTRIBUTIONS_QUERY,
@@ -46,10 +57,11 @@ export const fetchGitHubContributionCalendar = async ({
   })
 
   if (!response.ok) {
-    throw response.body
+    const errorMessage = await response.text()
+    throw new Error(`GitHub API request failed (${response.status}): ${errorMessage}`)
   }
 
-  const data = await response.json()
+  const data = (await response.json()) as GitHubContributionResponse
 
   return data.data.user.contributionsCollection.contributionCalendar
 }

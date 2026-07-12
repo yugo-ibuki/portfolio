@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
-import { kv } from '@vercel/kv'
+import { getCloudflareContext } from '@opennextjs/cloudflare'
+import { createContributionCache } from '@/features/github-contributions/cache'
 import { fetchGitHubContributionCalendar } from '@/features/github-contributions/api'
 import { getContributionDateRange } from '@/features/github-contributions/model'
 
@@ -16,7 +17,9 @@ export async function GET() {
 
   try {
     const cacheKey = `github_contributions_${username}`
-    const cachedData = await kv.get(cacheKey)
+    const { env } = await getCloudflareContext({ async: true })
+    const cache = createContributionCache(env.GITHUB_CONTRIBUTIONS_KV)
+    const cachedData = await cache.get(cacheKey)
 
     if (cachedData) {
       console.log('Returning cached data', cachedData)
@@ -44,7 +47,7 @@ export async function GET() {
     console.log('Caching new data for:', username)
 
     // 1時間キャッシュ（3600秒）
-    await kv.set(cacheKey, contributionsData, { ex: 3600 })
+    await cache.set(cacheKey, contributionsData)
 
     const freshResponse = NextResponse.json(contributionsData)
     freshResponse.headers.set('Cache-Control', 'public, max-age=3600, stale-while-revalidate=1800')

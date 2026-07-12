@@ -1,0 +1,23 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "yugo-ibuki-portfolio",
+	"main": ".open-next/worker.js",
+	"compatibility_date": "2026-07-11",
+	"compatibility_flags": [
+		"nodejs_compat",
+		"global_fetch_strictly_public"
+	],
+	"assets": {
+		"directory": ".open-next/assets",
+		"binding": "ASSETS"
+	},
+	"kv_namespaces": [
+		{
+			"binding": "GITHUB_CONTRIBUTIONS_KV",
+			"id": "726988350fa8413ab13de6805bce74f8"
+		}
+	],
+	"observability": {
+		"enabled": true
+	}
+}
