@@ -17,3 +17,12 @@ localhost:3000
 ```bash
 https://y-ibuki91.app
 ```
+
+## Cloudflare Workers
+
+The `main` branch is deployed automatically with Cloudflare Workers Builds.
+
+```bash
+bun run preview
+bun run deploy
+```
