@@ -50,6 +50,7 @@ This is a Next.js 14 portfolio site using the App Router pattern with TypeScript
 5. **External Integrations**:
    - GitHub API for contribution graph
    - SendGrid for email functionality
+   - Cloudflare Web Analytics through automatic setup
    - Vercel KV for data storage
 
 ### Code Conventions

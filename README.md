@@ -26,3 +26,7 @@ The `main` branch is deployed automatically with Cloudflare Workers Builds.
 bun run preview
 bun run deploy
 ```
+
+Cloudflare Web Analytics is enabled for `y-ibuki91.app` through Cloudflare's
+automatic setup. Do not add the manual beacon to the application because
+Cloudflare already injects one analytics snippet into each production page.
