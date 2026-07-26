@@ -21,7 +21,7 @@ Yugo Ibuki is a web developer based in Japan, passionate about building AI-drive
 - **Framework**: Next.js 14 with App Router
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS, shadcn/ui components
-- **Hosting**: Vercel
+- **Hosting**: Cloudflare Workers
 
 ## Contact
 
