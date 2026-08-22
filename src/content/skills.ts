@@ -30,6 +30,11 @@ export const skills: SkillGroups = {
       terms: 2,
       level: 50,
     },
+    {
+      name: 'Python',
+      terms: 0.2,
+      level: 30,
+    },
   ],
   framework: [
     {
@@ -47,26 +52,31 @@ export const skills: SkillGroups = {
       terms: 1,
       level: 45,
     },
+    {
+      name: 'Flutter',
+      terms: 0.5,
+      level: 30,
+    },
   ],
   ai: [
     {
       name: 'Claude',
-      terms: 3,
+      terms: 3.5,
       level: 80,
     },
     {
       name: 'ChatGPT',
-      terms: 1.5,
+      terms: 2,
       level: 65,
     },
     {
       name: 'cursor',
-      terms: 1.5,
+      terms: 2,
       level: 55,
     },
     {
       name: 'Gemini',
-      terms: 1,
+      terms: 1.5,
       level: 30,
     },
   ],
