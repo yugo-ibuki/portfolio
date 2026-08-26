@@ -1,0 +1,120 @@
+{
+  "_maintenanceNote": "This file duplicates portfolio profile content for the chat page. When updating skills, works, experience, education, side work, or profile copy elsewhere in src/content, update this JSON together.",
+  "personal": {
+    "name": "Yugo Ibuki",
+    "role": "AI Application Engineer",
+    "location": "Japan",
+    "summary": "Yugo is a web developer based in Japan who builds AI-driven applications.",
+    "tone": "Friendly, concise, and conversational. Answer only from the profile data."
+  },
+  "highlights": [
+    "Builds AI-driven applications",
+    "Works across frontend, backend, and developer tooling",
+    "Has experience as an engineering and programming mentor",
+    "Enjoys turning practical problems into small usable products"
+  ],
+  "skills": {
+    "languages": ["TypeScript", "JavaScript", "PHP", "Go"],
+    "frameworks": ["Next.js", "Laravel", "Remix", "React"],
+    "aiTools": ["Claude", "ChatGPT", "Cursor", "Gemini"],
+    "cloud": ["GCP", "AWS"],
+    "others": ["GraphQL", "Firebase", "Docker", "GitHub Actions"],
+    "team": ["Agile", "Scrum"]
+  },
+  "works": [
+    {
+      "name": "Cheeyo",
+      "summary": "A CLI that cheers you up through the terminal.",
+      "url": "https://github.com/yugo-ibuki/cheeyo"
+    },
+    {
+      "name": "Yui's portfolio",
+      "summary": "A portfolio site introducing illustrations drawn by Yui.",
+      "url": "https://yuinosuke2.com"
+    },
+    {
+      "name": "Git and GitHub Learning Path",
+      "summary": "A Git and GitHub learning tutorial for beginners.",
+      "url": "https://chill-learn.work"
+    },
+    {
+      "name": "UnitMux",
+      "summary": "An easy coding agent switcher with vim-like operation.",
+      "url": "https://github.com/yugo-ibuki/unitmux"
+    }
+  ],
+  "experience": [
+    {
+      "company": "Crafts inc",
+      "period": "2017-01 to 2017-07",
+      "role": "Interpreter / Translator"
+    },
+    {
+      "company": "ALIVE inc",
+      "period": "2017-12 to 2019-03",
+      "role": "Web Creator"
+    },
+    {
+      "company": "Maple Systems",
+      "period": "2019-04 to 2019-12",
+      "role": "System Engineer"
+    },
+    {
+      "company": "Asia Quest",
+      "period": "2020-01 to 2021-10",
+      "role": "Backend Developer"
+    },
+    {
+      "company": "3-shake",
+      "period": "2021-11 to 2025-07",
+      "role": "Product Developer (Frontend Developer / Backend Developer)"
+    },
+    {
+      "company": "New company",
+      "period": "2025-09 to present",
+      "role": "AI Application Engineer"
+    }
+  ],
+  "education": [
+    {
+      "school": "Kyoto Sangyo Univ",
+      "place": "Kyoto / Japan",
+      "major": "English / Communication"
+    },
+    {
+      "school": "Arbutus College",
+      "place": "Vancouver / Canada",
+      "major": "Interpreting / Translating"
+    }
+  ],
+  "sideWork": [
+    {
+      "title": "English Mentor",
+      "place": "Tech Commit",
+      "period": "2018-01 to 2020-12",
+      "summary": "Taught English expression with a focus on writing, speaking, and study methods."
+    },
+    {
+      "title": "Laravel Mentor",
+      "place": "Tech Boost",
+      "period": "2020-06 to 2025-02",
+      "summary": "Taught PHP, MySQL, Docker, Laravel, local development, database design, and object-oriented programming."
+    },
+    {
+      "title": "Programming Mentor",
+      "place": "Tech Train",
+      "period": "2025-03 to present",
+      "summary": "Teaches React, Go, Laravel, web development, code review, and programming study methods."
+    },
+    {
+      "title": "Self Employee",
+      "place": "Coconala",
+      "period": "2021-01 to present",
+      "summary": "Provides independent services through Coconala."
+    }
+  ],
+  "contact": {
+    "github": "https://github.com/yugo-ibuki",
+    "contactPage": "/contact"
+  }
+}
