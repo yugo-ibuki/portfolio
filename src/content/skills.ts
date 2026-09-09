@@ -62,22 +62,22 @@ export const skills: SkillGroups = {
     {
       name: 'Claude',
       terms: 3.5,
-      level: 80,
+      level: 70,
     },
     {
       name: 'ChatGPT',
-      terms: 2,
-      level: 65,
+      terms: 2.5,
+      level: 75,
     },
     {
-      name: 'cursor',
-      terms: 2,
-      level: 55,
+      name: 'Cursor',
+      terms: 2.5,
+      level: 60,
     },
     {
       name: 'Gemini',
-      terms: 1.5,
-      level: 30,
+      terms: 2,
+      level: 40,
     },
   ],
   cloud: [
@@ -88,20 +88,20 @@ export const skills: SkillGroups = {
     },
     {
       name: 'GCP',
-      terms: 4.5,
+      terms: 5,
       level: 65,
     },
   ],
   others: [
     {
       name: 'GraphQL',
-      terms: 2,
+      terms: 2.5,
       level: 50,
     },
     {
       name: 'Firebase',
-      terms: 1.5,
-      level: 50,
+      terms: 2,
+      level: 60,
     },
     {
       name: 'Docker',
@@ -110,7 +110,7 @@ export const skills: SkillGroups = {
     },
     {
       name: 'GitHub Actions',
-      terms: 3,
+      terms: 3.5,
       level: 65,
     },
   ],
@@ -118,7 +118,7 @@ export const skills: SkillGroups = {
     {
       name: 'JetBrains',
       terms: 4,
-      level: 60,
+      level: 50,
     },
     {
       name: 'Vim',
@@ -128,7 +128,12 @@ export const skills: SkillGroups = {
     {
       name: 'Cursor',
       terms: 1,
-      level: 30,
+      level: 40,
+    },
+    {
+      name: 'Orca',
+      terms: 0.25,
+      level: 40,
     },
   ],
   team: [
