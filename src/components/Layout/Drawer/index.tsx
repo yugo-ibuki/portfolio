@@ -1,6 +1,12 @@
 'use client'
 
-import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@components/components/ui/sheet'
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+} from '@components/components/ui/sheet'
 import { GiHamburgerMenu } from 'react-icons/gi'
 import type { FC, ReactNode } from 'react'
 
@@ -28,6 +34,9 @@ export const Menu: FC<Props> = ({ children, disclosure }) => {
         <SheetContent side="left" className="w-[300px] sm:w-[400px]">
           <SheetHeader>
             <SheetTitle>Menu</SheetTitle>
+            <SheetDescription className="sr-only">
+              サイト内のページを選択できます。
+            </SheetDescription>
           </SheetHeader>
           <div className="mt-4">{children}</div>
         </SheetContent>

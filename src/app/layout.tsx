@@ -1,12 +1,29 @@
 import type { FC, ReactNode } from 'react'
 import React from 'react'
 import '../style/global.css'
-import { ProfileSidebar } from '@/components/ProfileSidebar'
 import { MobileHeader } from '@/components/MobileHeader'
+import { SiteHeader } from '@/components/SiteHeader'
 import { Providers } from './providers'
 import type { Metadata } from 'next'
 import { Toaster } from '@/components/components/ui/toaster'
-import Background3D from '@/components/Background3D'
+import Link from 'next/link'
+import { Instrument_Serif, Manrope } from 'next/font/google'
+
+const manrope = Manrope({
+  subsets: ['latin'],
+  display: 'swap',
+  fallback: ['Arial', 'sans-serif'],
+  variable: '--font-manrope',
+})
+
+const instrumentSerif = Instrument_Serif({
+  subsets: ['latin'],
+  weight: '400',
+  style: ['normal', 'italic'],
+  display: 'swap',
+  fallback: ['Georgia', 'serif'],
+  variable: '--font-instrument-serif',
+})
 
 type Props = {
   children: ReactNode
@@ -15,7 +32,7 @@ type Props = {
 export const metadata: Metadata = {
   title: {
     default: 'Yugo Ibuki',
-    template: '%s | Acme',
+    template: '%s | Yugo Ibuki',
   },
   icons: {
     icon: '/icon.ico',
@@ -25,22 +42,24 @@ export const metadata: Metadata = {
 const RootLayout: FC<Props> = ({ children }) => {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body>
+      <body className={`${manrope.variable} ${instrumentSerif.variable}`}>
         <Providers>
-          <Background3D />
-          {/* <Header /> */}
+          <SiteHeader />
           <MobileHeader />
-          <div className="max-w-7xl mx-auto px-6 py-6 md:py-20 lg:py-24">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 items-start">
-              {/* Left Sidebar (Desktop Only) */}
-              <div className="hidden lg:block lg:col-span-3 lg:sticky lg:top-24">
-                <ProfileSidebar />
-              </div>
-
-              {/* Main Content Area */}
-              <main className="lg:col-span-9 min-h-[50vh]">{children}</main>
+          <main className="site-shell min-h-[70vh] w-full overflow-x-clip">{children}</main>
+          <footer className="border-t border-foreground/10">
+            <div className="site-gutter flex w-full flex-col gap-4 py-8 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
+              <p>Yugo Ibuki — AI Application Engineer</p>
+              <Link
+                href="https://github.com/yugo-ibuki"
+                target="_blank"
+                rel="noreferrer"
+                className="w-fit underline decoration-border underline-offset-4 hover:text-foreground"
+              >
+                GitHub
+              </Link>
             </div>
-          </div>
+          </footer>
           <Toaster />
         </Providers>
       </body>
