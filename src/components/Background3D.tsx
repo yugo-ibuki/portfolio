@@ -141,8 +141,8 @@ export default function Background3D({ className = '' }: Background3DProps) {
         }),
         createTetrahedron({
           drift: { phase: 2.1, speed: 0.22, xPixels: 16, yPixels: 10 },
-          edgeOpacity: 0.48,
-          faceOpacity: 0.07,
+          edgeOpacity: 0.56,
+          faceOpacity: 0.085,
           position: [0, 0, 0.35],
           rotation: [0.52, -0.28, 0.34],
           rotationSpeed: { x: -0.22, y: 0.32, z: 0.08 },
@@ -186,6 +186,10 @@ export default function Background3D({ className = '' }: Background3DProps) {
           const gridRect = heroGrid.getBoundingClientRect()
           const visualRect = heroVisual.getBoundingClientRect()
           const portraitRect = portrait.getBoundingClientRect()
+          const headerBottom = Array.from(document.querySelectorAll<HTMLElement>('header')).reduce(
+            (bottom, header) => Math.max(bottom, header.getBoundingClientRect().bottom),
+            0
+          )
           const viewportWidth = window.innerWidth
           const isUltraWide = viewportWidth >= 2560
           const isDesktop = viewportWidth >= 1024
@@ -216,8 +220,11 @@ export default function Background3D({ className = '' }: Background3DProps) {
           }
           const topTarget = isTablet
             ? {
-                x: gridRect.left - mountRect.left + gridRect.width * 0.85,
-                y: gridRect.top - mountRect.top + gridRect.height * 0.18,
+                x: gridRect.left - mountRect.left + gridRect.width * 0.48,
+                y: Math.max(
+                  gridRect.top - mountRect.top + gridRect.height * 0.15,
+                  headerBottom - mountRect.top + 72
+                ),
               }
             : {
                 x: visualRect.left - mountRect.left + visualRect.width * 0.78,
@@ -225,8 +232,8 @@ export default function Background3D({ className = '' }: Background3DProps) {
               }
           const lowerTarget = isTablet
             ? {
-                x: gridRect.left - mountRect.left + gridRect.width * 0.62,
-                y: gridRect.top - mountRect.top + gridRect.height * 0.82,
+                x: gridRect.left - mountRect.left + gridRect.width * 0.12,
+                y: gridRect.top - mountRect.top + gridRect.height * 0.8,
               }
             : {
                 x: visualRect.left - mountRect.left + visualRect.width * 0.18,
