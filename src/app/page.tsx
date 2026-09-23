@@ -10,7 +10,7 @@ const Page = () => {
   return (
     <div className="pb-16 md:pb-24">
       <MotionSection className="border-b border-foreground/15" delayIndex={0}>
-        <div className="site-content grid md:grid-cols-[minmax(0,1fr)_minmax(364px,0.65fr)] lg:min-h-[620px] lg:grid-cols-2 xl:min-h-[660px]">
+        <div className="grid md:grid-cols-[minmax(0,1fr)_minmax(364px,0.65fr)] lg:min-h-[620px] lg:grid-cols-2 xl:min-h-[660px]">
           <div className="site-gutter flex flex-col justify-center py-16 sm:py-20 lg:py-24">
             <p className="mb-5 text-xs font-semibold uppercase tracking-[0.24em] text-muted-foreground">
               AI Application Engineer · Japan
@@ -54,7 +54,7 @@ const Page = () => {
         </div>
       </MotionSection>
 
-      <div className="site-content site-gutter space-y-24 py-24 md:space-y-32 md:py-32">
+      <div className="site-gutter space-y-24 py-24 md:space-y-32 md:py-32">
         <MotionSection className="grid gap-10 lg:grid-cols-12" delayIndex={1}>
           <div className="lg:col-span-3">
             <p className="text-xs font-semibold uppercase tracking-[0.24em] text-muted-foreground">
