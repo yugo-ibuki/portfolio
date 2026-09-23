@@ -14,12 +14,12 @@ export const Step: FC = () => {
         return (
           <div
             key={ex.title}
-            className="relative grid grid-cols-[0.5rem_minmax(0,1fr)] gap-x-4 pb-8 last:pb-0 sm:grid-cols-[10rem_0.5rem_minmax(0,1fr)] sm:gap-x-8"
+            className="relative grid grid-cols-[0.5rem_minmax(0,1fr)] gap-x-4 pb-8 last:pb-0 sm:grid-cols-[8rem_0.5rem_minmax(0,1fr)] sm:gap-x-4"
           >
             {index < experiences.length - 1 && (
               <span
                 aria-hidden="true"
-                className="absolute -bottom-3 left-1 top-3 w-px bg-border sm:left-[12.25rem]"
+                className="absolute -bottom-3 left-1 top-3 w-px bg-border sm:left-[9.25rem]"
               />
             )}
             <span
@@ -27,7 +27,7 @@ export const Step: FC = () => {
               className="relative z-10 col-start-1 row-start-1 mt-2 size-2 rounded-full border border-foreground/30 bg-background sm:col-start-2"
             />
             <div className="col-start-2 row-start-1 space-y-1 sm:col-start-1">
-              <p className="text-sm text-muted-foreground">
+              <p className="text-sm text-muted-foreground sm:whitespace-nowrap">
                 {`${formattedStartDate} ~ ${formattedEndDate}`}
               </p>
               <p className="text-xs text-muted-foreground">{duration}</p>
