@@ -46,7 +46,7 @@ const RootLayout: FC<Props> = ({ children }) => {
         <Providers>
           <SiteHeader />
           <MobileHeader />
-          <main className="site-shell min-h-[70vh] w-full overflow-x-clip">{children}</main>
+          <main className="site-content site-shell min-h-[70vh] overflow-x-clip">{children}</main>
           <footer className="border-t border-foreground/10">
             <div className="site-content site-gutter flex w-full flex-col gap-4 py-8 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
               <p>Yugo Ibuki — AI Application Engineer</p>

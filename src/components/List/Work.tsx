@@ -6,19 +6,19 @@ import { works } from '@/content/works'
 
 export const Work: FC = () => {
   return (
-    <div data-work-layout="editorial" className="min-w-0">
+    <div data-work-layout="editorial" className="grid min-w-0 gap-8 xl:grid-cols-2">
       {works.map((work, index) => {
         return (
           <article
             key={work.name}
-            className="group grid min-w-0 border-b border-foreground/15 md:min-h-[380px] md:grid-cols-[minmax(300px,min(38vw,540px))_minmax(0,1fr)] lg:min-h-[400px]"
+            className="group grid min-w-0 overflow-hidden border border-foreground/15 md:min-h-[300px] md:grid-cols-[minmax(240px,34%)_minmax(0,1fr)] xl:grid-cols-[minmax(220px,min(42%,360px))_minmax(0,1fr)]"
             data-featured={index === 0 ? 'true' : undefined}
           >
             <Link
               href={work.url}
               target="_blank"
               rel="noreferrer"
-              className="relative block h-[240px] w-full overflow-hidden bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring sm:h-[280px] md:h-[380px] lg:h-[400px]"
+              className="relative block aspect-[16/10] w-full overflow-hidden bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring md:aspect-auto md:h-full md:min-h-[300px]"
               aria-label={`${work.name} を開く`}
             >
               <Image
@@ -26,7 +26,7 @@ export const Work: FC = () => {
                 alt={work.name}
                 fill
                 priority={index === 0}
-                sizes="(max-width: 767px) 100vw, (max-width: 1421px) 38vw, 540px"
+                sizes="(max-width: 767px) calc(100vw - 40px), (max-width: 1279px) 34vw, (max-width: 1799px) 20vw, 360px"
                 className="object-contain transition-transform duration-500 ease-out group-hover:scale-[1.025] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
               />
               <span className="absolute right-4 top-4 grid h-11 w-11 place-items-center rounded-full bg-background/90 text-foreground shadow-sm backdrop-blur transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0 motion-reduce:group-hover:translate-y-0">
@@ -34,15 +34,15 @@ export const Work: FC = () => {
               </span>
             </Link>
 
-            <div className="site-gutter flex min-w-0 flex-col justify-center gap-8 py-12 md:py-10 lg:py-12">
+            <div className="flex min-w-0 flex-col justify-center gap-7 p-6 sm:p-8 lg:p-10">
               <div className="min-w-0">
                 <p className="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-muted-foreground">
                   Project {String(index + 1).padStart(2, '0')}
                 </p>
-                <h2 className="editorial-display text-4xl tracking-[-0.04em] sm:text-5xl lg:text-6xl">
+                <h2 className="editorial-display text-3xl leading-tight tracking-[-0.035em] sm:text-4xl">
                   {work.name}
                 </h2>
-                <p className="mt-5 max-w-lg text-lg leading-relaxed text-muted-foreground">
+                <p className="mt-4 max-w-xl leading-relaxed text-muted-foreground">
                   {work.description}
                 </p>
               </div>
