@@ -11,7 +11,7 @@ export const SiteHeader = () => {
 
   return (
     <header className="sticky top-0 z-50 hidden border-b border-foreground/10 bg-background/90 backdrop-blur-xl lg:block">
-      <div className="site-gutter flex h-20 w-full items-center gap-8">
+      <div className="site-content site-gutter flex h-20 w-full items-center gap-8">
         <Link
           href="/"
           className="mr-auto text-lg font-semibold tracking-[-0.03em] transition-opacity hover:opacity-60"

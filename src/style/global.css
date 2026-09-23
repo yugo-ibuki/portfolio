@@ -115,6 +115,12 @@ body::-webkit-scrollbar {
 }
 
 @layer components {
+  .site-content {
+    @apply w-full;
+    max-width: 140rem;
+    margin-inline: auto;
+  }
+
   .site-gutter {
     @apply px-5 sm:px-8 lg:px-12 xl:px-16;
   }
@@ -122,6 +128,39 @@ body::-webkit-scrollbar {
   .site-shell > main,
   .site-shell > .motion-page-enter > main {
     @apply px-5 py-10 sm:px-8 md:py-16 lg:px-12 lg:py-20 xl:px-16;
+  }
+}
+
+.hero-portrait {
+  width: 15rem;
+  height: 15rem;
+}
+
+@media (min-width: 640px) {
+  .hero-portrait {
+    width: 16.25rem;
+    height: 16.25rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .hero-portrait {
+    width: 18.75rem;
+    height: 18.75rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-portrait {
+    width: 22rem;
+    height: 22rem;
+  }
+}
+
+@media (min-width: 2560px) {
+  .hero-portrait {
+    width: 26rem;
+    height: 26rem;
   }
 }
 
