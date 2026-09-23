@@ -91,6 +91,11 @@ export const skills: SkillGroups = {
       terms: 5,
       level: 65,
     },
+    {
+      name: 'Cloudflare',
+      terms: 0.5,
+      level: 30,
+    },
   ],
   others: [
     {

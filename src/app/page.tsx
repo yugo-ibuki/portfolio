@@ -70,12 +70,9 @@ const Page = () => {
       <div className="site-gutter space-y-24 py-24 md:space-y-32 md:py-32">
         <MotionSection className="grid gap-10 lg:grid-cols-12" delayIndex={1}>
           <div className="lg:col-span-3">
-            <p
-              data-pixi-glitch
-              className="text-sm font-semibold uppercase tracking-[0.24em] text-muted-foreground sm:text-base"
-            >
+            <h2 data-pixi-glitch className="editorial-display text-4xl tracking-[-0.04em]">
               Technical skills
-            </p>
+            </h2>
           </div>
           <div className="lg:col-span-9">
             <Skill />
@@ -87,12 +84,9 @@ const Page = () => {
           delayIndex={2}
         >
           <div className="lg:col-span-3">
-            <p
-              data-pixi-glitch
-              className="text-sm font-semibold uppercase tracking-[0.24em] text-muted-foreground sm:text-base"
-            >
+            <h2 data-pixi-glitch className="editorial-display text-4xl tracking-[-0.04em]">
               Contributions
-            </p>
+            </h2>
           </div>
           <div className="min-w-0 lg:col-span-9">
             <GitContribution />

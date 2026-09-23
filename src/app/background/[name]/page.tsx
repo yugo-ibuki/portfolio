@@ -27,7 +27,9 @@ const Page = async ({ params }: Props) => {
     <main>
       <MotionSection className="mt-[25px]" delayIndex={0}>
         <div className="flex items-baseline justify-between border-b pb-2 mb-4">
-          <h3 className="text-2xl font-semibold tracking-tight">{data.title}</h3>
+          <h1 data-pixi-glitch className="text-2xl font-semibold tracking-tight">
+            {data.title}
+          </h1>
         </div>
         <Description subtitle={data.place}>
           <div className="space-y-4">
