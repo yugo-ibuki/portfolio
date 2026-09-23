@@ -10,8 +10,15 @@ import { FaArrowRight, FaGithub } from 'react-icons/fa6'
 const Page = () => {
   return (
     <div className="pb-16 md:pb-24">
-      <MotionSection className="border-b border-foreground/15" delayIndex={0}>
-        <div className="grid md:grid-cols-[minmax(0,1fr)_minmax(364px,0.65fr)] lg:min-h-[620px] lg:grid-cols-2 xl:min-h-[660px]">
+      <MotionSection
+        className="relative overflow-hidden border-b border-foreground/15"
+        delayIndex={0}
+      >
+        <Background3D className="hero-three-canvas" />
+        <div
+          data-hero-grid
+          className="relative z-10 grid md:grid-cols-[minmax(0,1fr)_minmax(364px,0.65fr)] lg:min-h-[620px] lg:grid-cols-2 xl:min-h-[660px]"
+        >
           <div className="site-gutter flex flex-col justify-center py-16 sm:py-20 lg:py-24">
             <p className="mb-5 text-xs font-semibold uppercase tracking-[0.24em] text-muted-foreground">
               AI Application Engineer · Japan
@@ -42,7 +49,6 @@ const Page = () => {
           </div>
           <div className="site-gutter flex items-center justify-center pb-16 md:py-16 lg:py-24">
             <div className="hero-visual" role="img" aria-label="Portrait of Yugo Ibuki">
-              <Background3D className="hero-three-canvas" />
               <div className="hero-portrait shrink-0 overflow-hidden rounded-[2rem] bg-muted">
                 <Image
                   src="/assets/me.jpeg"

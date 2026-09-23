@@ -140,7 +140,8 @@ body::-webkit-scrollbar {
 
 .hero-three-canvas {
   position: absolute;
-  inset: 0.25rem 3.75rem 3.75rem 0;
+  inset: 0;
+  z-index: 0;
   color: hsl(var(--foreground));
   opacity: 0.82;
 }
@@ -167,10 +168,6 @@ body::-webkit-scrollbar {
     height: 22rem;
   }
 
-  .hero-three-canvas {
-    inset: 0 4.5rem 4rem 0;
-  }
-
   .hero-portrait {
     width: 14rem;
     height: 14rem;
@@ -183,10 +180,6 @@ body::-webkit-scrollbar {
     height: 25rem;
   }
 
-  .hero-three-canvas {
-    inset: 0 5.5rem 4.5rem 0;
-  }
-
   .hero-portrait {
     width: 16rem;
     height: 16rem;
@@ -197,10 +190,6 @@ body::-webkit-scrollbar {
   .hero-visual {
     width: 31rem;
     height: 28rem;
-  }
-
-  .hero-three-canvas {
-    inset: 0 6.5rem 5rem 0;
   }
 
   .hero-portrait {
