@@ -32,8 +32,8 @@ type Props = {
 
 export const metadata: Metadata = {
   title: {
-    default: 'Yugo Ibuki',
-    template: '%s | Yugo Ibuki',
+    default: "Yugo's Site",
+    template: "%s | Yugo's Site",
   },
   icons: {
     icon: '/icon.ico',
