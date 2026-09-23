@@ -10,7 +10,10 @@ const Contact: FC = () => {
       delayIndex={0}
     >
       <div className="min-w-0">
-        <h1 className="display-heading mb-8 text-[clamp(2.5rem,4vw,3.5rem)] font-normal leading-none tracking-[-0.035em]">
+        <h1
+          data-pixi-glitch
+          className="display-heading mb-8 text-[clamp(2.5rem,4vw,3.5rem)] font-normal leading-none tracking-[-0.035em]"
+        >
           Get in touch
         </h1>
         <p className="text-lg text-muted-foreground mb-4">Feel free to reach out via email:</p>

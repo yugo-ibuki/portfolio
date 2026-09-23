@@ -2,29 +2,34 @@
 
 import { useEffect, useRef } from 'react'
 import type * as Three from 'three'
-import { getBackgroundMotionConfig } from '@/lib/motion'
-
-type FloatingUserData = {
-  rotationSpeed: {
-    x: number
-    y: number
-    z: number
-  }
-  originalPosition: Three.Vector3
-  floatOffset: number
-  floatSpeed: number
-  baseOpacity: number
-}
-
-type FloatingMesh = Three.Mesh<Three.BufferGeometry, Three.MeshBasicMaterial>
 
 type Background3DProps = {
   className?: string
 }
 
+type RotatingTetrahedron = {
+  basePosition: Three.Vector3
+  drift: {
+    mobileXPixels?: number
+    phase: number
+    speed: number
+    xPixels: number
+    yPixels: number
+  }
+  group: Three.Group
+  rotationSpeed: {
+    x: number
+    y: number
+    z: number
+  }
+}
+
+const MOBILE_BREAKPOINT = 640
+const MOBILE_FRAME_RATE = 30
+const DESKTOP_FRAME_RATE = 48
+
 export default function Background3D({ className = '' }: Background3DProps) {
   const mountRef = useRef<HTMLDivElement>(null)
-  const frameRef = useRef<number>(0)
 
   useEffect(() => {
     const mountElement = mountRef.current
@@ -33,11 +38,19 @@ export default function Background3D({ className = '' }: Background3DProps) {
       return
     }
 
+    let animationFrame = 0
     let renderer: Three.WebGLRenderer | null = null
-    let handleResize: (() => void) | null = null
-    const objects: FloatingMesh[] = []
-    let geometries: Three.BufferGeometry[] = []
+    let geometry: Three.TetrahedronGeometry | null = null
+    let edgeGeometry: Three.EdgesGeometry | null = null
+    const faceMaterials: Three.MeshStandardMaterial[] = []
+    const edgeMaterials: Three.LineBasicMaterial[] = []
+    let resizeObserver: ResizeObserver | null = null
+    let intersectionObserver: IntersectionObserver | null = null
+    let themeObserver: MutationObserver | null = null
     let isDisposed = false
+    let isHeroVisible = true
+    let isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
 
     const initThree = async () => {
       const THREE = await import('three')
@@ -46,186 +59,362 @@ export default function Background3D({ className = '' }: Background3DProps) {
         return
       }
 
-      const shouldReduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-      const config = getBackgroundMotionConfig(shouldReduceMotion)
-      const isMobile = window.innerWidth < 768
       const scene = new THREE.Scene()
-      const camera = new THREE.PerspectiveCamera(
-        60,
-        window.innerWidth / window.innerHeight,
-        0.1,
-        1000
-      )
+      const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 100)
+      camera.position.set(0, 0.1, 5.2)
 
-      renderer = new THREE.WebGLRenderer({
-        alpha: true,
-        antialias: !isMobile,
-        powerPreference: 'high-performance',
-      })
-
-      camera.position.set(0, 0, 8)
-      renderer.setSize(window.innerWidth, window.innerHeight)
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1.2 : 1.5))
-      renderer.setClearColor(0x000000, 0)
-      mountElement.appendChild(renderer.domElement)
-
-      geometries = [
-        new THREE.OctahedronGeometry(1.2, 0),
-        new THREE.IcosahedronGeometry(1.0, 0),
-        new THREE.TetrahedronGeometry(1.4, 0),
-        new THREE.DodecahedronGeometry(0.9, 0),
-        new THREE.ConeGeometry(0.8, 1.8, 6),
-        new THREE.CylinderGeometry(0.5, 0.9, 1.6, 8),
-      ]
-      const colorPalette = [
-        new THREE.Color(0x6366f1),
-        new THREE.Color(0x8b5cf6),
-        new THREE.Color(0x3b82f6),
-        new THREE.Color(0x06b6d4),
-        new THREE.Color(0x10b981),
-        new THREE.Color(0xf59e0b),
-      ]
-      const objectCount = isMobile ? 4 : 6
-
-      for (let index = 0; index < objectCount; index += 1) {
-        const geometry = geometries[Math.floor(Math.random() * geometries.length)]
-        const color = colorPalette[Math.floor(Math.random() * colorPalette.length)]
-        const material = new THREE.MeshBasicMaterial({
-          color,
-          wireframe: true,
-          transparent: true,
-          opacity: 0.18 + Math.random() * 0.18,
+      try {
+        renderer = new THREE.WebGLRenderer({
+          alpha: true,
+          antialias: window.innerWidth >= MOBILE_BREAKPOINT,
+          powerPreference: 'low-power',
         })
-        const mesh = new THREE.Mesh<Three.BufferGeometry, Three.MeshBasicMaterial>(
-          geometry,
-          material
-        )
-
-        const angle = Math.random() * Math.PI * 2
-        const radius = 4.8 + Math.random() * 4.5
-        const x = Math.cos(angle) * radius
-        const baseY = Math.sin(angle) * radius
-        const y = baseY + (Math.random() - 0.5) * 2.4
-        const z = (Math.random() - 0.5) * 3.5
-
-        mesh.position.set(x, y, z)
-        mesh.userData = {
-          rotationSpeed: {
-            x: (Math.random() - 0.5) * 0.006,
-            y: (Math.random() - 0.5) * 0.006,
-            z: (Math.random() - 0.5) * 0.006,
-          },
-          originalPosition: mesh.position.clone(),
-          floatOffset: Math.random() * Math.PI * 2,
-          floatSpeed: 0.25 + Math.random() * 0.2,
-          baseOpacity: material.opacity,
-        } as FloatingUserData
-
-        scene.add(mesh)
-        objects.push(mesh)
+      } catch {
+        return
       }
 
-      let lastTime = 0
-      const targetFPS = isMobile ? 30 : 48
-      const frameInterval = 1000 / targetFPS
+      const webglRenderer = renderer
+      webglRenderer.setClearColor(0x000000, 0)
+      webglRenderer.outputColorSpace = THREE.SRGBColorSpace
+      webglRenderer.domElement.setAttribute('role', 'presentation')
+      mountElement.appendChild(webglRenderer.domElement)
 
+      geometry = new THREE.TetrahedronGeometry(1.72, 0)
+      edgeGeometry = new THREE.EdgesGeometry(geometry)
+      const sharedGeometry = geometry
+      const sharedEdgeGeometry = edgeGeometry
+
+      const createTetrahedron = ({
+        edgeOpacity,
+        faceOpacity,
+        drift,
+        position,
+        rotation,
+        rotationSpeed,
+        scale,
+      }: {
+        edgeOpacity: number
+        faceOpacity: number
+        drift: RotatingTetrahedron['drift']
+        position: [number, number, number]
+        rotation: [number, number, number]
+        rotationSpeed: RotatingTetrahedron['rotationSpeed']
+        scale: number
+      }): RotatingTetrahedron => {
+        const faceMaterial = new THREE.MeshStandardMaterial({
+          color: 0x171717,
+          flatShading: true,
+          metalness: 0.05,
+          opacity: faceOpacity,
+          roughness: 0.82,
+          side: THREE.DoubleSide,
+          transparent: true,
+        })
+        const edgeMaterial = new THREE.LineBasicMaterial({
+          color: 0x171717,
+          opacity: edgeOpacity,
+          transparent: true,
+        })
+        const solid = new THREE.Mesh(sharedGeometry, faceMaterial)
+        const edges = new THREE.LineSegments(sharedEdgeGeometry, edgeMaterial)
+        const group = new THREE.Group()
+
+        faceMaterials.push(faceMaterial)
+        edgeMaterials.push(edgeMaterial)
+        group.add(solid, edges)
+        group.position.set(...position)
+        group.rotation.set(...rotation)
+        group.scale.setScalar(scale)
+        scene.add(group)
+
+        return { basePosition: group.position.clone(), drift, group, rotationSpeed }
+      }
+
+      const tetrahedra = [
+        createTetrahedron({
+          drift: { phase: 0.4, speed: 0.78, xPixels: 28, yPixels: 10 },
+          edgeOpacity: 0.72,
+          faceOpacity: 0.12,
+          position: [0, 0, 0],
+          rotation: [-0.36, 0.58, 0.08],
+          rotationSpeed: { x: 0.16, y: 0.25, z: 0 },
+          scale: 1,
+        }),
+        createTetrahedron({
+          drift: { phase: 2.1, speed: 0.92, xPixels: 34, yPixels: 8 },
+          edgeOpacity: 0.56,
+          faceOpacity: 0.085,
+          position: [0, 0, 0.35],
+          rotation: [0.52, -0.28, 0.34],
+          rotationSpeed: { x: -0.22, y: 0.32, z: 0.08 },
+          scale: 0.34,
+        }),
+        createTetrahedron({
+          drift: { mobileXPixels: 12, phase: 4.3, speed: 0.84, xPixels: 32, yPixels: 12 },
+          edgeOpacity: 0.4,
+          faceOpacity: 0.055,
+          position: [0, 0, 0.38],
+          rotation: [-0.18, 0.92, -0.38],
+          rotationSpeed: { x: 0.26, y: -0.2, z: -0.1 },
+          scale: 0.27,
+        }),
+      ]
+
+      scene.add(new THREE.HemisphereLight(0xffffff, 0x6b7280, 1.6))
+      const directionalLight = new THREE.DirectionalLight(0xffffff, 2.5)
+      directionalLight.position.set(3, 4, 5)
+      scene.add(directionalLight)
+
+      const updateTheme = () => {
+        const foregroundColor = window.getComputedStyle(mountElement).color
+        faceMaterials.forEach((material) => material.color.setStyle(foregroundColor))
+        edgeMaterials.forEach((material) => material.color.setStyle(foregroundColor))
+      }
+
+      const resize = () => {
+        const width = Math.max(mountElement.clientWidth, 1)
+        const height = Math.max(mountElement.clientHeight, 1)
+        const isMobile = width < MOBILE_BREAKPOINT
+        const heroGrid = mountElement.parentElement?.querySelector<HTMLElement>('[data-hero-grid]')
+        const heroVisual = heroGrid?.querySelector<HTMLElement>('.hero-visual')
+        const portrait = heroGrid?.querySelector<HTMLElement>('.hero-portrait')
+
+        camera.aspect = width / height
+        camera.updateProjectionMatrix()
+
+        if (heroGrid && heroVisual && portrait) {
+          const mountRect = mountElement.getBoundingClientRect()
+          const gridRect = heroGrid.getBoundingClientRect()
+          const visualRect = heroVisual.getBoundingClientRect()
+          const portraitRect = portrait.getBoundingClientRect()
+          const headerBottom = Array.from(document.querySelectorAll<HTMLElement>('header')).reduce(
+            (bottom, header) => Math.max(bottom, header.getBoundingClientRect().bottom),
+            0
+          )
+          const viewportWidth = window.innerWidth
+          const isUltraWide = viewportWidth >= 2560
+          const isDesktop = viewportWidth >= 1024
+          const isTablet = viewportWidth >= 768
+          const isSmallTablet = viewportWidth >= 640
+          const previousCanvasHeight = isUltraWide
+            ? 416
+            : isDesktop
+              ? 368
+              : isTablet
+                ? 328
+                : isSmallTablet
+                  ? 288
+                  : 248
+          const mainOffsetX = isUltraWide ? 20 : isDesktop ? 4 : -12
+          const mainOffsetY = isUltraWide
+            ? 64
+            : isDesktop
+              ? 40
+              : isTablet
+                ? 20
+                : isSmallTablet
+                  ? 16
+                  : 8
+          const mainTarget = {
+            x: portraitRect.left - mountRect.left + mainOffsetX,
+            y: portraitRect.top - mountRect.top + mainOffsetY,
+          }
+          const topTarget = isTablet
+            ? {
+                x: gridRect.left - mountRect.left + gridRect.width * 0.48,
+                y: Math.max(
+                  gridRect.top - mountRect.top + gridRect.height * 0.15,
+                  headerBottom - mountRect.top + 82
+                ),
+              }
+            : {
+                x: visualRect.left - mountRect.left + visualRect.width * 0.86,
+                y: visualRect.top - mountRect.top + visualRect.height * 0.03,
+              }
+          const lowerTarget = isTablet
+            ? {
+                x: gridRect.left - mountRect.left + gridRect.width * 0.12,
+                y: gridRect.top - mountRect.top + gridRect.height * 0.8,
+              }
+            : {
+                x: visualRect.left - mountRect.left + visualRect.width * 0.14,
+                y: visualRect.top - mountRect.top + visualRect.height * 0.82,
+              }
+          const toWorldPosition = (point: { x: number; y: number }, z: number) => {
+            const visibleHeight =
+              2 * (camera.position.z - z) * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2))
+
+            return {
+              x: ((point.x - width / 2) / height) * visibleHeight,
+              y: ((height / 2 - point.y) / height) * visibleHeight,
+            }
+          }
+          const mainPosition = toWorldPosition(mainTarget, 0)
+          const topPosition = toWorldPosition(topTarget, 0.35)
+          const lowerPosition = toWorldPosition(lowerTarget, 0.38)
+          const mainScale = (previousCanvasHeight / height) * 0.62
+          const topScaleRatio = isTablet ? 0.34 : 0.44
+          const lowerScaleRatio = isTablet ? 0.28 : 0.38
+
+          tetrahedra[0].group.position.set(mainPosition.x, mainPosition.y, 0)
+          tetrahedra[0].basePosition.copy(tetrahedra[0].group.position)
+          tetrahedra[0].group.scale.setScalar(mainScale)
+          tetrahedra[1].group.position.set(topPosition.x, topPosition.y, 0.35)
+          tetrahedra[1].basePosition.copy(tetrahedra[1].group.position)
+          tetrahedra[1].group.scale.setScalar(mainScale * topScaleRatio)
+          tetrahedra[2].group.position.set(lowerPosition.x, lowerPosition.y, 0.38)
+          tetrahedra[2].basePosition.copy(tetrahedra[2].group.position)
+          tetrahedra[2].group.scale.setScalar(mainScale * lowerScaleRatio)
+        }
+
+        webglRenderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1.25 : 1.5))
+        webglRenderer.setSize(width, height, false)
+        webglRenderer.render(scene, camera)
+      }
+
+      let previousFrameTime = 0
       const animate = (currentTime: number) => {
-        frameRef.current = window.requestAnimationFrame(animate)
+        animationFrame = 0
 
-        if (currentTime - lastTime < frameInterval) {
+        if (isDisposed || isReducedMotion || !isHeroVisible || document.hidden) {
           return
         }
 
-        lastTime = currentTime
+        const targetFrameRate =
+          mountElement.clientWidth < MOBILE_BREAKPOINT ? MOBILE_FRAME_RATE : DESKTOP_FRAME_RATE
+        const frameInterval = 1000 / targetFrameRate
 
-        const time = currentTime * 0.001
+        if (currentTime - previousFrameTime >= frameInterval) {
+          const elapsedSeconds =
+            previousFrameTime === 0
+              ? frameInterval / 1000
+              : Math.min((currentTime - previousFrameTime) / 1000, 0.1)
 
-        objects.forEach((mesh, index) => {
-          const { baseOpacity, floatOffset, floatSpeed, originalPosition, rotationSpeed } =
-            mesh.userData as FloatingUserData
+          previousFrameTime = currentTime
+          const timeSeconds = currentTime * 0.001
 
-          mesh.rotation.x += rotationSpeed.x * config.motionMultiplier
-          mesh.rotation.y += rotationSpeed.y * config.motionMultiplier
-          mesh.rotation.z += rotationSpeed.z * config.motionMultiplier
+          tetrahedra.forEach(({ basePosition, drift, group, rotationSpeed }) => {
+            group.rotation.x += elapsedSeconds * rotationSpeed.x
+            group.rotation.y += elapsedSeconds * rotationSpeed.y
+            group.rotation.z += elapsedSeconds * rotationSpeed.z
 
-          const floatX = Math.cos(time * floatSpeed * 0.8 + floatOffset) * config.floatXAmplitude
-          const floatY = Math.sin(time * floatSpeed + floatOffset) * config.floatYAmplitude
-          const nextX = originalPosition.x + floatX
-          const nextY = originalPosition.y + floatY
-          const distance = Math.hypot(nextX, nextY)
-          const minDistance = 3.8
+            const visibleHeight =
+              2 *
+              (camera.position.z - basePosition.z) *
+              Math.tan(THREE.MathUtils.degToRad(camera.fov / 2))
+            const worldPerPixel = visibleHeight / Math.max(mountElement.clientHeight, 1)
+            const driftTime = timeSeconds * drift.speed + drift.phase
+            const xPixels =
+              mountElement.clientWidth < MOBILE_BREAKPOINT
+                ? (drift.mobileXPixels ?? drift.xPixels)
+                : drift.xPixels
 
-          if (distance < minDistance) {
-            const safeDistance = distance === 0 ? 1 : distance
-            const scale = minDistance / safeDistance
-
-            mesh.position.x = nextX * scale
-            mesh.position.y = nextY * scale
-          } else {
-            mesh.position.x = nextX
-            mesh.position.y = nextY
-          }
-
-          mesh.position.z = originalPosition.z
-          mesh.scale.setScalar(0.92 + Math.sin(time * 0.35 + index) * config.scaleAmplitude)
-          mesh.material.opacity = Math.max(
-            0.12,
-            baseOpacity + Math.sin(time * 0.9 + index) * config.opacityAmplitude
-          )
-        })
-
-        if (!shouldReduceMotion) {
-          camera.position.x = Math.sin(time * 0.08) * config.cameraXAmplitude
-          camera.position.y = Math.cos(time * 0.12) * config.cameraYAmplitude
-          camera.lookAt(0, 0, 0)
+            group.position.x = basePosition.x + Math.cos(driftTime) * xPixels * worldPerPixel
+            group.position.y =
+              basePosition.y + Math.sin(driftTime * 0.82) * drift.yPixels * worldPerPixel
+          })
+          webglRenderer.render(scene, camera)
         }
 
-        renderer?.render(scene, camera)
+        animationFrame = window.requestAnimationFrame(animate)
       }
 
-      handleResize = () => {
-        const isMobileViewport = window.innerWidth < 768
+      const updateAnimation = () => {
+        const shouldAnimate = !isReducedMotion && isHeroVisible && !document.hidden
 
-        camera.aspect = window.innerWidth / window.innerHeight
-        camera.updateProjectionMatrix()
-        renderer?.setSize(window.innerWidth, window.innerHeight)
-        renderer?.setPixelRatio(Math.min(window.devicePixelRatio, isMobileViewport ? 1.2 : 1.5))
+        if (isReducedMotion) {
+          tetrahedra.forEach(({ basePosition, group }) => group.position.copy(basePosition))
+        }
+
+        if (shouldAnimate && animationFrame === 0) {
+          previousFrameTime = 0
+          animationFrame = window.requestAnimationFrame(animate)
+        } else if (!shouldAnimate && animationFrame !== 0) {
+          window.cancelAnimationFrame(animationFrame)
+          animationFrame = 0
+        }
+
+        if (!shouldAnimate) {
+          webglRenderer.render(scene, camera)
+        }
       }
 
-      frameRef.current = window.requestAnimationFrame(animate)
-      window.addEventListener('resize', handleResize)
+      const handleVisibilityChange = () => {
+        updateAnimation()
+      }
+
+      const handleReducedMotionChange = (event: MediaQueryListEvent) => {
+        isReducedMotion = event.matches
+        updateAnimation()
+      }
+
+      resizeObserver = new ResizeObserver(resize)
+      resizeObserver.observe(mountElement)
+
+      intersectionObserver = new IntersectionObserver(
+        ([entry]) => {
+          isHeroVisible = entry.isIntersecting
+          updateAnimation()
+        },
+        { threshold: 0.01 }
+      )
+      intersectionObserver.observe(mountElement)
+
+      themeObserver = new MutationObserver(() => {
+        updateTheme()
+        webglRenderer.render(scene, camera)
+      })
+      themeObserver.observe(document.documentElement, {
+        attributeFilter: ['class'],
+        attributes: true,
+      })
+
+      document.addEventListener('visibilitychange', handleVisibilityChange)
+      reducedMotionQuery.addEventListener('change', handleReducedMotionChange)
+      updateTheme()
+      resize()
+      updateAnimation()
+
+      return () => {
+        document.removeEventListener('visibilitychange', handleVisibilityChange)
+        reducedMotionQuery.removeEventListener('change', handleReducedMotionChange)
+      }
     }
 
-    void initThree()
+    let removeEventListeners: (() => void) | undefined
+    void initThree().then((cleanup) => {
+      if (isDisposed) {
+        cleanup?.()
+        return
+      }
+
+      removeEventListeners = cleanup
+    })
 
     return () => {
       isDisposed = true
-      window.cancelAnimationFrame(frameRef.current)
-      if (handleResize) {
-        window.removeEventListener('resize', handleResize)
+      window.cancelAnimationFrame(animationFrame)
+      removeEventListeners?.()
+      resizeObserver?.disconnect()
+      intersectionObserver?.disconnect()
+      themeObserver?.disconnect()
+      faceMaterials.forEach((material) => material.dispose())
+      edgeMaterials.forEach((material) => material.dispose())
+      edgeGeometry?.dispose()
+      geometry?.dispose()
+
+      if (renderer) {
+        if (mountElement.contains(renderer.domElement)) {
+          mountElement.removeChild(renderer.domElement)
+        }
+
+        renderer.dispose()
+        renderer.forceContextLoss()
       }
-
-      objects.forEach((mesh) => {
-        mesh.material.dispose()
-      })
-
-      geometries.forEach((geometry) => {
-        geometry.dispose()
-      })
-
-      if (renderer && mountElement.contains(renderer.domElement)) {
-        mountElement.removeChild(renderer.domElement)
-      }
-
-      renderer?.dispose()
     }
   }, [])
 
   return (
-    <div
-      ref={mountRef}
-      className={`fixed inset-0 pointer-events-none ${className}`}
-      style={{ zIndex: -1 }}
-    />
+    <div ref={mountRef} aria-hidden="true" className={`pointer-events-none ${className}`.trim()} />
   )
 }

@@ -8,6 +8,7 @@ import type { Metadata } from 'next'
 import { Toaster } from '@/components/components/ui/toaster'
 import Link from 'next/link'
 import { Instrument_Serif, Manrope } from 'next/font/google'
+import { PixiHeadingGlitch } from '@/components/PixiHeadingGlitch'
 
 const manrope = Manrope({
   subsets: ['latin'],
@@ -60,6 +61,7 @@ const RootLayout: FC<Props> = ({ children }) => {
               </Link>
             </div>
           </footer>
+          <PixiHeadingGlitch />
           <Toaster />
         </Providers>
       </body>

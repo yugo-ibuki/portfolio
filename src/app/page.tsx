@@ -2,6 +2,7 @@ import { Skill, Graduate } from '@components'
 import { Certificate } from '@components/List/Certificate'
 import { GitContribution } from '@/features/github-contributions/GitContribution'
 import { MotionSection } from '@/components/MotionSection'
+import Background3D from '@/components/Background3D'
 import Image from 'next/image'
 import Link from 'next/link'
 import { FaArrowRight, FaGithub } from 'react-icons/fa6'
@@ -9,13 +10,23 @@ import { FaArrowRight, FaGithub } from 'react-icons/fa6'
 const Page = () => {
   return (
     <div className="pb-16 md:pb-24">
-      <MotionSection className="border-b border-foreground/15" delayIndex={0}>
-        <div className="grid md:grid-cols-[minmax(0,1fr)_minmax(364px,0.65fr)] lg:min-h-[620px] lg:grid-cols-2 xl:min-h-[660px]">
+      <MotionSection
+        className="relative overflow-hidden border-b border-foreground/15"
+        delayIndex={0}
+      >
+        <Background3D className="hero-three-canvas" />
+        <div
+          data-hero-grid
+          className="relative z-10 grid md:grid-cols-[minmax(0,1fr)_minmax(364px,0.65fr)] lg:min-h-[620px] lg:grid-cols-2 xl:min-h-[660px]"
+        >
           <div className="site-gutter flex flex-col justify-center py-16 sm:py-20 lg:py-24">
             <p className="mb-5 text-xs font-semibold uppercase tracking-[0.24em] text-muted-foreground">
               AI Application Engineer · Japan
             </p>
-            <h1 className="display-heading whitespace-nowrap text-[clamp(2rem,3.25vw,3rem)] font-normal leading-none tracking-[-0.035em]">
+            <h1
+              data-pixi-glitch
+              className="display-heading whitespace-nowrap text-[clamp(2rem,3.25vw,3rem)] font-normal leading-none tracking-[-0.035em]"
+            >
               Yugo <span className="ml-[0.16em] italic">Ibuki</span>
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground sm:text-xl">
@@ -40,15 +51,17 @@ const Page = () => {
             </div>
           </div>
           <div className="site-gutter flex items-center justify-center pb-16 md:py-16 lg:py-24">
-            <div className="hero-portrait relative shrink-0 overflow-hidden rounded-[2rem] bg-muted">
-              <Image
-                src="/assets/me.jpeg"
-                alt="Yugo Ibuki"
-                fill
-                priority
-                sizes="(min-width: 2560px) 416px, (max-width: 639px) 240px, (max-width: 767px) 260px, (max-width: 1023px) 300px, 352px"
-                className="object-cover grayscale"
-              />
+            <div className="hero-visual" role="img" aria-label="Portrait of Yugo Ibuki">
+              <div className="hero-portrait shrink-0 overflow-hidden rounded-[2rem] bg-muted">
+                <Image
+                  src="/assets/me.jpeg"
+                  alt=""
+                  fill
+                  priority
+                  sizes="(min-width: 2560px) 352px, (max-width: 639px) 192px, (max-width: 767px) 224px, (max-width: 1023px) 256px, 304px"
+                  className="object-cover grayscale"
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -57,7 +70,10 @@ const Page = () => {
       <div className="site-gutter space-y-24 py-24 md:space-y-32 md:py-32">
         <MotionSection className="grid gap-10 lg:grid-cols-12" delayIndex={1}>
           <div className="lg:col-span-3">
-            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-muted-foreground">
+            <p
+              data-pixi-glitch
+              className="text-sm font-semibold uppercase tracking-[0.24em] text-muted-foreground sm:text-base"
+            >
               Technical skills
             </p>
           </div>
@@ -71,7 +87,10 @@ const Page = () => {
           delayIndex={2}
         >
           <div className="lg:col-span-3">
-            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-muted-foreground">
+            <p
+              data-pixi-glitch
+              className="text-sm font-semibold uppercase tracking-[0.24em] text-muted-foreground sm:text-base"
+            >
               Contributions
             </p>
           </div>
@@ -85,11 +104,15 @@ const Page = () => {
           delayIndex={3}
         >
           <section className="space-y-8">
-            <h2 className="editorial-display text-4xl tracking-[-0.04em]">Education</h2>
+            <h2 data-pixi-glitch className="editorial-display text-4xl tracking-[-0.04em]">
+              Education
+            </h2>
             <Graduate />
           </section>
           <section className="space-y-8">
-            <h2 className="editorial-display text-4xl tracking-[-0.04em]">Certifications</h2>
+            <h2 data-pixi-glitch className="editorial-display text-4xl tracking-[-0.04em]">
+              Certifications
+            </h2>
             <Certificate />
           </section>
         </MotionSection>
