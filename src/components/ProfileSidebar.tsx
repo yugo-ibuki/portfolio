@@ -6,16 +6,7 @@ import { AiFillGithub } from 'react-icons/ai'
 import { HiMapPin } from 'react-icons/hi2'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/components/ui/avatar'
 import { cn } from '@/lib/utils'
-import { ColorModeSwitch } from '@components/ColorModeSwitch'
-
-const navItems = [
-  { name: 'HOME', href: '/' },
-  { name: 'BACKGROUND', href: '/background' },
-  { name: 'WORKS', href: '/works' },
-  { name: 'ARTICLES', href: '/articles' },
-  { name: 'PRESENTATION', href: '/presentation' },
-  { name: 'CONTACT', href: '/contact' },
-]
+import { isNavigationItemActive, siteNavigation } from './siteNavigation'
 
 export const ProfileSidebar = ({
   className,
@@ -27,9 +18,9 @@ export const ProfileSidebar = ({
   const pathname = usePathname()
 
   return (
-    <aside className={cn('flex flex-col gap-8', className)}>
+    <aside className={cn('flex min-h-[calc(100vh-7rem)] flex-col gap-10', className)}>
       <div className="flex flex-col gap-4">
-        <Avatar className="w-32 h-32 md:w-32 md:h-32 border-2 border-border/50 transition-transform duration-300 ease-out motion-reduce:transition-none hover:-translate-y-0.5 motion-reduce:hover:translate-y-0">
+        <Avatar className="h-20 w-20 border border-border/50">
           <AvatarImage src="/assets/me.jpeg" alt="Yugo Ibuki" />
           <AvatarFallback className="text-4xl text-muted-foreground">YI</AvatarFallback>
         </Avatar>
@@ -40,9 +31,9 @@ export const ProfileSidebar = ({
             className="block transition-[opacity,transform] duration-200 ease-out hover:opacity-80 hover:-translate-y-0.5 motion-reduce:transition-none motion-reduce:hover:translate-y-0"
             onClick={onNavClick}
           >
-            <h1 className="text-3xl font-bold tracking-tight text-primary break-words">
-              YUGO IBUKI
-            </h1>
+            <h2 className="text-2xl font-semibold tracking-[-0.03em] text-primary break-words">
+              Yugo Ibuki
+            </h2>
           </Link>
           <p className="text-lg text-muted-foreground font-medium">AI Application Engineer</p>
           <p className="text-sm text-muted-foreground flex items-center gap-1">
@@ -57,21 +48,24 @@ export const ProfileSidebar = ({
         </p>
       </div>
 
-      <nav className="flex flex-col gap-2">
-        {navItems.map((item) => (
+      <nav className="flex flex-col border-t border-foreground/15" aria-label="Mobile navigation">
+        {siteNavigation.map((item) => (
           <Link
             key={item.href}
             href={item.href}
             onClick={onNavClick}
-            aria-current={pathname === item.href ? 'page' : undefined}
+            aria-current={isNavigationItemActive(pathname, item.href) ? 'page' : undefined}
             className={cn(
-              'inline-flex w-fit items-center py-1 text-sm font-bold tracking-wider uppercase transition-[color,transform,opacity] duration-200 ease-out motion-reduce:transition-none motion-reduce:transform-none',
-              pathname === item.href
-                ? 'text-primary translate-x-1'
-                : 'text-muted-foreground hover:text-primary hover:translate-x-0.5'
+              'flex items-center justify-between border-b border-foreground/15 py-4 text-xl font-semibold tracking-[-0.02em] transition-colors',
+              isNavigationItemActive(pathname, item.href)
+                ? 'text-primary'
+                : 'text-muted-foreground hover:text-primary'
             )}
           >
             {item.name}
+            <span aria-hidden="true" className="text-sm font-normal">
+              {isNavigationItemActive(pathname, item.href) ? '●' : '↗'}
+            </span>
           </Link>
         ))}
       </nav>
@@ -94,9 +88,6 @@ export const ProfileSidebar = ({
         >
           <AiFillLinkedin size={24} />
         </Link> */}
-        <div className="ml-auto">
-          <ColorModeSwitch />
-        </div>
       </div>
     </aside>
   )

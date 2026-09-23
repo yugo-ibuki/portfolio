@@ -3,21 +3,32 @@ import { MotionSection } from '@/components/MotionSection'
 
 const ArticlesPage = () => {
   return (
-    <MotionSection className="space-y-10" delayIndex={0}>
-      <div className="flex items-baseline justify-between border-b pb-2 mb-4">
-        <h3 className="text-2xl font-semibold tracking-tight">WRITING & PUBLICATIONS</h3>
-      </div>
+    <div className="site-gutter space-y-16 pb-16 pt-10 sm:pt-12 md:space-y-24 md:pb-24 md:pt-16 lg:pt-20">
+      <MotionSection className="border-b border-foreground/15 pb-10 md:pb-12" delayIndex={0}>
+        <h1 className="display-heading text-[clamp(2.5rem,4vw,3.5rem)] font-normal leading-none tracking-[-0.035em]">
+          Writing &amp; publications
+        </h1>
+      </MotionSection>
 
-      <section className="space-y-4">
-        <h4 className="text-lg font-semibold tracking-tight">Platforms</h4>
-        <Articles />
-      </section>
+      <MotionSection className="grid gap-8 lg:grid-cols-12" delayIndex={1}>
+        <h2 className="editorial-display text-4xl tracking-[-0.04em] lg:col-span-3">Platforms</h2>
+        <div className="lg:col-span-9">
+          <Articles />
+        </div>
+      </MotionSection>
 
-      <section className="space-y-4">
-        <h4 className="text-lg font-semibold tracking-tight">Publications</h4>
-        <Publications />
-      </section>
-    </MotionSection>
+      <MotionSection
+        className="grid gap-8 border-t border-foreground/15 pt-10 lg:grid-cols-12"
+        delayIndex={2}
+      >
+        <h2 className="editorial-display text-4xl tracking-[-0.04em] lg:col-span-3">
+          Publications
+        </h2>
+        <div className="lg:col-span-9">
+          <Publications />
+        </div>
+      </MotionSection>
+    </div>
   )
 }
 
