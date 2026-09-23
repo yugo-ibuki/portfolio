@@ -227,8 +227,8 @@ export default function Background3D({ className = '' }: Background3DProps) {
                 ),
               }
             : {
-                x: visualRect.left - mountRect.left + visualRect.width * 0.78,
-                y: visualRect.top - mountRect.top + visualRect.height * 0.16,
+                x: visualRect.left - mountRect.left + visualRect.width * 0.86,
+                y: visualRect.top - mountRect.top + visualRect.height * 0.03,
               }
           const lowerTarget = isTablet
             ? {

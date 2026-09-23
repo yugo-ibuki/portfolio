@@ -162,6 +162,17 @@ body::-webkit-scrollbar {
   box-shadow: 0 1.5rem 4rem hsl(var(--background) / 0.45);
 }
 
+@media (max-width: 639px) {
+  [data-hero-grid] > :first-child,
+  [data-hero-grid] > :last-child {
+    padding-bottom: 2rem;
+  }
+
+  .hero-visual {
+    height: 14.5rem;
+  }
+}
+
 @media (min-width: 640px) {
   .hero-visual {
     width: 25rem;
