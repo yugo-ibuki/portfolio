@@ -26,7 +26,7 @@ export const Step: FC = () => {
               aria-hidden="true"
               className="relative z-10 col-start-1 row-start-1 mt-2 size-2 rounded-full border border-foreground/30 bg-background sm:col-start-2"
             />
-            <div className="col-start-2 row-start-1 space-y-1 sm:col-start-1 sm:text-right">
+            <div className="col-start-2 row-start-1 space-y-1 sm:col-start-1">
               <p className="text-sm text-muted-foreground">
                 {`${formattedStartDate} ~ ${formattedEndDate}`}
               </p>
