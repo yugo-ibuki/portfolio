@@ -171,6 +171,12 @@ body::-webkit-scrollbar {
   .hero-visual {
     height: 14.5rem;
   }
+
+  .hero-portrait {
+    right: auto;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 }
 
 @media (min-width: 640px) {

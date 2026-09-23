@@ -10,6 +10,7 @@ type Background3DProps = {
 type RotatingTetrahedron = {
   basePosition: Three.Vector3
   drift: {
+    mobileXPixels?: number
     phase: number
     speed: number
     xPixels: number
@@ -149,7 +150,7 @@ export default function Background3D({ className = '' }: Background3DProps) {
           scale: 0.34,
         }),
         createTetrahedron({
-          drift: { phase: 4.3, speed: 0.84, xPixels: 32, yPixels: 12 },
+          drift: { mobileXPixels: 12, phase: 4.3, speed: 0.84, xPixels: 32, yPixels: 12 },
           edgeOpacity: 0.4,
           faceOpacity: 0.055,
           position: [0, 0, 0.38],
@@ -236,7 +237,7 @@ export default function Background3D({ className = '' }: Background3DProps) {
                 y: gridRect.top - mountRect.top + gridRect.height * 0.8,
               }
             : {
-                x: visualRect.left - mountRect.left + visualRect.width * 0.18,
+                x: visualRect.left - mountRect.left + visualRect.width * 0.14,
                 y: visualRect.top - mountRect.top + visualRect.height * 0.82,
               }
           const toWorldPosition = (point: { x: number; y: number }, z: number) => {
@@ -303,8 +304,12 @@ export default function Background3D({ className = '' }: Background3DProps) {
               Math.tan(THREE.MathUtils.degToRad(camera.fov / 2))
             const worldPerPixel = visibleHeight / Math.max(mountElement.clientHeight, 1)
             const driftTime = timeSeconds * drift.speed + drift.phase
+            const xPixels =
+              mountElement.clientWidth < MOBILE_BREAKPOINT
+                ? (drift.mobileXPixels ?? drift.xPixels)
+                : drift.xPixels
 
-            group.position.x = basePosition.x + Math.cos(driftTime) * drift.xPixels * worldPerPixel
+            group.position.x = basePosition.x + Math.cos(driftTime) * xPixels * worldPerPixel
             group.position.y =
               basePosition.y + Math.sin(driftTime * 0.82) * drift.yPixels * worldPerPixel
           })
