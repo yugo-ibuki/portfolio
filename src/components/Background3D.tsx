@@ -2,29 +2,17 @@
 
 import { useEffect, useRef } from 'react'
 import type * as Three from 'three'
-import { getBackgroundMotionConfig } from '@/lib/motion'
-
-type FloatingUserData = {
-  rotationSpeed: {
-    x: number
-    y: number
-    z: number
-  }
-  originalPosition: Three.Vector3
-  floatOffset: number
-  floatSpeed: number
-  baseOpacity: number
-}
-
-type FloatingMesh = Three.Mesh<Three.BufferGeometry, Three.MeshBasicMaterial>
 
 type Background3DProps = {
   className?: string
 }
 
+const MOBILE_BREAKPOINT = 640
+const MOBILE_FRAME_RATE = 30
+const DESKTOP_FRAME_RATE = 48
+
 export default function Background3D({ className = '' }: Background3DProps) {
   const mountRef = useRef<HTMLDivElement>(null)
-  const frameRef = useRef<number>(0)
 
   useEffect(() => {
     const mountElement = mountRef.current
@@ -33,11 +21,19 @@ export default function Background3D({ className = '' }: Background3DProps) {
       return
     }
 
+    let animationFrame = 0
     let renderer: Three.WebGLRenderer | null = null
-    let handleResize: (() => void) | null = null
-    const objects: FloatingMesh[] = []
-    let geometries: Three.BufferGeometry[] = []
+    let geometry: Three.TetrahedronGeometry | null = null
+    let edgeGeometry: Three.EdgesGeometry | null = null
+    let faceMaterial: Three.MeshStandardMaterial | null = null
+    let edgeMaterial: Three.LineBasicMaterial | null = null
+    let resizeObserver: ResizeObserver | null = null
+    let intersectionObserver: IntersectionObserver | null = null
+    let themeObserver: MutationObserver | null = null
     let isDisposed = false
+    let isHeroVisible = true
+    let isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
 
     const initThree = async () => {
       const THREE = await import('three')
@@ -46,186 +42,192 @@ export default function Background3D({ className = '' }: Background3DProps) {
         return
       }
 
-      const shouldReduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-      const config = getBackgroundMotionConfig(shouldReduceMotion)
-      const isMobile = window.innerWidth < 768
       const scene = new THREE.Scene()
-      const camera = new THREE.PerspectiveCamera(
-        60,
-        window.innerWidth / window.innerHeight,
-        0.1,
-        1000
-      )
+      const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 100)
+      camera.position.set(0, 0.1, 5.2)
 
-      renderer = new THREE.WebGLRenderer({
-        alpha: true,
-        antialias: !isMobile,
-        powerPreference: 'high-performance',
-      })
-
-      camera.position.set(0, 0, 8)
-      renderer.setSize(window.innerWidth, window.innerHeight)
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1.2 : 1.5))
-      renderer.setClearColor(0x000000, 0)
-      mountElement.appendChild(renderer.domElement)
-
-      geometries = [
-        new THREE.OctahedronGeometry(1.2, 0),
-        new THREE.IcosahedronGeometry(1.0, 0),
-        new THREE.TetrahedronGeometry(1.4, 0),
-        new THREE.DodecahedronGeometry(0.9, 0),
-        new THREE.ConeGeometry(0.8, 1.8, 6),
-        new THREE.CylinderGeometry(0.5, 0.9, 1.6, 8),
-      ]
-      const colorPalette = [
-        new THREE.Color(0x6366f1),
-        new THREE.Color(0x8b5cf6),
-        new THREE.Color(0x3b82f6),
-        new THREE.Color(0x06b6d4),
-        new THREE.Color(0x10b981),
-        new THREE.Color(0xf59e0b),
-      ]
-      const objectCount = isMobile ? 4 : 6
-
-      for (let index = 0; index < objectCount; index += 1) {
-        const geometry = geometries[Math.floor(Math.random() * geometries.length)]
-        const color = colorPalette[Math.floor(Math.random() * colorPalette.length)]
-        const material = new THREE.MeshBasicMaterial({
-          color,
-          wireframe: true,
-          transparent: true,
-          opacity: 0.18 + Math.random() * 0.18,
+      try {
+        renderer = new THREE.WebGLRenderer({
+          alpha: true,
+          antialias: window.innerWidth >= MOBILE_BREAKPOINT,
+          powerPreference: 'low-power',
         })
-        const mesh = new THREE.Mesh<Three.BufferGeometry, Three.MeshBasicMaterial>(
-          geometry,
-          material
-        )
-
-        const angle = Math.random() * Math.PI * 2
-        const radius = 4.8 + Math.random() * 4.5
-        const x = Math.cos(angle) * radius
-        const baseY = Math.sin(angle) * radius
-        const y = baseY + (Math.random() - 0.5) * 2.4
-        const z = (Math.random() - 0.5) * 3.5
-
-        mesh.position.set(x, y, z)
-        mesh.userData = {
-          rotationSpeed: {
-            x: (Math.random() - 0.5) * 0.006,
-            y: (Math.random() - 0.5) * 0.006,
-            z: (Math.random() - 0.5) * 0.006,
-          },
-          originalPosition: mesh.position.clone(),
-          floatOffset: Math.random() * Math.PI * 2,
-          floatSpeed: 0.25 + Math.random() * 0.2,
-          baseOpacity: material.opacity,
-        } as FloatingUserData
-
-        scene.add(mesh)
-        objects.push(mesh)
+      } catch {
+        return
       }
 
-      let lastTime = 0
-      const targetFPS = isMobile ? 30 : 48
-      const frameInterval = 1000 / targetFPS
+      const webglRenderer = renderer
+      webglRenderer.setClearColor(0x000000, 0)
+      webglRenderer.outputColorSpace = THREE.SRGBColorSpace
+      webglRenderer.domElement.setAttribute('role', 'presentation')
+      mountElement.appendChild(webglRenderer.domElement)
 
+      geometry = new THREE.TetrahedronGeometry(1.72, 0)
+      edgeGeometry = new THREE.EdgesGeometry(geometry)
+      faceMaterial = new THREE.MeshStandardMaterial({
+        color: 0x171717,
+        flatShading: true,
+        metalness: 0.05,
+        opacity: 0.12,
+        roughness: 0.82,
+        side: THREE.DoubleSide,
+        transparent: true,
+      })
+      edgeMaterial = new THREE.LineBasicMaterial({
+        color: 0x171717,
+        opacity: 0.72,
+        transparent: true,
+      })
+
+      const solid = new THREE.Mesh(geometry, faceMaterial)
+      const edges = new THREE.LineSegments(edgeGeometry, edgeMaterial)
+      const tetrahedron = new THREE.Group()
+      tetrahedron.add(solid, edges)
+      tetrahedron.rotation.set(-0.36, 0.58, 0.08)
+      scene.add(tetrahedron)
+
+      scene.add(new THREE.HemisphereLight(0xffffff, 0x6b7280, 1.6))
+      const directionalLight = new THREE.DirectionalLight(0xffffff, 2.5)
+      directionalLight.position.set(3, 4, 5)
+      scene.add(directionalLight)
+
+      const updateTheme = () => {
+        const foregroundColor = window.getComputedStyle(mountElement).color
+        faceMaterial?.color.setStyle(foregroundColor)
+        edgeMaterial?.color.setStyle(foregroundColor)
+      }
+
+      const resize = () => {
+        const width = Math.max(mountElement.clientWidth, 1)
+        const height = Math.max(mountElement.clientHeight, 1)
+        const isMobile = width < MOBILE_BREAKPOINT
+
+        camera.aspect = width / height
+        camera.updateProjectionMatrix()
+        webglRenderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1.25 : 1.5))
+        webglRenderer.setSize(width, height, false)
+        webglRenderer.render(scene, camera)
+      }
+
+      let previousFrameTime = 0
       const animate = (currentTime: number) => {
-        frameRef.current = window.requestAnimationFrame(animate)
+        animationFrame = 0
 
-        if (currentTime - lastTime < frameInterval) {
+        if (isDisposed || isReducedMotion || !isHeroVisible || document.hidden) {
           return
         }
 
-        lastTime = currentTime
+        const targetFrameRate =
+          mountElement.clientWidth < MOBILE_BREAKPOINT ? MOBILE_FRAME_RATE : DESKTOP_FRAME_RATE
+        const frameInterval = 1000 / targetFrameRate
 
-        const time = currentTime * 0.001
+        if (currentTime - previousFrameTime >= frameInterval) {
+          const elapsedSeconds =
+            previousFrameTime === 0
+              ? frameInterval / 1000
+              : Math.min((currentTime - previousFrameTime) / 1000, 0.1)
 
-        objects.forEach((mesh, index) => {
-          const { baseOpacity, floatOffset, floatSpeed, originalPosition, rotationSpeed } =
-            mesh.userData as FloatingUserData
-
-          mesh.rotation.x += rotationSpeed.x * config.motionMultiplier
-          mesh.rotation.y += rotationSpeed.y * config.motionMultiplier
-          mesh.rotation.z += rotationSpeed.z * config.motionMultiplier
-
-          const floatX = Math.cos(time * floatSpeed * 0.8 + floatOffset) * config.floatXAmplitude
-          const floatY = Math.sin(time * floatSpeed + floatOffset) * config.floatYAmplitude
-          const nextX = originalPosition.x + floatX
-          const nextY = originalPosition.y + floatY
-          const distance = Math.hypot(nextX, nextY)
-          const minDistance = 3.8
-
-          if (distance < minDistance) {
-            const safeDistance = distance === 0 ? 1 : distance
-            const scale = minDistance / safeDistance
-
-            mesh.position.x = nextX * scale
-            mesh.position.y = nextY * scale
-          } else {
-            mesh.position.x = nextX
-            mesh.position.y = nextY
-          }
-
-          mesh.position.z = originalPosition.z
-          mesh.scale.setScalar(0.92 + Math.sin(time * 0.35 + index) * config.scaleAmplitude)
-          mesh.material.opacity = Math.max(
-            0.12,
-            baseOpacity + Math.sin(time * 0.9 + index) * config.opacityAmplitude
-          )
-        })
-
-        if (!shouldReduceMotion) {
-          camera.position.x = Math.sin(time * 0.08) * config.cameraXAmplitude
-          camera.position.y = Math.cos(time * 0.12) * config.cameraYAmplitude
-          camera.lookAt(0, 0, 0)
+          previousFrameTime = currentTime
+          tetrahedron.rotation.x += elapsedSeconds * 0.16
+          tetrahedron.rotation.y += elapsedSeconds * 0.25
+          webglRenderer.render(scene, camera)
         }
 
-        renderer?.render(scene, camera)
+        animationFrame = window.requestAnimationFrame(animate)
       }
 
-      handleResize = () => {
-        const isMobileViewport = window.innerWidth < 768
+      const updateAnimation = () => {
+        const shouldAnimate = !isReducedMotion && isHeroVisible && !document.hidden
 
-        camera.aspect = window.innerWidth / window.innerHeight
-        camera.updateProjectionMatrix()
-        renderer?.setSize(window.innerWidth, window.innerHeight)
-        renderer?.setPixelRatio(Math.min(window.devicePixelRatio, isMobileViewport ? 1.2 : 1.5))
+        if (shouldAnimate && animationFrame === 0) {
+          previousFrameTime = 0
+          animationFrame = window.requestAnimationFrame(animate)
+        } else if (!shouldAnimate && animationFrame !== 0) {
+          window.cancelAnimationFrame(animationFrame)
+          animationFrame = 0
+        }
+
+        if (!shouldAnimate) {
+          webglRenderer.render(scene, camera)
+        }
       }
 
-      frameRef.current = window.requestAnimationFrame(animate)
-      window.addEventListener('resize', handleResize)
+      const handleVisibilityChange = () => {
+        updateAnimation()
+      }
+
+      const handleReducedMotionChange = (event: MediaQueryListEvent) => {
+        isReducedMotion = event.matches
+        updateAnimation()
+      }
+
+      resizeObserver = new ResizeObserver(resize)
+      resizeObserver.observe(mountElement)
+
+      intersectionObserver = new IntersectionObserver(
+        ([entry]) => {
+          isHeroVisible = entry.isIntersecting
+          updateAnimation()
+        },
+        { threshold: 0.01 }
+      )
+      intersectionObserver.observe(mountElement)
+
+      themeObserver = new MutationObserver(() => {
+        updateTheme()
+        webglRenderer.render(scene, camera)
+      })
+      themeObserver.observe(document.documentElement, {
+        attributeFilter: ['class'],
+        attributes: true,
+      })
+
+      document.addEventListener('visibilitychange', handleVisibilityChange)
+      reducedMotionQuery.addEventListener('change', handleReducedMotionChange)
+      updateTheme()
+      resize()
+      updateAnimation()
+
+      return () => {
+        document.removeEventListener('visibilitychange', handleVisibilityChange)
+        reducedMotionQuery.removeEventListener('change', handleReducedMotionChange)
+      }
     }
 
-    void initThree()
+    let removeEventListeners: (() => void) | undefined
+    void initThree().then((cleanup) => {
+      if (isDisposed) {
+        cleanup?.()
+        return
+      }
+
+      removeEventListeners = cleanup
+    })
 
     return () => {
       isDisposed = true
-      window.cancelAnimationFrame(frameRef.current)
-      if (handleResize) {
-        window.removeEventListener('resize', handleResize)
+      window.cancelAnimationFrame(animationFrame)
+      removeEventListeners?.()
+      resizeObserver?.disconnect()
+      intersectionObserver?.disconnect()
+      themeObserver?.disconnect()
+      faceMaterial?.dispose()
+      edgeMaterial?.dispose()
+      edgeGeometry?.dispose()
+      geometry?.dispose()
+
+      if (renderer) {
+        if (mountElement.contains(renderer.domElement)) {
+          mountElement.removeChild(renderer.domElement)
+        }
+
+        renderer.dispose()
+        renderer.forceContextLoss()
       }
-
-      objects.forEach((mesh) => {
-        mesh.material.dispose()
-      })
-
-      geometries.forEach((geometry) => {
-        geometry.dispose()
-      })
-
-      if (renderer && mountElement.contains(renderer.domElement)) {
-        mountElement.removeChild(renderer.domElement)
-      }
-
-      renderer?.dispose()
     }
   }, [])
 
   return (
-    <div
-      ref={mountRef}
-      className={`fixed inset-0 pointer-events-none ${className}`}
-      style={{ zIndex: -1 }}
-    />
+    <div ref={mountRef} aria-hidden="true" className={`pointer-events-none ${className}`.trim()} />
   )
 }

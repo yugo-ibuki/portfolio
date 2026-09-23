@@ -2,6 +2,7 @@ import { Skill, Graduate } from '@components'
 import { Certificate } from '@components/List/Certificate'
 import { GitContribution } from '@/features/github-contributions/GitContribution'
 import { MotionSection } from '@/components/MotionSection'
+import Background3D from '@/components/Background3D'
 import Image from 'next/image'
 import Link from 'next/link'
 import { FaArrowRight, FaGithub } from 'react-icons/fa6'
@@ -40,15 +41,18 @@ const Page = () => {
             </div>
           </div>
           <div className="site-gutter flex items-center justify-center pb-16 md:py-16 lg:py-24">
-            <div className="hero-portrait relative shrink-0 overflow-hidden rounded-[2rem] bg-muted">
-              <Image
-                src="/assets/me.jpeg"
-                alt="Yugo Ibuki"
-                fill
-                priority
-                sizes="(min-width: 2560px) 416px, (max-width: 639px) 240px, (max-width: 767px) 260px, (max-width: 1023px) 300px, 352px"
-                className="object-cover grayscale"
-              />
+            <div className="hero-visual" role="img" aria-label="Portrait of Yugo Ibuki">
+              <Background3D className="hero-three-canvas" />
+              <div className="hero-portrait shrink-0 overflow-hidden rounded-[2rem] bg-muted">
+                <Image
+                  src="/assets/me.jpeg"
+                  alt=""
+                  fill
+                  priority
+                  sizes="(min-width: 2560px) 352px, (max-width: 639px) 192px, (max-width: 767px) 224px, (max-width: 1023px) 256px, 304px"
+                  className="object-cover grayscale"
+                />
+              </div>
             </div>
           </div>
         </div>
