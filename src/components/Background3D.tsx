@@ -131,7 +131,7 @@ export default function Background3D({ className = '' }: Background3DProps) {
 
       const tetrahedra = [
         createTetrahedron({
-          drift: { phase: 0.4, speed: 0.28, xPixels: 10, yPixels: 7 },
+          drift: { phase: 0.4, speed: 0.78, xPixels: 28, yPixels: 10 },
           edgeOpacity: 0.72,
           faceOpacity: 0.12,
           position: [0, 0, 0],
@@ -140,7 +140,7 @@ export default function Background3D({ className = '' }: Background3DProps) {
           scale: 1,
         }),
         createTetrahedron({
-          drift: { phase: 2.1, speed: 0.22, xPixels: 16, yPixels: 10 },
+          drift: { phase: 2.1, speed: 0.92, xPixels: 34, yPixels: 8 },
           edgeOpacity: 0.56,
           faceOpacity: 0.085,
           position: [0, 0, 0.35],
@@ -149,7 +149,7 @@ export default function Background3D({ className = '' }: Background3DProps) {
           scale: 0.34,
         }),
         createTetrahedron({
-          drift: { phase: 4.3, speed: 0.25, xPixels: 12, yPixels: 14 },
+          drift: { phase: 4.3, speed: 0.84, xPixels: 32, yPixels: 12 },
           edgeOpacity: 0.4,
           faceOpacity: 0.055,
           position: [0, 0, 0.38],
@@ -223,7 +223,7 @@ export default function Background3D({ className = '' }: Background3DProps) {
                 x: gridRect.left - mountRect.left + gridRect.width * 0.48,
                 y: Math.max(
                   gridRect.top - mountRect.top + gridRect.height * 0.15,
-                  headerBottom - mountRect.top + 72
+                  headerBottom - mountRect.top + 82
                 ),
               }
             : {
