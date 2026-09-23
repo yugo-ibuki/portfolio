@@ -23,7 +23,10 @@ const Page = () => {
             <p className="mb-5 text-xs font-semibold uppercase tracking-[0.24em] text-muted-foreground">
               AI Application Engineer · Japan
             </p>
-            <h1 className="display-heading whitespace-nowrap text-[clamp(2rem,3.25vw,3rem)] font-normal leading-none tracking-[-0.035em]">
+            <h1
+              data-pixi-glitch
+              className="display-heading whitespace-nowrap text-[clamp(2rem,3.25vw,3rem)] font-normal leading-none tracking-[-0.035em]"
+            >
               Yugo <span className="ml-[0.16em] italic">Ibuki</span>
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground sm:text-xl">
@@ -67,7 +70,10 @@ const Page = () => {
       <div className="site-gutter space-y-24 py-24 md:space-y-32 md:py-32">
         <MotionSection className="grid gap-10 lg:grid-cols-12" delayIndex={1}>
           <div className="lg:col-span-3">
-            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-muted-foreground">
+            <p
+              data-pixi-glitch
+              className="text-sm font-semibold uppercase tracking-[0.24em] text-muted-foreground sm:text-base"
+            >
               Technical skills
             </p>
           </div>
@@ -81,7 +87,10 @@ const Page = () => {
           delayIndex={2}
         >
           <div className="lg:col-span-3">
-            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-muted-foreground">
+            <p
+              data-pixi-glitch
+              className="text-sm font-semibold uppercase tracking-[0.24em] text-muted-foreground sm:text-base"
+            >
               Contributions
             </p>
           </div>
@@ -95,11 +104,15 @@ const Page = () => {
           delayIndex={3}
         >
           <section className="space-y-8">
-            <h2 className="editorial-display text-4xl tracking-[-0.04em]">Education</h2>
+            <h2 data-pixi-glitch className="editorial-display text-4xl tracking-[-0.04em]">
+              Education
+            </h2>
             <Graduate />
           </section>
           <section className="space-y-8">
-            <h2 className="editorial-display text-4xl tracking-[-0.04em]">Certifications</h2>
+            <h2 data-pixi-glitch className="editorial-display text-4xl tracking-[-0.04em]">
+              Certifications
+            </h2>
             <Certificate />
           </section>
         </MotionSection>
