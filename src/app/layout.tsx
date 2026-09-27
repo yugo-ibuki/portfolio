@@ -10,6 +10,8 @@ import Link from 'next/link'
 import { Instrument_Serif, Manrope } from 'next/font/google'
 import { PixiHeadingGlitch } from '@/components/PixiHeadingGlitch'
 
+const EMAIL_ADDRESS = 'y.ibuki91@gmail.com'
+
 const manrope = Manrope({
   subsets: ['latin'],
   display: 'swap',
@@ -51,14 +53,22 @@ const RootLayout: FC<Props> = ({ children }) => {
           <footer className="border-t border-foreground/10">
             <div className="site-content site-gutter flex w-full flex-col gap-4 py-8 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
               <p>Yugo Ibuki — AI Application Engineer</p>
-              <Link
-                href="https://github.com/yugo-ibuki"
-                target="_blank"
-                rel="noreferrer"
-                className="w-fit underline decoration-border underline-offset-4 hover:text-foreground"
-              >
-                GitHub
-              </Link>
+              <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a
+                  href={`mailto:${EMAIL_ADDRESS}`}
+                  className="w-fit break-all underline decoration-border underline-offset-4 hover:text-foreground"
+                >
+                  {EMAIL_ADDRESS}
+                </a>
+                <Link
+                  href="https://github.com/yugo-ibuki"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="w-fit underline decoration-border underline-offset-4 hover:text-foreground"
+                >
+                  GitHub
+                </Link>
+              </div>
             </div>
           </footer>
           <PixiHeadingGlitch />

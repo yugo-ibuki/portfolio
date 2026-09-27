@@ -162,20 +162,23 @@ body::-webkit-scrollbar {
   box-shadow: 0 1.5rem 4rem hsl(var(--background) / 0.45);
 }
 
-@media (max-width: 639px) {
+/* Hero grid stays single-column below md (768px), so center the portrait there. */
+@media (max-width: 767px) {
   [data-hero-grid] > :first-child,
   [data-hero-grid] > :last-child {
     padding-bottom: 2rem;
-  }
-
-  .hero-visual {
-    height: 14.5rem;
   }
 
   .hero-portrait {
     right: auto;
     left: 50%;
     transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 639px) {
+  .hero-visual {
+    height: 14.5rem;
   }
 }
 
@@ -188,6 +191,12 @@ body::-webkit-scrollbar {
   .hero-portrait {
     width: 14rem;
     height: 14rem;
+  }
+}
+
+@media (min-width: 640px) and (max-width: 767px) {
+  .hero-visual {
+    height: 16.5rem;
   }
 }
 

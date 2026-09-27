@@ -2,9 +2,7 @@ export const siteNavigation = [
   { name: 'Home', href: '/' },
   { name: 'Works', href: '/works' },
   { name: 'Background', href: '/background' },
-  { name: 'Articles', href: '/articles' },
-  { name: 'Presentation', href: '/presentation' },
-  { name: 'Contact', href: '/contact' },
+  { name: 'Writing', href: '/articles' },
 ] as const
 
 export const isNavigationItemActive = (pathname: string, href: string) => {

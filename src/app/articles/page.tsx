@@ -1,4 +1,4 @@
-import { Articles, Publications } from '@components/List'
+import { Articles, Presentations, Publications } from '@components/List'
 import { MotionSection } from '@/components/MotionSection'
 
 const ArticlesPage = () => {
@@ -9,7 +9,7 @@ const ArticlesPage = () => {
           data-pixi-glitch
           className="display-heading text-[clamp(2.5rem,4vw,3.5rem)] font-normal leading-none tracking-[-0.035em]"
         >
-          Writing &amp; publications
+          Writing &amp; talks
         </h1>
       </MotionSection>
 
@@ -37,6 +37,21 @@ const ArticlesPage = () => {
         </h2>
         <div className="lg:col-span-9">
           <Publications />
+        </div>
+      </MotionSection>
+
+      <MotionSection
+        className="grid gap-8 border-t border-foreground/15 pt-10 lg:grid-cols-12"
+        delayIndex={3}
+      >
+        <h2
+          data-pixi-glitch
+          className="editorial-display text-4xl tracking-[-0.04em] lg:col-span-3"
+        >
+          Presentations
+        </h2>
+        <div className="lg:col-span-9">
+          <Presentations />
         </div>
       </MotionSection>
     </div>

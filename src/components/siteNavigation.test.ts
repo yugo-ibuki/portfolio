@@ -8,8 +8,6 @@ describe('siteNavigation', () => {
       '/works',
       '/background',
       '/articles',
-      '/presentation',
-      '/contact',
     ])
   })
 
