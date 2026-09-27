@@ -8,16 +8,6 @@ export type SkillGroupKey = 'language' | 'framework' | 'ai' | 'cloud' | 'others'
 
 export type SkillGroups = Record<SkillGroupKey, SkillEntry[]>
 
-export const skillGroupLabels: Record<SkillGroupKey, string> = {
-  language: 'Language',
-  framework: 'Framework',
-  ai: 'AI',
-  cloud: 'Cloud',
-  others: 'Others',
-  ide: 'IDE',
-  team: 'Team',
-}
-
 export const skills: SkillGroups = {
   language: [
     {
