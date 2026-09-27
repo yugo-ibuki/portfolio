@@ -1,6 +1,7 @@
 import type { FC } from 'react'
 import { skillGroupLabels, skills } from '@/content/skills'
 import type { SkillEntry, SkillGroups } from '@/content/skills'
+import { formatSkillTerm } from '@/lib/formatSkillTerm'
 
 export const Skill: FC = () => (
   <div className="grid gap-x-6 gap-y-10 md:grid-cols-2 xl:grid-cols-3">
@@ -21,7 +22,7 @@ const SkillItem: FC<{ skill: SkillEntry }> = ({ skill }) => (
   <div className="grid min-w-0 grid-cols-[minmax(0,1fr)_auto] items-baseline gap-3 py-3">
     <span className="min-w-0 font-medium">{skill.name}</span>
     <span className="whitespace-nowrap text-xs tabular-nums text-muted-foreground">
-      {skill.terms} years
+      {formatSkillTerm(skill.terms)}
     </span>
   </div>
 )
