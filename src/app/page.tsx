@@ -30,8 +30,8 @@ const Page = () => {
               Yugo <span className="ml-[0.16em] italic">Ibuki</span>
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground sm:text-xl">
-              Hello, I&apos;m Yugo. An engineer based in Japan who designs and builds AI-driven web
-              applications.
+              Hello, I&apos;m Yugo. An engineer based in Japan who designs and builds{' '}
+              <span className="whitespace-nowrap">AI-driven</span> web applications.
             </p>
             <div className="mt-8 flex flex-wrap gap-4">
               <Link
