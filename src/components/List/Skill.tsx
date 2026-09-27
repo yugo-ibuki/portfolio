@@ -1,6 +1,5 @@
 import type { FC } from 'react'
-import { firstUppercase } from '@lib/firstUppercase'
-import { skills } from '@/content/skills'
+import { skillGroupLabels, skills } from '@/content/skills'
 import type { SkillEntry, SkillGroups } from '@/content/skills'
 
 export const Skill: FC = () => (
@@ -18,7 +17,9 @@ export const Skill: FC = () => (
     >
       {(Object.keys(skills) as (keyof SkillGroups)[]).map((title) => (
         <section key={title} className="min-w-0 border-t border-foreground/15 pt-5">
-          <h3 className="mb-3 text-lg font-semibold tracking-[-0.02em]">{firstUppercase(title)}</h3>
+          <h3 className="mb-3 text-lg font-semibold tracking-[-0.02em]">
+            {skillGroupLabels[title]}
+          </h3>
           <div className="divide-y divide-foreground/10">
             {skills[title].map((skill: SkillEntry) => (
               <SkillItem key={skill.name} skill={skill} />
