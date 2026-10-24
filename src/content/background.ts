@@ -1,5 +1,7 @@
 export type SideWorkBase = {
   title: string
+  summary?: string
+  activities?: string[]
   startDate: string
   endDate: string | null
 }
@@ -42,15 +44,24 @@ export const sideWorks: SideWorkEntry[] = [
     ],
   },
   {
-    title: 'Programming Mentor',
+    title: 'Tech Train',
+    summary: 'Programming Mentoring, AI Training & University Workshops',
+    activities: [
+      'Programming mentoring',
+      'Code reviews and feedback',
+      'AI training',
+      'Workshops for university students',
+      'Public speaking',
+    ],
     slug: 'programming_mentor_2',
     place: 'Tech Train',
     startDate: '2025-03',
     endDate: null,
     description: [
-      "I've worked as a mentor for engineering.",
+      'I work with Tech Train to support learning and skill development.',
       'I taught React, Go, Laravel, and web development.',
       'I reviewed code, gave feedback, and coached students on how to study programming effectively.',
+      'My work also includes AI training and workshops for university students.',
     ],
   },
   {

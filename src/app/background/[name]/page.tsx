@@ -31,7 +31,10 @@ const Page = async ({ params }: Props) => {
             {data.title}
           </h1>
         </div>
-        <Description subtitle={data.place}>
+        <Description
+          subtitle={data.summary ?? data.place}
+          subtitleLabel={data.summary ? 'Activities:' : undefined}
+        >
           <div className="space-y-4">
             {data.description.map((paragraph) => (
               <p key={paragraph}>{paragraph}</p>

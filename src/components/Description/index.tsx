@@ -5,15 +5,21 @@ import { cn } from '@/lib/utils'
 type Props = {
   children: ReactNode
   subtitle: string
+  subtitleLabel?: string
   className?: string
 }
 
-export const Description: FC<Props> = ({ children, subtitle, className }) => {
+export const Description: FC<Props> = ({
+  children,
+  subtitle,
+  subtitleLabel = 'at:',
+  className,
+}) => {
   return (
     <Card className={cn('mt-5', className)}>
       <CardHeader className="border-b-2 border-gray-200 dark:border-gray-700 py-3">
         <div className="flex items-center gap-2">
-          <span className="text-muted-foreground">at:</span>
+          <span className="text-muted-foreground">{subtitleLabel}</span>
           <h2 className="font-semibold text-lg">{subtitle}</h2>
         </div>
       </CardHeader>
