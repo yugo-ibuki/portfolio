@@ -1,10 +1,18 @@
+export type SideWorkDates =
+  | {
+      startDate: string
+      endDate: string | null
+    }
+  | {
+      startDate?: never
+      endDate?: never
+    }
+
 export type SideWorkBase = {
   title: string
   summary?: string
   activities?: string[]
-  startDate: string
-  endDate: string | null
-}
+} & SideWorkDates
 
 export type InternalSideWork = SideWorkBase & {
   slug: string
@@ -22,6 +30,11 @@ export const sideWorks: SideWorkEntry[] = [
   {
     title: 'Tech Commit',
     summary: 'English Mentoring',
+    activities: [
+      'English mentoring',
+      'Writing and speaking guidance',
+      'Study advice and English learning articles',
+    ],
     slug: 'english_mentor',
     place: 'Tech Commit',
     startDate: '2018-01',
@@ -35,6 +48,12 @@ export const sideWorks: SideWorkEntry[] = [
   {
     title: 'Tech Boost',
     summary: 'Laravel Mentoring',
+    activities: [
+      'PHP and Laravel mentoring',
+      'MySQL and database design reviews',
+      'Docker and local development setup',
+      'Object-oriented programming guidance',
+    ],
     slug: 'programming_mentor',
     place: 'Tech Boost',
     startDate: '2020-06',
@@ -65,6 +84,14 @@ export const sideWorks: SideWorkEntry[] = [
       'I reviewed code, gave feedback, and coached students on how to study programming effectively.',
       'My work also includes AI training and workshops for university students.',
     ],
+  },
+  {
+    title: 'Ficilcom',
+    summary: 'Frontend Engineering',
+    activities: ['Frontend development'],
+    slug: 'ficilcom',
+    place: 'Ficilcom',
+    description: ['I worked as a frontend engineer at Ficilcom.'],
   },
   {
     title: 'Self Employee',

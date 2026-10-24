@@ -9,9 +9,13 @@ export const SideWork: FC = () => {
   return (
     <div className="space-y-8">
       {sideWorks.map((sw, index) => {
-        const formattedStartDate = formatDate(sw.startDate)
-        const formattedEndDate = sw.endDate ? formatDate(sw.endDate) : 'present'
-        const duration = calculateDuration(sw.startDate, sw.endDate)
+        const period = sw.startDate
+          ? {
+              startDate: formatDate(sw.startDate),
+              endDate: sw.endDate ? formatDate(sw.endDate) : 'present',
+              duration: calculateDuration(sw.startDate, sw.endDate ?? null),
+            }
+          : null
         const activities = sw.activities ?? []
         const hasActivities = activities.length > 0
 
@@ -35,12 +39,14 @@ export const SideWork: FC = () => {
                   ))}
                 </ul>
               )}
-              <div className="pl-4">
-                <p className="text-sm text-muted-foreground">
-                  {`${formattedStartDate} ~ ${formattedEndDate}`}
-                  <span className="ml-2 text-xs">{duration}</span>
-                </p>
-              </div>
+              {period && (
+                <div className="pl-4">
+                  <p className="text-sm text-muted-foreground">
+                    {`${period.startDate} ~ ${period.endDate}`}
+                    <span className="ml-2 text-xs">{period.duration}</span>
+                  </p>
+                </div>
+              )}
             </div>
             {index < sideWorks.length - 1 && <Separator />}
           </div>
