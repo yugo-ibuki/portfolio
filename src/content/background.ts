@@ -20,7 +20,8 @@ export type SideWorkEntry = InternalSideWork | ExternalSideWork
 
 export const sideWorks: SideWorkEntry[] = [
   {
-    title: 'English Mentor',
+    title: 'Tech Commit',
+    summary: 'English Mentoring',
     slug: 'english_mentor',
     place: 'Tech Commit',
     startDate: '2018-01',
@@ -32,7 +33,8 @@ export const sideWorks: SideWorkEntry[] = [
     ],
   },
   {
-    title: 'Laravel Mentor',
+    title: 'Tech Boost',
+    summary: 'Laravel Mentoring',
     slug: 'programming_mentor',
     place: 'Tech Boost',
     startDate: '2020-06',
