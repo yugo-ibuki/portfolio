@@ -8,16 +8,17 @@ export type WorkEntry = {
 
 export const works: WorkEntry[] = [
   {
-    name: "Yui's portfolio",
-    description: 'Introduction of the illustrations drawn by Yui.',
-    url: 'https://yuinosuke2.com',
-    photo: '/assets/yui-san.png',
-  },
-  {
     name: 'UnitMux',
     description: 'Easy coding agent switcher with vim-like operation.',
     url: 'https://github.com/yugo-ibuki/unitmux',
     photo: '/assets/unitmux.png',
     github: 'https://github.com/yugo-ibuki/unitmux',
+  },
+  {
+    name: 'Yoyaku',
+    description:
+      'A searchable collection of article summaries, filterable by genre and technology.',
+    url: 'https://summary-articles.y-ibuki91.workers.dev/',
+    photo: '/assets/yoyaku.png',
   },
 ]
