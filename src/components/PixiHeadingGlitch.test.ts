@@ -1,6 +1,7 @@
 import { afterEach, describe, expect, test } from 'bun:test'
 import {
   createHeadingGlitchController,
+  playNativeHeadingGlitch,
   runWithSourceTextHidden,
   syncTextToTarget,
   type HeadingIntersection,
@@ -260,6 +261,55 @@ describe('runWithSourceTextHidden', () => {
     expect(colors[1]).toBe('transparent')
     expect(heading.style.getPropertyValue('color')).toBe('rgb(12, 34, 56)')
     expect(heading.style.getPropertyPriority('color')).toBe('important')
+  })
+})
+
+describe('playNativeHeadingGlitch', () => {
+  const createHeading = () => {
+    const heading = document.createElement('h1')
+    heading.style.setProperty('color', 'rgb(12, 34, 56)', 'important')
+    heading.innerHTML = 'Hello <i>world</i>'
+    document.body.append(heading)
+    const animation = new EventTarget() as Animation
+    let cancelCount = 0
+    animation.cancel = () => {
+      cancelCount += 1
+    }
+    let keyframes: Keyframe[] = []
+    heading.animate = ((frames: Keyframe[]) => {
+      keyframes = frames
+      return animation
+    }) as typeof heading.animate
+    return { heading, animation, getCancelCount: () => cancelCount, getKeyframes: () => keyframes }
+  }
+
+  test('animates the visible original heading and removes transient styles on finish', async () => {
+    const { heading, animation, getCancelCount, getKeyframes } = createHeading()
+    const playback = playNativeHeadingGlitch(heading, new AbortController().signal)
+
+    expect(heading.style.getPropertyValue('color')).toBe('rgb(12, 34, 56)')
+    expect(heading.querySelector('i')?.textContent).toBe('world')
+    expect(getKeyframes().some((frame) => frame.transform !== 'translateX(0px)')).toBe(true)
+    expect(getKeyframes().some((frame) => String(frame.textShadow).includes('cyan'))).toBe(true)
+
+    animation.dispatchEvent(new Event('finish'))
+    await playback
+    expect(getCancelCount()).toBe(1)
+    expect(heading.style.getPropertyValue('color')).toBe('rgb(12, 34, 56)')
+    expect(heading.style.transform).toBe('')
+    expect(heading.style.textShadow).toBe('')
+  })
+
+  test('cancels the effect and settles playback when aborted', async () => {
+    const { heading, getCancelCount } = createHeading()
+    const controller = new AbortController()
+    const playback = playNativeHeadingGlitch(heading, controller.signal)
+    controller.abort()
+    await playback
+
+    expect(getCancelCount()).toBe(1)
+    expect(heading.style.getPropertyValue('color')).toBe('rgb(12, 34, 56)')
+    expect(heading.style.textShadow).toBe('')
   })
 })
 

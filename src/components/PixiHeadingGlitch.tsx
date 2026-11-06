@@ -126,6 +126,62 @@ export const runWithSourceTextHidden = async (
   }
 }
 
+export const playNativeHeadingGlitch = (target: HTMLElement, signal: AbortSignal) => {
+  if (signal.aborted) return Promise.resolve()
+
+  const animation = target.animate(
+    [
+      { transform: 'translateX(0px)', textShadow: 'none', offset: 0, easing: 'steps(1, end)' },
+      {
+        transform: 'translateX(-6px)',
+        textShadow: '3px 0 red, -3px 0 cyan',
+        offset: 0.12,
+        easing: 'steps(1, end)',
+      },
+      {
+        transform: 'translateX(5px)',
+        textShadow: '-3px 0 red, 3px 0 cyan',
+        offset: 0.28,
+        easing: 'steps(1, end)',
+      },
+      {
+        transform: 'translateX(-4px)',
+        textShadow: '2px 0 red, -2px 0 cyan',
+        offset: 0.46,
+        easing: 'steps(1, end)',
+      },
+      {
+        transform: 'translateX(6px)',
+        textShadow: '-3px 0 red, 3px 0 cyan',
+        offset: 0.62,
+        easing: 'steps(1, end)',
+      },
+      {
+        transform: 'translateX(-2px)',
+        textShadow: '2px 0 red, -2px 0 cyan',
+        offset: 0.8,
+        easing: 'steps(1, end)',
+      },
+      { transform: 'translateX(0px)', textShadow: 'none', offset: 1 },
+    ],
+    { duration: EFFECT_DURATION_MS }
+  )
+
+  return new Promise<void>((resolve) => {
+    const finish = () => {
+      animation.removeEventListener('finish', finish)
+      animation.removeEventListener('cancel', finish)
+      signal.removeEventListener('abort', finish)
+      animation.cancel()
+      resolve()
+    }
+    animation.addEventListener('finish', finish, { once: true })
+    animation.addEventListener('cancel', finish, { once: true })
+    signal.addEventListener('abort', finish, { once: true })
+    if (signal.aborted) finish()
+  })
+}
+
 type PositionedText = {
   x: number
   y: number
@@ -172,6 +228,7 @@ class SharedPixiHeadingPlayer {
   private animationFrame: number | undefined
   private pendingPlays = 0
   private isDestroyed = false
+  private useNativeFallback = false
 
   constructor(
     private readonly document: Document,
@@ -181,13 +238,27 @@ class SharedPixiHeadingPlayer {
   async play(target: Element, signal: AbortSignal) {
     if (!(target instanceof HTMLElement) || signal.aborted || this.isDestroyed) return
 
-    const app = await this.getApplication()
+    if (this.useNativeFallback) return playNativeHeadingGlitch(target, signal)
+
+    let app: Application
+    try {
+      app = await this.getApplication()
+    } catch {
+      if (signal.aborted || this.isDestroyed) return
+      this.useNativeFallback = true
+      return playNativeHeadingGlitch(target, signal)
+    }
     if (signal.aborted || this.isDestroyed) return
 
-    const [{ Shader, Text }, { GlitchFilter }] = await Promise.all([
-      import('pixi.js'),
-      import('pixi-filters/glitch'),
-    ])
+    const { RendererType, Shader, Text } = await import('pixi.js')
+    if (signal.aborted || this.isDestroyed) return
+    if (this.useNativeFallback) return playNativeHeadingGlitch(target, signal)
+    if (app.renderer.type === RendererType.CANVAS) {
+      this.useNativeFallback = true
+      this.destroyApplication()
+      return playNativeHeadingGlitch(target, signal)
+    }
+    const { GlitchFilter } = await import('pixi-filters/glitch')
     if (signal.aborted || this.isDestroyed) return
     this.destroyFilter ??= (filter) => {
       Shader.prototype.destroy.call(filter)
