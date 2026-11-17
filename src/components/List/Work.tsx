@@ -1,6 +1,5 @@
 import type { FC } from 'react'
-import Link from 'next/link'
-import Image from 'next/image'
+import { AppLink as Link } from '@/components/AppLink'
 import { FaArrowUpRightFromSquare, FaGithub } from 'react-icons/fa6'
 import { works } from '@/content/works'
 
@@ -21,13 +20,15 @@ export const Work: FC = () => {
               className="relative block aspect-[16/10] w-full overflow-hidden bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring md:aspect-auto md:h-full md:min-h-[300px]"
               aria-label={`${work.name} を開く`}
             >
-              <Image
+              <img
                 src={work.photo}
                 alt={work.name}
-                fill
-                priority={index === 0}
-                sizes="(max-width: 767px) calc(100vw - 40px), (max-width: 1279px) 34vw, (max-width: 1799px) 20vw, 360px"
-                className="object-contain transition-transform duration-500 ease-out group-hover:scale-[1.025] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+                width={800}
+                height={500}
+                loading={index === 0 ? 'eager' : 'lazy'}
+                fetchPriority={index === 0 ? 'high' : 'auto'}
+                decoding="async"
+                className="absolute inset-0 h-full w-full object-contain transition-transform duration-500 ease-out group-hover:scale-[1.025] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
               />
               <span className="absolute right-4 top-4 grid h-11 w-11 place-items-center rounded-full bg-background/90 text-foreground shadow-sm backdrop-blur transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0 motion-reduce:group-hover:translate-y-0">
                 <FaArrowUpRightFromSquare className="h-4 w-4" aria-hidden="true" />

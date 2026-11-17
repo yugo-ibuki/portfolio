@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'bun:test'
 import { renderToStaticMarkup } from 'react-dom/server'
-import Template from './template'
+import Template from './PageTransition'
 
 describe('Template', () => {
   test('wraps route content with the page transition class', () => {

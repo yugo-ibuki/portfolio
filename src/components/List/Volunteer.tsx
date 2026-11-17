@@ -1,5 +1,5 @@
 import type { FC } from 'react'
-import Link from 'next/link'
+import { AppLink as Link } from '@/components/AppLink'
 import { Separator } from '@/components/components/ui/separator'
 import { volunteerActivities } from '@/content/volunteer'
 

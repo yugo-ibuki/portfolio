@@ -1,9 +1,8 @@
-'use server'
+import '@tanstack/react-start/server-only'
 
 import * as sgMail from '@sendgrid/mail'
 import { contentToSender } from '@lib/mailTemplate/toSender'
 import { contentToMe } from '@lib/mailTemplate/toMe'
-import { NextResponse } from 'next/server'
 
 export interface IFormInputs {
   name: string
@@ -13,7 +12,7 @@ export interface IFormInputs {
 }
 
 export const sendMail = async (data: IFormInputs) => {
-  sgMail.setApiKey(process.env.NEXT_PUBLIC_SENDGRID_KEY as string)
+  sgMail.setApiKey(process.env.SENDGRID_KEY as string)
 
   const msgToSender = makeMailSenderObject(data)
   const msgToMe = makeToMeMailObject(data)
@@ -25,7 +24,7 @@ export const sendMail = async (data: IFormInputs) => {
     throw error
   }
 
-  await NextResponse.json({ status: 'ok' })
+  return Response.json({ status: 'ok' })
 }
 
 const makeMailSenderObject = (data: IFormInputs) => ({
@@ -41,7 +40,7 @@ const makeMailSenderObject = (data: IFormInputs) => ({
 })
 
 const makeToMeMailObject = (data: IFormInputs) => ({
-  to: process.env.NEXT_PUBLIC_MY_EMAIL,
+  to: process.env.MY_EMAIL,
   from: 'support@y-ibuki91.app',
   subject: 'お問合せがありました。',
   text: contentToMe({

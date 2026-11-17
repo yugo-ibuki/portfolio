@@ -2,6 +2,12 @@
 /.next
 /.open-next
 /.wrangler
+/.tanstack
+/dist
+.dev.vars
+.dev.vars.*
+.env.*
+*.tsbuildinfo
 /build
 /.yarn
 .env

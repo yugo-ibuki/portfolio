@@ -1,11 +1,6 @@
-import { describe, expect, mock, test } from 'bun:test'
+import { describe, expect, test } from 'bun:test'
 import { renderToStaticMarkup } from 'react-dom/server'
-import type { ImageProps } from 'next/image'
 import { works } from '@/content/works'
-
-mock.module('next/image', () => ({
-  default: ({ alt, src }: ImageProps) => <span data-alt={alt} data-src={src.toString()} />,
-}))
 
 describe('Work', () => {
   test('renders every project in the editorial layout', async () => {
@@ -19,7 +14,11 @@ describe('Work', () => {
       expect(document.body.textContent).toContain(work.name)
       expect(document.body.textContent).toContain(work.description)
       expect(document.querySelector(`a[href="${work.url}"]`)).not.toBeNull()
-      expect(document.querySelector(`[data-src="${work.photo}"]`)).not.toBeNull()
+      const image = document.querySelector(`img[src="${work.photo}"]`)
+      expect(image?.getAttribute('alt')).toBe(work.name)
+      expect(image?.getAttribute('width')).toBe('800')
+      expect(image?.getAttribute('height')).toBe('500')
+      expect(image?.getAttribute('loading')).toBe(work === works[0] ? 'eager' : 'lazy')
     }
   })
 })

@@ -1,28 +1,12 @@
 import { Description } from '@components'
 import { MotionSection } from '@/components/MotionSection'
-import { getSideWorkBySlug, internalSideWorks } from '@/content/background'
-import { notFound } from 'next/navigation'
+import type { getBackgroundDetail } from '@/lib/getBackgroundDetail'
 
 type Props = {
-  params: Promise<{
-    name: string
-  }>
+  data: ReturnType<typeof getBackgroundDetail>
 }
 
-export const generateStaticParams = async () => {
-  return internalSideWorks.map((sideWork) => ({
-    name: sideWork.slug,
-  }))
-}
-
-const Page = async ({ params }: Props) => {
-  const { name } = await params
-  const data = getSideWorkBySlug(name)
-
-  if (!data) {
-    notFound()
-  }
-
+const Page = ({ data }: Props) => {
   return (
     <main>
       <MotionSection className="mt-[25px]" delayIndex={0}>

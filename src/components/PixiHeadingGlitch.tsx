@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect } from 'react'
-import { usePathname } from 'next/navigation'
+import { useLocation } from '@tanstack/react-router'
 import type { Application, CanvasTextOptions, Text, TextStyleOptions } from 'pixi.js'
 import type { GlitchFilter } from 'pixi-filters/glitch'
 import { PAGE_TRANSITION_DURATION_MS } from '@/lib/motion'
@@ -494,7 +494,7 @@ class SharedPixiHeadingPlayer {
 }
 
 export const PixiHeadingGlitch = () => {
-  const pathname = usePathname()
+  const pathname = useLocation({ select: (location) => location.pathname })
 
   useEffect(() => {
     const media = window.matchMedia('(prefers-reduced-motion: reduce)')

@@ -1,0 +1,11 @@
+import { defineConfig } from 'vite'
+import { cloudflare } from '@cloudflare/vite-plugin'
+import { tanstackStart } from '@tanstack/react-start/plugin/vite'
+import react from '@vitejs/plugin-react'
+
+export default defineConfig({
+  server: { port: 3000, strictPort: true },
+  preview: { port: 3000, strictPort: true },
+  resolve: { tsconfigPaths: true },
+  plugins: [cloudflare({ viteEnvironment: { name: 'ssr' } }), tanstackStart(), react()],
+})

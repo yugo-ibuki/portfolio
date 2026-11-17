@@ -1,14 +1,13 @@
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
 	"name": "yugo-ibuki-portfolio",
-	"main": ".open-next/worker.js",
+	"main": "@tanstack/react-start/server-entry",
 	"compatibility_date": "2026-07-11",
 	"compatibility_flags": [
 		"nodejs_compat",
 		"global_fetch_strictly_public"
 	],
 	"assets": {
-		"directory": ".open-next/assets",
 		"binding": "ASSETS"
 	},
 	"kv_namespaces": [

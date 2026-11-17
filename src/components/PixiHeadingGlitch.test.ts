@@ -47,7 +47,7 @@ describe('createHeadingGlitchController', () => {
     const heading = document.createElement('h1')
     heading.dataset.pixiGlitch = ''
     heading.style.setProperty('color', 'rgb(12, 34, 56)', 'important')
-    document.body.append(heading)
+    document.body.appendChild(heading)
     const played: Array<{ element: Element; signal: AbortSignal }> = []
     const colorsBeforeRender: string[] = []
     const { harness, createObserver } = createObserverHarness()
@@ -104,7 +104,7 @@ describe('createHeadingGlitchController', () => {
   test('skips playback when reduced motion is active', () => {
     const heading = document.createElement('h2')
     heading.dataset.pixiGlitch = ''
-    document.body.append(heading)
+    document.body.appendChild(heading)
     let playCount = 0
     const { harness, createObserver } = createObserverHarness()
     const controller = createHeadingGlitchController({
@@ -127,7 +127,7 @@ describe('createHeadingGlitchController', () => {
   test('disconnects observation and cancels an active effect during cleanup', () => {
     const heading = document.createElement('h2')
     heading.dataset.pixiGlitch = ''
-    document.body.append(heading)
+    document.body.appendChild(heading)
     let activeSignal: AbortSignal | undefined
     const { harness, createObserver } = createObserverHarness()
     const controller = createHeadingGlitchController({
@@ -151,7 +151,7 @@ describe('createHeadingGlitchController', () => {
   test('resets played state when a route remounts the controller', () => {
     const heading = document.createElement('h1')
     heading.dataset.pixiGlitch = ''
-    document.body.append(heading)
+    document.body.appendChild(heading)
     let playCount = 0
     const firstObserver = createObserverHarness()
     const first = createHeadingGlitchController({
@@ -190,11 +190,11 @@ describe('createHeadingGlitchController', () => {
     const heading = document.createElement('h2')
     heading.dataset.pixiGlitch = ''
     heading.style.color = 'rgb(20, 40, 60)'
-    document.body.append(heading)
+    document.body.appendChild(heading)
     const colorsBeforeRender: string[] = []
     let playCount = 0
     let shouldReduce = false
-    let notifyMotionChange = () => undefined
+    let notifyMotionChange: () => void = () => undefined
     const { harness, createObserver } = createObserverHarness()
     const controller = createHeadingGlitchController({
       document,
@@ -209,7 +209,9 @@ describe('createHeadingGlitchController', () => {
         playCount += 1
         return runWithSourceTextHidden(
           element as HTMLElement,
-          () => colorsBeforeRender.push((element as HTMLElement).style.color),
+          () => {
+            colorsBeforeRender.push((element as HTMLElement).style.color)
+          },
           () =>
             new Promise<void>((resolve) => {
               if (signal.aborted) resolve()
@@ -269,7 +271,7 @@ describe('playNativeHeadingGlitch', () => {
     const heading = document.createElement('h1')
     heading.style.setProperty('color', 'rgb(12, 34, 56)', 'important')
     heading.innerHTML = 'Hello <i>world</i>'
-    document.body.append(heading)
+    document.body.appendChild(heading)
     const animation = new EventTarget() as Animation
     let cancelCount = 0
     animation.cancel = () => {

@@ -1,5 +1,5 @@
 import type { FC } from 'react'
-import Link from 'next/link'
+import { AppLink as Link } from '@/components/AppLink'
 import { formatDate } from '@lib/formatDate'
 import { calculateDuration } from '@lib/calculateDuration'
 import { Separator } from '@/components/components/ui/separator'

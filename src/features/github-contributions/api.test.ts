@@ -34,8 +34,10 @@ describe('GitHub contributions API', () => {
   })
 
   test('includes the GitHub response status when a request fails', async () => {
-    globalThis.fetch = (async () =>
-      new Response('User-Agent required', { status: 403 })) as typeof fetch
+    globalThis.fetch = Object.assign(
+      async () => new Response('User-Agent required', { status: 403 }),
+      { preconnect: originalFetch.preconnect }
+    )
 
     await expect(
       fetchGitHubContributionCalendar({

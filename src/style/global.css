@@ -1,3 +1,7 @@
+@import '@fontsource-variable/manrope';
+@import '@fontsource/instrument-serif/latin-400.css';
+@import '@fontsource/instrument-serif/latin-400-italic.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -34,6 +38,8 @@ body::-webkit-scrollbar {
 
 @layer base {
   :root {
+    --font-manrope: 'Manrope Variable';
+    --font-instrument-serif: 'Instrument Serif';
     --background: 0 0% 100%;
     --foreground: 0 0% 3.9%;
     --card: 0 0% 100%;

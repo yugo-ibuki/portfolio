@@ -1,13 +1,13 @@
 'use client'
 
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { AppLink as Link } from './AppLink'
+import { useLocation } from '@tanstack/react-router'
 import { ColorModeSwitch } from '@/components/ColorModeSwitch'
 import { cn } from '@/lib/utils'
 import { isNavigationItemActive, siteNavigation } from './siteNavigation'
 
 export const SiteHeader = () => {
-  const pathname = usePathname()
+  const pathname = useLocation({ select: (location) => location.pathname })
 
   return (
     <header className="sticky top-0 z-50 hidden border-b border-foreground/10 bg-background/90 backdrop-blur-xl lg:block">

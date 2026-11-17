@@ -1,7 +1,7 @@
 'use client'
 
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { AppLink as Link } from './AppLink'
+import { useLocation } from '@tanstack/react-router'
 import { AiFillGithub } from 'react-icons/ai'
 import { HiMapPin } from 'react-icons/hi2'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/components/ui/avatar'
@@ -15,7 +15,7 @@ export const ProfileSidebar = ({
   className?: string
   onNavClick?: () => void
 }) => {
-  const pathname = usePathname()
+  const pathname = useLocation({ select: (location) => location.pathname })
 
   return (
     <aside className={cn('flex min-h-[calc(100vh-7rem)] flex-col gap-10', className)}>

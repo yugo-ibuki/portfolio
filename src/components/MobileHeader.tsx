@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import Link from 'next/link'
+import { AppLink as Link } from './AppLink'
 import { Menu } from '@/components/Layout/Drawer'
 import { ProfileSidebar } from '@/components/ProfileSidebar'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/components/ui/avatar'

@@ -3,8 +3,7 @@ import { Certificate } from '@components/List/Certificate'
 import { GitContribution } from '@/features/github-contributions/GitContribution'
 import { MotionSection } from '@/components/MotionSection'
 import Background3D from '@/components/Background3D'
-import Image from 'next/image'
-import Link from 'next/link'
+import { AppLink as Link } from '@/components/AppLink'
 import { FaArrowRight, FaGithub } from 'react-icons/fa6'
 
 const Page = () => {
@@ -53,13 +52,15 @@ const Page = () => {
           <div className="site-gutter flex items-center justify-center pb-16 md:py-16 lg:py-24">
             <div className="hero-visual" role="img" aria-label="Portrait of Yugo Ibuki">
               <div className="hero-portrait shrink-0 overflow-hidden rounded-[2rem] bg-muted">
-                <Image
+                <img
                   src="/assets/me.jpeg"
                   alt=""
-                  fill
-                  priority
-                  sizes="(min-width: 2560px) 352px, (max-width: 639px) 192px, (max-width: 767px) 224px, (max-width: 1023px) 256px, 304px"
-                  className="object-cover grayscale"
+                  width={352}
+                  height={352}
+                  loading="eager"
+                  fetchPriority="high"
+                  decoding="async"
+                  className="absolute inset-0 h-full w-full object-cover grayscale"
                 />
               </div>
             </div>

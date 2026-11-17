@@ -1,5 +1,5 @@
 import type { FC } from 'react'
-import Link from 'next/link'
+import { AppLink as Link } from '@/components/AppLink'
 import { FaExternalLinkAlt } from 'react-icons/fa'
 import { Card, CardContent } from '@/components/components/ui/card'
 import { presentations } from '@/content/presentations'

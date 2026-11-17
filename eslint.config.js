@@ -1,16 +1,22 @@
 import { defineConfig } from 'eslint/config'
-import nextVitals from 'eslint-config-next/core-web-vitals'
-import nextTypescript from 'eslint-config-next/typescript'
+import reactHooks from 'eslint-plugin-react-hooks'
 import typescriptParser from '@typescript-eslint/parser'
 import typescriptPlugin from '@typescript-eslint/eslint-plugin'
 import prettierPlugin from 'eslint-plugin-prettier'
 
 export default defineConfig([
   {
-    ignores: ['.next/**', 'node_modules/**', 'out/**', 'build/**', 'next-env.d.ts'],
+    ignores: [
+      '.next/**',
+      '.tanstack/**',
+      'node_modules/**',
+      'out/**',
+      'build/**',
+      'dist/**',
+      'src/routeTree.gen.ts',
+      'cloudflare-env.d.ts',
+    ],
   },
-  ...nextVitals,
-  ...nextTypescript,
   {
     files: ['**/*.ts', '**/*.tsx'],
     languageOptions: {
@@ -27,8 +33,11 @@ export default defineConfig([
     plugins: {
       '@typescript-eslint': typescriptPlugin,
       prettier: prettierPlugin,
+      'react-hooks': reactHooks,
     },
     rules: {
+      'react-hooks/rules-of-hooks': 'error',
+      'react-hooks/exhaustive-deps': 'warn',
       semi: ['error', 'never', { beforeStatementContinuationChars: 'never' }],
       'semi-spacing': ['error', { after: true, before: false }],
       'semi-style': ['error', 'first'],
