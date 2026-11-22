@@ -1,4 +1,6 @@
 import type { FC } from 'react'
+import { SideWorkOfficialSiteLink } from '@/components/SideWorkOfficialSiteLink'
+import { SideWorkReferences } from '@/components/SideWorkReferences'
 import { AppLink as Link } from '@/components/AppLink'
 import { formatDate } from '@lib/formatDate'
 import { calculateDuration } from '@lib/calculateDuration'
@@ -22,13 +24,22 @@ export const SideWork: FC = () => {
         return (
           <div key={getSideWorkHref(sw)} className="space-y-4">
             <div className="space-y-2">
-              <Link
-                href={getSideWorkHref(sw)}
-                target={isInternalSideWork(sw) ? undefined : '_blank'}
-                className="text-lg font-medium hover:text-primary transition-colors"
-              >
-                {sw.title}
-              </Link>
+              <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                <Link
+                  href={getSideWorkHref(sw)}
+                  target={isInternalSideWork(sw) ? undefined : '_blank'}
+                  className="text-lg font-medium hover:text-primary transition-colors"
+                >
+                  {sw.title}
+                </Link>
+                {period && (
+                  <p className="text-sm text-muted-foreground">
+                    {`${period.startDate} ~ ${period.endDate}`}
+                    <span className="ml-2 text-xs">{period.duration}</span>
+                  </p>
+                )}
+                {isInternalSideWork(sw) && <SideWorkOfficialSiteLink {...sw} />}
+              </div>
               {!hasActivities && sw.summary && (
                 <p className="text-sm text-muted-foreground">{sw.summary}</p>
               )}
@@ -39,15 +50,10 @@ export const SideWork: FC = () => {
                   ))}
                 </ul>
               )}
-              {period && (
-                <div className="pl-4">
-                  <p className="text-sm text-muted-foreground">
-                    {`${period.startDate} ~ ${period.endDate}`}
-                    <span className="ml-2 text-xs">{period.duration}</span>
-                  </p>
-                </div>
-              )}
             </div>
+            {isInternalSideWork(sw) && sw.references && (
+              <SideWorkReferences references={sw.references} />
+            )}
             {index < sideWorks.length - 1 && <Separator />}
           </div>
         )

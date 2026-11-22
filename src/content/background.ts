@@ -14,10 +14,20 @@ export type SideWorkBase = {
   activities?: string[]
 } & SideWorkDates
 
+export const sideWorkReferenceCategories = ['AI Consulting', 'Workshop', 'Public Speaking'] as const
+
 export type InternalSideWork = SideWorkBase & {
   slug: string
   place: string
+  officialSiteUrl?: string
   description: string[]
+  references?: {
+    title: string
+    japaneseTitle?: string
+    url: string
+    thumbnail?: string
+    category: (typeof sideWorkReferenceCategories)[number]
+  }[]
 }
 
 export type ExternalSideWork = SideWorkBase & {
@@ -37,6 +47,7 @@ export const sideWorks: SideWorkEntry[] = [
     ],
     slug: 'english_mentor',
     place: 'Tech Commit',
+    officialSiteUrl: 'https://corp.tech-training.jp/',
     startDate: '2018-01',
     endDate: '2020-12',
     description: [
@@ -56,6 +67,7 @@ export const sideWorks: SideWorkEntry[] = [
     ],
     slug: 'programming_mentor',
     place: 'Tech Boost',
+    officialSiteUrl: 'https://tech-boost.jp/',
     startDate: '2020-06',
     endDate: '2025-02',
     description: [
@@ -66,23 +78,53 @@ export const sideWorks: SideWorkEntry[] = [
   },
   {
     title: 'Tech Train',
-    summary: 'Programming Mentoring, AI Training & University Workshops',
-    activities: [
-      'Programming mentoring',
-      'Code reviews and feedback',
-      'AI training',
-      'Workshops for university students',
-      'Public speaking',
-    ],
+    summary: 'Programming Mentoring, AI Adoption Support & University Workshops',
+    activities: ['Programming mentoring', 'Code reviews and feedback'],
     slug: 'programming_mentor_2',
     place: 'Tech Train',
+    officialSiteUrl: 'https://service.techtrain.dev/',
     startDate: '2025-03',
     endDate: null,
     description: [
       'I work with Tech Train to support learning and skill development.',
       'I taught React, Go, Laravel, and web development.',
       'I reviewed code, gave feedback, and coached students on how to study programming effectively.',
-      'My work also includes AI training and workshops for university students.',
+      'My work also includes AI training, AI adoption support, and workshops for university students.',
+      'Through TechTrain, I helped deliver a three-session, five-hour generative AI hands-on training program for Tokyo Total Consulting, supporting AI adoption in day-to-day consulting work.',
+      'The program covered identifying opportunities for AI use in existing workflows, prompt design, and hands-on AI agent implementation with tools including ChatGPT, Gemini, and Claude. Participants applied what they learned to their own business challenges and developed plans to expand AI use across their teams.',
+      'Through TechTrain, I supported students at Musashino University in an AI-powered problem-solving internship, helping them identify problems, build prototypes with AI, gather user feedback, and improve their products.',
+      'The program ran from September 25 to October 23, 2026. All 43 participants completed the program and presented their work in a final poster session; 85% of survey respondents said the experience would help them in their job search.',
+      'As a TechTrain mentor, I spoke at the KAMINASHI × TechBowl meetup on May 30, 2025, sharing how I built a real-time chat app using Cloudflare Workers, Durable Objects, and WebSockets.',
+      'I also gave a lightning talk at CircLeT 2026 on March 1, sharing how I used AI to build an authorization server. The event brought together four student tech clubs.',
+    ],
+    references: [
+      {
+        category: 'AI Consulting',
+        title: 'Tokyo Total Consulting: Generative AI hands-on training (TechTrain case study)',
+        url: 'https://business.techtrain.dev/training/case/ttc-genai-hands-on-3series',
+        thumbnail: '/assets/sidework/techtrain-training.jpg',
+      },
+      {
+        category: 'Workshop',
+        title: 'Musashino University: AI-powered problem-solving workshop (PR TIMES)',
+        url: 'https://prtimes.jp/main/html/rd/p/000000254.000040741.html',
+        thumbnail: '/assets/sidework/techtrain-musashino.jpg',
+      },
+      {
+        category: 'Public Speaking',
+        title:
+          'KAMINASHI × TechBowl meetup: Building real-time chat with Cloudflare Durable Objects',
+        japaneseTitle: 'Cloudflare Durable Objectsについて',
+        url: 'https://techtrain.dev/media/articles/hisvafpeq',
+        thumbnail: '/assets/sidework/techtrain-kaminashi.jpg',
+      },
+      {
+        category: 'Public Speaking',
+        title: 'CircLeT 2026: Behind the scenes of building an authorization server with AI',
+        japaneseTitle: '認可サーバ構築の裏話～AIを利用したイマドキアプローチ～',
+        url: 'https://news.nicovideo.jp/watch/nw18993291',
+        thumbnail: '/assets/sidework/techtrain-circlet.jpg',
+      },
     ],
   },
   {
