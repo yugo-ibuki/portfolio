@@ -2,14 +2,16 @@
 
 ## Project Structure & Module Organization
 
-This repository is a Next.js 16 + TypeScript portfolio app. Route files live under `src/app`, including page routes such as `src/app/page.tsx` and API handlers like `src/app/api/github-contributions/route.ts`. Reusable UI components live in `src/components`, shared hooks in `src/hooks`, and utility or mail helpers in `src/lib`. Static assets are served from `public/`, with images under `public/assets/`. Global styles and Tailwind entry CSS are in `src/style/global.css`.
+This repository is a TanStack Start + TypeScript portfolio app deployed to Cloudflare Workers. File-based routes live in `src/routes`, including `src/routes/index.tsx` and the API route `src/routes/api.github-contributions.ts`. Page components live in `src/pages`, reusable UI in `src/components`, shared hooks in `src/hooks`, and feature-specific code in `src/features`. Static assets live in `public/`, with images under `public/assets/`. Global styles and Tailwind entry CSS are in `src/style/global.css`.
 
 ## Build, Test, and Development Commands
 
 - `bun dev` — start the local dev server at `http://localhost:3000`.
 - `bun run build` — create the production build.
-- `bun start` — run the built app locally.
+- `bun start` — preview the built app locally.
 - `bun run lint` — run ESLint on the TypeScript codebase.
+- `bun run typecheck` — check TypeScript types.
+- `bun test` — run the unit and component tests.
 
 `package.json` declares `bun` as the package manager, so prefer `bun` over `npm` or `yarn` for local work.
 
@@ -21,7 +23,7 @@ Use path aliases from `tsconfig.json` where helpful, such as `@/`, `@lib/*`, and
 
 ## Testing Guidelines
 
-There is currently no dedicated automated test suite in this repository. Before opening a PR, run `bun run lint` and manually verify the affected pages and API routes in `bun dev`. If you add tests later, place them near the feature or in a `tests/` directory and use clear names like `component-name.test.ts`.
+Before opening a PR, run `bun run lint`, `bun run typecheck`, and `bun test`. Verify affected pages and API routes locally. With a local server running, `bun run test:routes` checks legacy redirects, 404 navigation, and the detail page. Place new unit and component tests near the feature.
 
 ## Commit & Pull Request Guidelines
 

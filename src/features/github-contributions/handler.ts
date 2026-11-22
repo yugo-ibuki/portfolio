@@ -1,6 +1,6 @@
 import { createContributionCache } from './cache'
 import type { KeyValueCache } from './cache'
-import { fetchGitHubContributionCalendar } from './api'
+import { fetchGitHubContributionCalendar, GitHubContributionError } from './api'
 import { getContributionDateRange } from './model'
 import type { GitHubContributionCalendar } from './types'
 
@@ -40,8 +40,12 @@ export const handleContributionRequest = async (
     })
     await cache.set(cacheKey, calendar)
     return Response.json(calendar, { headers: cacheHeaders })
-  } catch {
-    console.error('GitHub contribution request failed')
+  } catch (error) {
+    const details =
+      error instanceof GitHubContributionError
+        ? { reason: error.reason, status: error.status }
+        : { reason: 'unexpected' }
+    console.error('GitHub contribution request failed', details)
     return Response.json({ error: 'An error occurred while fetching data' }, { status: 500 })
   }
 }

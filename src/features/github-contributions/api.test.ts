@@ -46,6 +46,22 @@ describe('GitHub contributions API', () => {
         from: '2026-01-01T00:00:00.000Z',
         to: '2026-07-12T00:00:00.000Z',
       })
-    ).rejects.toThrow('GitHub API request failed (403): User-Agent required')
+    ).rejects.toMatchObject({ reason: 'http', status: 403 })
+  })
+
+  test('distinguishes GraphQL rate limits returned with HTTP 200', async () => {
+    globalThis.fetch = Object.assign(
+      async () => Response.json({ errors: [{ type: 'RATE_LIMITED', message: 'private details' }] }),
+      { preconnect: originalFetch.preconnect }
+    )
+
+    await expect(
+      fetchGitHubContributionCalendar({
+        token: 'token',
+        username: 'yugo-ibuki',
+        from: '2026-01-01T00:00:00.000Z',
+        to: '2026-07-12T00:00:00.000Z',
+      })
+    ).rejects.toMatchObject({ reason: 'rate_limit', status: 200 })
   })
 })

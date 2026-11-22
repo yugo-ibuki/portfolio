@@ -20,6 +20,15 @@ describe('background detail page', () => {
     }
   )
 
+  test('renders Ficilcom without an official site or project cards', () => {
+    const data = getBackgroundDetail('ficilcom')
+    document.body.innerHTML = renderToStaticMarkup(<BackgroundDetailPage data={data} />)
+
+    expect(document.querySelector('h1')?.textContent).toBe('Ficilcom')
+    expect(document.body.textContent).toContain('I worked as a frontend engineer at Ficilcom.')
+    expect(document.querySelector('a[target="_blank"], img')).toBeNull()
+  })
+
   test('renders the TechTrain internship results and press release link', () => {
     const data = getBackgroundDetail('programming_mentor_2')
     document.body.innerHTML = renderToStaticMarkup(<BackgroundDetailPage data={data} />)

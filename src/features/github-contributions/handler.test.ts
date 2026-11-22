@@ -1,4 +1,4 @@
-import { afterEach, describe, expect, test } from 'bun:test'
+import { afterEach, describe, expect, spyOn, test } from 'bun:test'
 import { handleContributionRequest } from './handler'
 import type { KeyValueCache } from './cache'
 
@@ -77,16 +77,24 @@ describe('contribution request handler', () => {
     expect(response.headers.get('Cache-Control')).toContain('max-age=3600')
   })
 
-  test('does not expose upstream errors or credentials', async () => {
+  test('logs the upstream status without exposing error bodies or credentials', async () => {
     globalThis.fetch = Object.assign(async () => new Response('private details', { status: 403 }), {
       preconnect: originalFetch.preconnect,
     })
-    const response = await handleContributionRequest({
-      GITHUB_USER_NAME: 'yugo',
-      GITHUB_API_KEY: 'test-token',
-      GITHUB_CONTRIBUTIONS_KV: makeKV().kv,
-    })
-    expect(response.status).toBe(500)
-    expect(await response.json()).toEqual({ error: 'An error occurred while fetching data' })
+    const log = spyOn(console, 'error').mockImplementation(() => {})
+    try {
+      const response = await handleContributionRequest({
+        GITHUB_USER_NAME: 'yugo',
+        GITHUB_API_KEY: 'test-token',
+        GITHUB_CONTRIBUTIONS_KV: makeKV().kv,
+      })
+      expect(response.status).toBe(500)
+      expect(await response.json()).toEqual({ error: 'An error occurred while fetching data' })
+      expect(log.mock.calls).toEqual([
+        ['GitHub contribution request failed', { reason: 'http', status: 403 }],
+      ])
+    } finally {
+      log.mockRestore()
+    }
   })
 })

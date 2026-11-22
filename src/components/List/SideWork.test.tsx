@@ -29,9 +29,12 @@ describe('SideWork', () => {
       expect(officialSite?.getAttribute('target')).toBe('_blank')
       expect(officialSite?.getAttribute('rel')).toBe('noopener noreferrer')
     }
+    const selfEmployed = document.querySelector('a[href="https://coconala.com/users/1842790"]')
+    expect(selfEmployed?.getAttribute('target')).toBe('_blank')
+    expect(selfEmployed?.getAttribute('rel')).toBe('noopener noreferrer')
   })
 
-  test('shows categorized cards with local OGP images under Tech Train', async () => {
+  test('shows categorized cards with local OGP images under TechTrain', async () => {
     const router = createRouter({
       routeTree: createRootRoute({ component: SideWork }),
       history: createMemoryHistory({ initialEntries: ['/'] }),

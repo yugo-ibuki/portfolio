@@ -131,10 +131,6 @@ body::-webkit-scrollbar {
     @apply px-5 sm:px-8 lg:px-12 xl:px-16;
   }
 
-  .site-shell > main,
-  .site-shell > .motion-page-enter > main {
-    @apply px-5 py-10 sm:px-8 md:py-16 lg:px-12 lg:py-20 xl:px-16;
-  }
 }
 
 .hero-visual {

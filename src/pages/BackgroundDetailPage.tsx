@@ -10,7 +10,7 @@ type Props = {
 
 const Page = ({ data }: Props) => {
   return (
-    <main>
+    <div className="site-gutter py-10 md:py-16 lg:py-20">
       <MotionSection className="mt-[25px]" delayIndex={0}>
         <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1 border-b pb-2 mb-4">
           <h1 data-pixi-glitch className="text-2xl font-semibold tracking-tight">
@@ -30,7 +30,7 @@ const Page = ({ data }: Props) => {
           </div>
         </Description>
       </MotionSection>
-    </main>
+    </div>
   )
 }
 

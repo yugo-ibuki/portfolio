@@ -1,12 +1,24 @@
 import type { GitHubContributionCalendar } from './types'
 
 type GitHubContributionResponse = {
-  data: {
-    user: {
-      contributionsCollection: {
-        contributionCalendar: GitHubContributionCalendar
+  data?: {
+    user?: {
+      contributionsCollection?: {
+        contributionCalendar?: GitHubContributionCalendar
       }
     }
+  }
+  errors?: { type?: string }[]
+}
+
+type FailureReason = 'network' | 'http' | 'rate_limit' | 'graphql' | 'invalid_response'
+
+export class GitHubContributionError extends Error {
+  constructor(
+    readonly reason: FailureReason,
+    readonly status?: number
+  ) {
+    super('GitHub contribution request failed')
   }
 }
 
@@ -54,14 +66,24 @@ export const fetchGitHubContributionCalendar = async ({
         to,
       },
     }),
+  }).catch(() => {
+    throw new GitHubContributionError('network')
   })
 
   if (!response.ok) {
-    const errorMessage = await response.text()
-    throw new Error(`GitHub API request failed (${response.status}): ${errorMessage}`)
+    throw new GitHubContributionError('http', response.status)
   }
 
-  const data = (await response.json()) as GitHubContributionResponse
+  const data = (await response.json().catch(() => {
+    throw new GitHubContributionError('invalid_response', response.status)
+  })) as GitHubContributionResponse | null
 
-  return data.data.user.contributionsCollection.contributionCalendar
+  if (data?.errors?.length) {
+    const isRateLimited = data.errors.some((error) => error.type === 'RATE_LIMITED')
+    throw new GitHubContributionError(isRateLimited ? 'rate_limit' : 'graphql', response.status)
+  }
+
+  const calendar = data?.data?.user?.contributionsCollection?.contributionCalendar
+  if (!calendar) throw new GitHubContributionError('invalid_response', response.status)
+  return calendar
 }

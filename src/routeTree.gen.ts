@@ -11,6 +11,8 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ArticlesRouteImport } from './routes/articles'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as PresentationRouteImport } from './routes/presentation'
 import { Route as WorksRouteImport } from './routes/works'
 import { Route as ApiGithubContributionsRouteImport } from './routes/api.github-contributions'
 import { Route as BackgroundIndexRouteImport } from './routes/background.index'
@@ -24,6 +26,16 @@ const IndexRoute = IndexRouteImport.update({
 const ArticlesRoute = ArticlesRouteImport.update({
   id: '/articles',
   path: '/articles',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PresentationRoute = PresentationRouteImport.update({
+  id: '/presentation',
+  path: '/presentation',
   getParentRoute: () => rootRouteImport,
 } as any)
 const WorksRoute = WorksRouteImport.update({
@@ -50,6 +62,8 @@ const BackgroundNameRoute = BackgroundNameRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/articles': typeof ArticlesRoute
+  '/contact': typeof ContactRoute
+  '/presentation': typeof PresentationRoute
   '/works': typeof WorksRoute
   '/api/github-contributions': typeof ApiGithubContributionsRoute
   '/background/$name': typeof BackgroundNameRoute
@@ -58,6 +72,8 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/articles': typeof ArticlesRoute
+  '/contact': typeof ContactRoute
+  '/presentation': typeof PresentationRoute
   '/works': typeof WorksRoute
   '/api/github-contributions': typeof ApiGithubContributionsRoute
   '/background/$name': typeof BackgroundNameRoute
@@ -67,6 +83,8 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/articles': typeof ArticlesRoute
+  '/contact': typeof ContactRoute
+  '/presentation': typeof PresentationRoute
   '/works': typeof WorksRoute
   '/api/github-contributions': typeof ApiGithubContributionsRoute
   '/background/$name': typeof BackgroundNameRoute
@@ -77,6 +95,8 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/articles'
+    | '/contact'
+    | '/presentation'
     | '/works'
     | '/api/github-contributions'
     | '/background/$name'
@@ -85,6 +105,8 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/articles'
+    | '/contact'
+    | '/presentation'
     | '/works'
     | '/api/github-contributions'
     | '/background/$name'
@@ -93,6 +115,8 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/articles'
+    | '/contact'
+    | '/presentation'
     | '/works'
     | '/api/github-contributions'
     | '/background/$name'
@@ -102,6 +126,8 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ArticlesRoute: typeof ArticlesRoute
+  ContactRoute: typeof ContactRoute
+  PresentationRoute: typeof PresentationRoute
   WorksRoute: typeof WorksRoute
   ApiGithubContributionsRoute: typeof ApiGithubContributionsRoute
   BackgroundNameRoute: typeof BackgroundNameRoute
@@ -122,6 +148,20 @@ declare module '@tanstack/react-router' {
       path: '/articles'
       fullPath: '/articles'
       preLoaderRoute: typeof ArticlesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/presentation': {
+      id: '/presentation'
+      path: '/presentation'
+      fullPath: '/presentation'
+      preLoaderRoute: typeof PresentationRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/works': {
@@ -158,6 +198,8 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ArticlesRoute: ArticlesRoute,
+  ContactRoute: ContactRoute,
+  PresentationRoute: PresentationRoute,
   WorksRoute: WorksRoute,
   ApiGithubContributionsRoute: ApiGithubContributionsRoute,
   BackgroundNameRoute: BackgroundNameRoute,

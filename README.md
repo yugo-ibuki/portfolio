@@ -18,6 +18,12 @@ localhost:3000
 https://y-ibuki91.app
 ```
 
+## Local verification
+
+Copy `.dev.vars.example` to `.dev.vars` and set the GitHub credentials to exercise the contributions API locally. Run `bun run cf-typegen` to regenerate the Worker binding types using the example file, without reading local secrets.
+
+With `bun dev` or `bun start` running, use `bun run test:routes` to check legacy redirects, 404 navigation, and the background detail layout. Pass a different base URL as the first argument to check another environment.
+
 ## Cloudflare Workers
 
 The `release` branch is deployed automatically with Cloudflare Workers Builds.
