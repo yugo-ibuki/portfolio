@@ -24,6 +24,7 @@ export type InternalSideWork = SideWorkBase & {
   references?: {
     title: string
     japaneseTitle?: string
+    contribution?: { role: string; description: string }
     url: string
     thumbnail?: string
     category: (typeof sideWorkReferenceCategories)[number]
@@ -90,9 +91,9 @@ export const sideWorks: SideWorkEntry[] = [
       'I taught React, Go, Laravel, and web development.',
       'I reviewed code, gave feedback, and coached students on how to study programming effectively.',
       'My work also includes AI training, AI adoption support, and workshops for university students.',
-      'Through TechTrain, I helped deliver a three-session, five-hour generative AI hands-on training program for Tokyo Total Consulting, supporting AI adoption in day-to-day consulting work.',
+      'As an instructor through TechTrain, I helped deliver a three-session, five-hour hands-on generative AI training program for Tokyo Total Consulting, supporting AI adoption in day-to-day consulting work.',
       'The program covered identifying opportunities for AI use in existing workflows, prompt design, and hands-on AI agent implementation with tools including ChatGPT, Gemini, and Claude. Participants applied what they learned to their own business challenges and developed plans to expand AI use across their teams.',
-      'Through TechTrain, I supported students at Musashino University in an AI-powered problem-solving internship, helping them identify problems, build prototypes with AI, gather user feedback, and improve their products.',
+      'As a TechTrain mentor, I guided Musashino University students through an AI-powered problem-solving internship, helping them identify problems, build prototypes with AI, gather user feedback, and improve their products.',
       'The program ran from September 25 to October 23, 2026. All 43 participants completed the program and presented their work in a final poster session; 85% of survey respondents said the experience would help them in their job search.',
       'As a TechTrain mentor, I spoke at the KAMINASHI × TechBowl meetup on May 30, 2025, sharing how I built a real-time chat app using Cloudflare Workers, Durable Objects, and WebSockets.',
       'I also gave a lightning talk at CircLeT 2026 on March 1, sharing how I used AI to build an authorization server. The event brought together four student tech clubs.',
@@ -101,12 +102,22 @@ export const sideWorks: SideWorkEntry[] = [
       {
         category: 'AI Consulting',
         title: 'Tokyo Total Consulting: Generative AI hands-on training (TechTrain case study)',
+        contribution: {
+          role: 'Instructor',
+          description:
+            'Taught participants how to identify where AI could help in their workflows, design prompts, and apply AI agents to everyday tasks.',
+        },
         url: 'https://business.techtrain.dev/training/case/ttc-genai-hands-on-3series',
         thumbnail: '/assets/sidework/techtrain-training.jpg',
       },
       {
         category: 'Workshop',
         title: 'Musashino University: AI-powered problem-solving workshop (PR TIMES)',
+        contribution: {
+          role: 'Mentor',
+          description:
+            'Guided students in defining problems, prototyping with AI, and improving their projects based on user feedback.',
+        },
         url: 'https://prtimes.jp/main/html/rd/p/000000254.000040741.html',
         thumbnail: '/assets/sidework/techtrain-musashino.jpg',
       },

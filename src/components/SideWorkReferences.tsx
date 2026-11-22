@@ -43,6 +43,15 @@ export const SideWorkReferences = ({ references }: Props) => {
                           {reference.japaneseTitle}
                         </span>
                       )}
+                      {reference.contribution && (
+                        <span className="mt-1 block text-xs leading-relaxed">
+                          <strong className="font-medium text-foreground">
+                            {reference.contribution.role}
+                          </strong>
+                          {' — '}
+                          {reference.contribution.description}
+                        </span>
+                      )}
                     </span>
                   </a>
                 </li>

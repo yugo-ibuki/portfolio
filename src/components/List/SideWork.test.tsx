@@ -56,6 +56,12 @@ describe('SideWork', () => {
         expect(existsSync(`public${image.getAttribute('src')}`)).toBe(true)
       }
     }
+    const consulting = projects?.querySelector('section[aria-label="AI Consulting"] a')
+    expect(consulting?.querySelector('strong')?.textContent).toBe('Instructor')
+    expect(consulting?.textContent).toContain('design prompts')
+    const workshop = projects?.querySelector('section[aria-label="Workshop"] a')
+    expect(workshop?.querySelector('strong')?.textContent).toBe('Mentor')
+    expect(workshop?.textContent).toContain('user feedback')
     expect(document.body.textContent).not.toContain('スッシトレイン')
   })
 })
